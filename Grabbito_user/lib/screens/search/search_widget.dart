@@ -3,7 +3,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:geolocator/geolocator.dart';
@@ -70,6 +69,7 @@ class _SearchPageState extends State<SearchPage> {
         statusBarIconBrightness: Brightness.dark,
       ),
       child: Scaffold(
+        backgroundColor: Colors.white,
         appBar: AppBar(
           leadingWidth: 0,
           backgroundColor: colorWhite,
@@ -188,7 +188,7 @@ class _SearchPageState extends State<SearchPage> {
                                   textAlign: TextAlign.start,
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
-                                      fontFamily: groldXBold,
+                                      fontFamily: groldReg,
                                       fontSize: 16,
                                       color: colorBlack),
                                 ),
@@ -211,7 +211,7 @@ class _SearchPageState extends State<SearchPage> {
                                         textAlign: TextAlign.start,
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold,
-                                            fontFamily: groldBold,
+                                            fontFamily: groldReg,
                                             fontSize: 14,
                                             color: colorBlue),
                                       )),
@@ -302,7 +302,7 @@ class _SearchPageState extends State<SearchPage> {
                                       textAlign: TextAlign.start,
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
-                                          fontFamily: groldXBold,
+                                          fontFamily: groldReg,
                                           fontSize: 16,
                                           color: colorHintText),
                                     ),
@@ -322,8 +322,8 @@ class _SearchPageState extends State<SearchPage> {
                               '${getTranslated(context, finedResult).toString()} ($totalSearch)',
                               textAlign: TextAlign.start,
                               style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: groldXBold,
+                                  fontWeight: FontWeight.w400,
+                                  fontFamily: groldReg,
                                   fontSize: 18,
                                   color: colorBlack),
                             ),
@@ -334,7 +334,7 @@ class _SearchPageState extends State<SearchPage> {
                               textAlign: TextAlign.start,
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  fontFamily: groldXBold,
+                                  fontFamily: groldReg,
                                   fontSize: 18,
                                   color: colorDivider),
                             ),
@@ -346,7 +346,7 @@ class _SearchPageState extends State<SearchPage> {
                               textAlign: TextAlign.start,
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  fontFamily: groldXBold,
+                                  fontFamily: groldReg,
                                   fontSize: 18,
                                   color: colorDivider),
                             ),
@@ -378,8 +378,7 @@ class _SearchPageState extends State<SearchPage> {
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 1,
                       mainAxisSpacing: 10,
-                      mainAxisExtent: ScreenUtil().screenWidth *
-                          0.27, // <== change the height to fit your needs
+                      mainAxisExtent: MediaQuery.of(context).size.height / 3
                     ),
                     itemBuilder: (context, index) {
                       return InkWell(
@@ -417,7 +416,7 @@ class _SearchPageState extends State<SearchPage> {
                                       Container(
                                     width:
                                         MediaQuery.of(context).size.width / 1.4,
-                                    // height: ScreenUtil().setHeight(120),
+
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(20.0),
                                       image: DecorationImage(
@@ -449,12 +448,12 @@ class _SearchPageState extends State<SearchPage> {
                                         maxLines: 1,
                                         style: TextStyle(
                                           fontSize: 16,
-                                          fontFamily: groldXBold,
+                                          fontFamily: groldReg,
                                         ),
                                       ),
                                       SizedBox(height: 5),
                                       SizedBox(
-                                        height: ScreenUtil().setHeight(30),
+                                        height: 30,
                                         child: Text(
                                           () {
                                             String allMenus = "";
@@ -493,7 +492,7 @@ class _SearchPageState extends State<SearchPage> {
                                       ),
                                       SizedBox(height: 5),
                                       SizedBox(
-                                        height: ScreenUtil().setHeight(16),
+                                        height: 16,
                                         width:
                                             MediaQuery.of(context).size.width /
                                                 1.8,
@@ -507,7 +506,7 @@ class _SearchPageState extends State<SearchPage> {
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 color: colorDividerDark,
-                                                fontFamily: groldBold,
+                                                fontFamily: groldReg,
                                               ),
                                             ),
                                             SizedBox(width: 10),
@@ -525,7 +524,7 @@ class _SearchPageState extends State<SearchPage> {
                                               style: TextStyle(
                                                   fontSize: 12,
                                                   color: colorDividerDark,
-                                                  fontFamily: groldBold),
+                                                  fontFamily: groldReg),
                                             ),
                                           ],
                                         ),
@@ -578,8 +577,7 @@ class _SearchPageState extends State<SearchPage> {
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 1,
                       mainAxisSpacing: 10,
-                      mainAxisExtent: ScreenUtil().screenWidth *
-                          0.27, // <== change the height to fit your needs
+                      mainAxisExtent: MediaQuery.of(context).size.height /3,
                     ),
                     itemBuilder: (context, index) {
                       return InkWell(
@@ -648,13 +646,13 @@ class _SearchPageState extends State<SearchPage> {
                                         maxLines: 1,
                                         style: TextStyle(
                                           fontSize: 16,
-                                          fontFamily: groldBold,
+                                          fontFamily: groldReg,
                                           color: colorBlack,
                                         ),
                                       ),
                                       SizedBox(height: 5),
                                       SizedBox(
-                                        height: ScreenUtil().setHeight(30),
+                                        height: 30,
                                         child: Text(
                                           itemSearchesData[index]
                                               .description
@@ -669,7 +667,7 @@ class _SearchPageState extends State<SearchPage> {
                                       ),
                                       SizedBox(height: 5),
                                       SizedBox(
-                                        height: ScreenUtil().setHeight(15),
+                                        height: 15,
                                         child: Row(
                                           children: [
                                             Text(
@@ -679,7 +677,7 @@ class _SearchPageState extends State<SearchPage> {
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 color: colorBlack,
-                                                fontFamily: groldBold,
+                                                fontFamily: groldReg,
                                               ),
                                             ),
                                             SizedBox(width: 5),
@@ -690,7 +688,7 @@ class _SearchPageState extends State<SearchPage> {
                                               style: TextStyle(
                                                   fontSize: 12,
                                                   color: colorBlack,
-                                                  fontFamily: groldBold),
+                                                  fontFamily: groldReg),
                                             ),
                                           ],
                                         ),
