@@ -1,0 +1,258 @@
+{
+  "Deliver_Anything": "Deliver Anything",
+  "Deliver_Anything_Desc": "Deliver anything with \nGrabbito fastest service.",
+  "Deliver_Anything_2": "Fastest Delivery",
+  "Deliver_Anything_Desc_2": "Fastest delivery of \nyour any products \nwithin 45 minutes.",
+  "Deliver_Anything_3": "offers And More",
+  "Deliver_Anything_Desc_3": "Coupon that helps you \nto save your money.",
+
+
+  "skip": "Skip For Now",
+  "email": "Email",
+  "email_hint": "Enter Your Email",
+  "password": "Password",
+  "password_hint": "Enter Your Password",
+  "remember_me": "Remember Me.",
+  "forgot_password": "Forgot Password ?",
+  "login_on_grabbito": "Login on Grabbito",
+  "do_not_have_an_account": "Don't have an account ? Signup",
+
+
+  "create_new_account": "Create New Account",
+  "full_name": "Full Name",
+  "full_name_hint": "Enter Your Full Name",
+  "email_address": "Email Address",
+  "email_address_hint": "Enter Your Email ID",
+  "contact_number": "Contact Number",
+  "contact_number_hint": "000 000 000",
+  "confirm_password": "Confirm Password",
+  "confirm_password_hint": "Re-Enter Your Password",
+  "terms_desc": "By clicking create account button, You agree with our ",
+  "terms": "Terms & Conditions",
+  "and_text": "and",
+  "privacy": "Privacy Policy",
+  "create_account": "Create Account",
+  "already_have_an_account_login": "Already have an account ? Login",
+
+
+  "forgot_password_title": "Forgot Password",
+  "verify_account": "Verify Account",
+  "forgot_message": "Check your email ID, we will share one OTP With You.\nDon't share your OTP with any other.",
+
+
+  "add_new_password": "Add New Password",
+  "new_password": "New Password",
+  "new_password_hint": "Enter New Password",
+  "change_password": "Change Password",
+
+
+  "OTP_verification": "OTP Verification",
+  "Verify_OTP": "Verify OTP",
+  "OTP_message": "We will share a one OTP code, Don't share this code with any other people, Please check your device.",
+  "resend_OTP": "Don't receive OTP ? Resend Again",
+
+
+  "no_internet": "No Internet !",
+  "no_internet_desc": "It's look like you are not connect with the internet or any Wi-Fi Connection.",
+  "no_data": "UH - Ohh...",
+  "no_data_desc": "No data found right now.",
+  "no_coupon_desc": "No coupon found right now.",
+  "add_address_Label_hint": "Enter Your Address Label",
+
+
+  "setup_location": "Setup Location",
+  "location": "Location",
+  "offers_at_grocery": "Offers At Grocery",
+  "show_all": "Show All",
+  "offers_at_fruits": "Offers At Fruits & Vegetables",
+  "offers_at_restaurant": "Great Offers At Restaurants",
+  "setup_desc": "As per this location you will see the home page results before set location.",
+  "set_location": "Set Location",
+  "set_location_for_pickup": "Set Location For Pickup",
+  "set_location_for_delivery": "Set Location For Delivery",
+  "change_location": "Change Location",
+  "search_location": "Search Location",
+  "select_location_from_map": "Select location from the map",
+  "recent_search": "Recent Searches",
+  "no_recent_search": "No Recent Searches",
+  "clear_all": "Clear All",
+  "order_is_text": "Order is ",
+  "shops" : "Shops",
+
+
+  "search_hint": "Search restaurants / shops / items...",
+  "search_by_category": "Search By Category",
+  "fined_result": "Fined Results",
+  "search_shop": "Shops",
+  "search_item": "Items",
+  "search_item_price": "Price",
+  "search_food_in_text": "Search Food in ",
+  "search_food_text": "Search Food",
+  "founded_results": "Founded Results",
+
+
+  "offers_title": "Offers",
+  "copy_text": "Copy",
+  "get_text": "Get",
+
+
+  "past_orders": "Past",
+  "past_orders2": "Orders",
+  "upcoming_orders": "Upcoming",
+  "upcoming_orders2": "Orders",
+  "pickup_orders": "Pick up and",
+  "pickup_orders2": "Drop off Orders",
+  "re_order": "Order Details",
+
+
+  "profile_title": "Profile",
+  "order_title" : "Orders",
+  "edit_profile": "Edit Profile",
+  "change_language": "Change Language",
+  "manage_location": "Manage Location",
+  "notification_center": "Notification Center",
+  "support": "Support",
+  "about": "About",
+  "privacy_policy": "Privacy Policy",
+  "terms_and_conditions": "Terms and Conditions",
+  "login": "Login",
+  "logout": "Logout",
+  "version_text": "Version 1.0.0",
+
+
+  "cancel": "Cancel",
+
+
+  "old_password": "Old Password",
+  "old_password_hint": "Enter Your Old Password",
+
+
+  "add_button_text": "Add",
+
+
+  "restaurant_available": "Restaurants Available",
+  "store_available": "Stores Available",
+
+
+  "km_distance_text": "km",
+  "veg_and_non_veg_text": "Veg. & Non. Veg",
+  "veg_text": "Veg. ",
+  "non_veg_text": "Non. Veg",
+  "for_text": "for 2",
+  "menu_text": "Menu",
+  "menu_desc_text_food": "Items of this menu is provided by restaurant.",
+  "menu_desc_text": "Items of this menu is provided by Shop.",
+  "food_type_text": "Veg. Only",
+
+
+  "customization_and_more": "Customization and More",
+  "service_items" : "Essentials delivered to your doorstep",
+  "top_picks" : "Top picks for you",
+  "total_items": "Items",
+  "add_item_text": "Add Item",
+  "off_upto_text": "off upto",
+  "use_code_text": "Use code",
+  "coupon_copied": "Coupon Copied ..!",
+  "add_to_bag": "Add To Bag",
+  "label_no_goBack": "No, Go Back",
+  "label_yes_remove_it": "Yes, Remove It",
+  "label_remove_cartItem": "Remove cart item?",
+  "label_your_cart_contains_dishes_from": "Your cart contains dishes from",
+  "label_your_cart_contains1": "Do you want to discard the selection and add dishes from",
+
+
+  "cart_page_title": "Cart",
+  "location_change": "Change",
+  "minutes_text": "Mins",
+  "customize_order_text": "Customize Order",
+  "note_for_delivery_guy_text": "Any Notes For Delivery Guy",
+  "note_for_delivery_guy_text2": "Note For Delivery Guy",
+  "promocode_text": "Promocode",
+  "promocode_hint_text": "Type or Paste Promocode",
+  "apply_promo_text": "Apply Coupon",
+  "go_to_coupon_section_text": "Go to Coupon Section",
+  "coupon_apply_successfully": "Coupon Apply Successfully",
+  "or_select_anyone_from_it": "Or Select Anyone From It",
+  "apply_this_coupon": "Apply this coupon ",
+  "continue_text": "Continue",
+  "subtotal_text": "Subtotal",
+  "tax_text": "Tax",
+  "delivery_charges_text": "Delivery Charges",
+  "promocode_discount": "Promocode Discount",
+  "remove_coupon": "Remove Coupon",
+  "to_pay": "To Pay",
+  "total_pay": "Total Pay",
+  "proceed_to_pay": "Proceed To Pay",
+
+
+  "select_address": "Select Address",
+  "your_current_location": "Your Current Location",
+  "or_text": "OR",
+  "select_from_saved_location": "Select From Saved Location",
+  "Select_building_Name": "Select Flat/Floor/Building Name",
+  "research": "Research",
+  "enter_here_text": "Enter Here",
+  "landmark_if_any": "Landmark If Any",
+  "enter_your_landMark": "Enter Your LandMark",
+  "save_address": "Save Address",
+  "add_address": "Add Address",
+
+
+  "payment_method_title": "Payment Method",
+  "total_payable_amount": "Total Payable Amount",
+  "razorpay_text": "Razorpay",
+  "stripe_text": "Stripe",
+  "cash_on_delivery_text": "Cash on Delivery",
+  "proceed_and_pay_text": "Proceed & Pay",
+  "select_payment_method": "Please Select Payment Method",
+
+
+  "stripe_payment_screen_title": "Stripe Payment",
+  "stripe_payment_complete": "Complete Payment",
+  "stripe_payment_done": "Stripe Payment Complete",
+
+
+  "pickup_address_text": "Pickup Address",
+  "tap_to_select_pickup_address": "Tap To select Pickup Address",
+  "tap_to_select_delivery_address": "Tap To select Delivery Address",
+  "delivery_address_text": "Delivery Address",
+  "pickup_content_text": "Package Content",
+  "select_pickup_content_text": "Select Package Content",
+  "package_weight_text": "Package Weight",
+  "weight_of_package_text": "Weight of your package",
+  "instructions_for_deliveryman": "Instructions For Deliveryman",
+  "pickup_screen_desc": "The order doesn't contain illegal/restricted items.",
+  "pickup_screen_desc2": "partner may ask to verify the contents of the package. ",
+  "confirm_order": "Confirm Order",
+  "provide_package_content": "Please Provide Package Content",
+  "please_login": "Please login to continue",
+
+
+  "reorder_it": "Reorder It",
+  "view_details": "View Details",
+  "shop_close": "Sorry this shop currently closed",
+  "pick_up": "Pick Up",
+  "drop_off": "Drop Off",
+  "edit_location": "Edit Location",
+  "remove_this_address": "Remove This Address",
+  "mute_notification": "Mute Notification",
+  "mute_noti_desc": "You won't receive any kind of notification from\nthe application if you disabled it.",
+  "login_please": "Login Please",
+
+
+  "order": "Order",
+  "order_rejected": "Order Reject",
+  "order_cancel": "Order Cancel",
+  "drop_off_address": "DropOff Address",
+  "delivered_success": "Delivered Successfully",
+  "billing_details": "Billing Details",
+  "track_order": "Track Order",
+  "food_prepared": "Food is being prepared",
+  "order_pickup": "Order is ready for pickup",
+  "successfully_delivered": "Successfully Delivered",
+  "press_exit": "Press again to exit",
+  "view_all": "View All",
+  "alert":"Alert",
+  "your_session_expired":"Your session is Expired",
+  "ok":"Ok"
+}

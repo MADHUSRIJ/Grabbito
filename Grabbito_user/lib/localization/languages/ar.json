@@ -1,0 +1,260 @@
+{
+  "Deliver_Anything": "تسليم أي شيء",
+  "Deliver_Anything_Desc": "تقديم أي شيء مع \nGrabbito أسرع خدمة.",
+  "Deliver_Anything_2": "أسرع تسليم",
+  "Deliver_Anything_Desc_2": "أسرع تسليم \nyour أي منتجات \nwithin 45 دقيقة.",
+  "Deliver_Anything_3": "عروض والمزيد",
+  "Deliver_Anything_Desc_3": "القسيمة التي تساعدك على توفير المال الخاص بك.",
+
+
+  "skip": "البريد الإلكتروني",
+  "email": "البريد الإلكتروني",
+  "email_hint": "أدخل بريدك الإلكتروني",
+  "password": "كلمة المرور",
+  "password_hint": "أدخل كلمة المرور",
+  "remember_me": "تذكرني.",
+  "forgot_password": "نسيت كلمة المرور؟",
+  "login_on_grabbito": "تسجيل الدخول على Grabbito",
+  "do_not_have_an_account": "ليس لديك حساب؟ التسجيل",
+
+
+  "create_new_account": "إنشاء حساب جديد",
+  "full_name": "الاسم الكامل",
+  "full_name_hint": "أدخل اسمك الكامل",
+  "email_address": "عنوان البريد الإلكتروني",
+  "email_address_hint": "أدخل معرف بريدك الإلكتروني",
+  "contact_number": "رقم الاتصال",
+  "contact_number_hint": "000 000 000",
+  "confirm_password": "تأكيد كلمة المرور",
+  "confirm_password_hint": "إعادة إدخال كلمة المرور",
+  "terms_desc": "بالنقر فوق إنشاء حساب الزر، أنت توافق على",
+  "terms": "الشروط والأحكام",
+  "and_text": "وَ",
+  "privacy": "وسياسة الخصوصية",
+  "create_account": "إنشاء حساب",
+  "already_have_an_account_login": "هل لديك حساب بالفعل؟ تسجيل الدخول",
+
+
+  "forgot_password_title": "نسيت كلمة المرور",
+  "verify_account": "تحقق من الحساب",
+  "forgot_message": "تحقق من معرف بريدك الإلكتروني، وسوف نشارك OTP واحد معك.لا تشارك OTP الخاص بك مع أي شخص آخر.",
+
+
+  "add_new_password": "إضافة كلمة مرور جديدة",
+  "new_password": "كلمة مرور جديدة",
+  "new_password_hint": "أدخل كلمة مرور جديدة",
+  "change_password": "تغيير كلمة المرور",
+
+
+  "OTP_verification": "التحقق من OTP",
+  "Verify_OTP": "تحقق من OTP",
+  "OTP_message": "سنشارك رمز OTP واحد، لا تشارك هذا الرمز مع أي أشخاص آخرين، يرجى التحقق من جهازك.",
+  "resend_OTP": "لا تتلقى OTP؟ إعادة الإرسال مرة أخرى",
+
+
+  "no_internet": "لا إنترنت!",
+  "no_internet_desc": "يبدو أنك لا تتصل بالإنترنت أو أي اتصال واي فاي.",
+  "no_data": "UH - أوه...",
+  "no_data_desc": "لا توجد أي بيانات في الوقت الحالي.",
+  "no_coupon_desc": "لا يوجد أي قسيمة الآن.",
+  "add_address_Label_hint": "أدخل عنوانك التسمية",
+
+
+  "setup_location": "موقع الإعداد",
+  "location": "موقع",
+  "offers_at_grocery": "عروض في البقالة",
+  "show_all": "إظهار الكل",
+  "offers_at_fruits": "عروض في الفواكه والخضروات",
+  "offers_at_restaurant": "عروض رائعة في المطاعم",
+  "setup_desc": "وفقا لهذا الموقع سترى نتائج الصفحة الرئيسية قبل تعيين الموقع.",
+  "set_location": "تعيين الموقع",
+  "set_location_for_pickup": "تعيين موقع لبيك اب",
+  "set_location_for_delivery": "تعيين موقع التسليم",
+  "change_location": "تغيير الموقع",
+  "search_location": "البحث عن الموقع",
+  "select_location_from_map": "تحديد الموقع من الخريطة",
+  "recent_search": "عمليات البحث الأخيرة",
+  "no_recent_search": "لا توجد عمليات بحث حديثة",
+  "clear_all": "مسح الكل",
+  "order_is_text": "الطلب هو",
+  "shops" : "Shops",
+
+
+  "search_hint": "البحث في المطاعم / المحلات التجارية / البنود...",
+  "search_by_category": "البحث حسب الفئة",
+  "fined_result": "نتائج الغرامة",
+  "search_shop": "الدكاكين",
+  "search_item": "العناصر",
+  "search_item_price": "السعر",
+  "search_food_in_text": "البحث عن الطعام في",
+  "search_food_text": "البحث عن الطعام",
+  "founded_results": "النتائج التي تأسست",
+
+
+
+  "offers_title": "عروض",
+  "copy_text": "تسمعني",
+  "get_text": "تحصل",
+
+
+  "past_orders": "الماضي",
+  "past_orders2": "أوامر",
+  "upcoming_orders": "القادمه",
+  "upcoming_orders2": "أوامر",
+  "pickup_orders": "التقاط و",
+  "pickup_orders2": "إسقاط الطلبات",
+  "re_order": "تفاصيل الطلب",
+
+
+  "profile_title": "Profile",
+  "order_title" : "Orders",
+  "edit_profile": "تحرير ملف التعريف",
+  "change_language": "تغيير اللغة",
+  "manage_location": "إدارة الموقع",
+  "notification_center": "مركز الإعلام",
+  "support": "ادعم",
+  "about": "حول",
+  "privacy_policy": "سياسة الخصوصية",
+  "terms_and_conditions": "الأحكام و الشروط",
+  "login": "لج",
+  "logout": "الخروج",
+  "version_text": "الإصدار 1.0.0",
+
+
+
+  "cancel": "الغ",
+
+
+  "old_password": "كلمة المرور القديمة",
+  "old_password_hint": "أدخل كلمة المرور القديمة",
+
+
+  "add_button_text": "جمع",
+
+
+  "restaurant_available": "المطاعم المتاحة",
+  "store_available": "المتاجر المتاحة",
+
+
+  "km_distance_text": "كيلومتر",
+  "veg_and_non_veg_text": "الخضار وغير الخضار",
+  "veg_text": "الخضار.",
+  "non_veg_text": "غير الخضار",
+  "for_text": "ل2",
+  "menu_text": "المنهج",
+  "menu_desc_text_food": "يتم توفير عناصر من هذه القائمة من قبل المطعم.",
+  "menu_desc_text": "يتم توفير عناصر من هذه القائمة من قبل متجر.",
+  "food_type_text": "الخضار. فقط",
+
+
+  "customization_and_more": "التخصيص والمزيد",
+  "service_items" : "Essentials delivered to your doorstep",
+  "top_picks" : "Top picks for you",
+  "total_items": "العناصر",
+  "add_item_text": "إضافة عنصر",
+  "off_upto_text": "إيقاف upto",
+  "use_code_text": "استخدام التعليمات البرمجية",
+  "coupon_copied": "نسخة القسيمة ..!",
+  "add_to_bag": "إضافة إلى حقيبة",
+  "label_no_goBack": "لا، عد",
+  "label_yes_remove_it": "نعم، إزالته",
+  "label_remove_cartItem": "إزالة عنصر عربة؟",
+  "label_your_cart_contains_dishes_from": "سلة التسوق الخاصة بك تحتوي على أطباق من",
+  "label_your_cart_contains1": "هل تريد تجاهل التحديد وإضافة أطباق من",
+
+
+  "cart_page_title": "عَرَبَة نَقْل",
+  "location_change": "تغيير",
+  "minutes_text": "دقيقه",
+  "customize_order_text": "تخصيص ترتيب",
+  "note_for_delivery_guy_text": "أي ملاحظات لغي التسليم",
+  "note_for_delivery_guy_text2": "ملاحظة لغي التسليم",
+  "promocode_text": "الرمز الترويجي",
+  "promocode_hint_text": "اكتب الرمز الترويجي أو الصقه",
+  "apply_promo_text": "تطبيق كوبون",
+  "go_to_coupon_section_text": "انتقل إلى قسم القسيمة",
+  "coupon_apply_successfully": "القسيمة تطبيق بنجاح",
+  "or_select_anyone_from_it": "أو حدد أي شخص منه",
+  "apply_this_coupon": "تطبيق هذه القسيمة",
+  "continue_text": "كملن",
+  "subtotal_text": "المجموع الفرعي",
+  "tax_text": "ضريبة",
+  "delivery_charges_text": "رسوم التوصيل",
+  "promocode_discount": "خصم الرمز الترويجي",
+  "remove_coupon": "إزالة القسيمة",
+  "to_pay": "للدفع",
+  "total_pay": "إجمالي الدفع",
+  "proceed_to_pay": "المضي قدما للدفع",
+
+
+  "select_address": "تحديد العنوان",
+  "your_current_location": "موقعك الحالي",
+  "or_text": "أو",
+  "select_from_saved_location": "تحديد من الموقع المحفوظ",
+  "Select_building_Name": "حدد اسم شقة/طابق/مبنى",
+  "research": "بحث",
+  "enter_here_text": "أدخل هنا",
+  "landmark_if_any": "معلم إن وجد",
+  "enter_your_landMark": "أدخل العلامة الأرضية",
+  "save_address": "حفظ العنوان",
+  "add_address": "إضافة عنوان",
+
+
+  "payment_method_title": "طريقة الدفع",
+  "total_payable_amount": "إجمالي المبلغ المستحق الدفع",
+  "razorpay_text": "رازورباي",
+  "stripe_text": "الشريط",
+  "cash_on_delivery_text": "النقدية عند التسليم",
+  "proceed_and_pay_text": "المتابعة والدفع",
+  "select_payment_method": "الرجاء تحديد طريقة الدفع",
+
+
+  "stripe_payment_screen_title": "دفع شريطي",
+  "stripe_payment_complete": "الدفع الكامل",
+  "stripe_payment_done": "اكتمال الدفع الشريطي",
+
+
+  "pickup_address_text": "عنوان الاستلام",
+  "tap_to_select_pickup_address": "انقر لتحديد عنوان الاستلام",
+  "tap_to_select_delivery_address": "اضغط لتحديد عنوان التسليم",
+  "delivery_address_text": "عنوان التسليم",
+  "pickup_content_text": "محتوى الحزمة",
+  "select_pickup_content_text": "تحديد محتوى الحزمة",
+  "package_weight_text": "وزن الحزمة",
+  "weight_of_package_text": "وزن الحزمة الخاصة بك",
+  "instructions_for_deliveryman": "تعليمات ل Deliveryman",
+  "pickup_screen_desc": "لا يحتوي الأمر على عناصر غير قانونية/مقيدة.",
+  "pickup_screen_desc2": "قد يطلب الشريك التحقق من محتويات الحزمة.",
+  "confirm_order": "تأكيد الطلب",
+  "provide_package_content": "الرجاء تقديم محتوى الحزمة",
+  "please_login": "يرجى تسجيل الدخول للمتابعة",
+
+
+  "reorder_it": "إعادة ترتيبه",
+  "view_details": "عرض التفاصيل",
+  "shop_close": "عذرا هذا المحل مغلق حاليا",
+  "pick_up": "التقط",
+  "drop_off": "الإنزال",
+  "edit_location": "تحرير الموقع",
+  "remove_this_address": "إزالة هذا العنوان",
+  "mute_notification": "كتم الإعلام",
+  "mute_noti_desc": "لن تتلقى أي نوع من الإشعارات من التطبيق إذا قمت بتعطيله.",
+  "login_please": "تسجيل الدخول من فضلك",
+
+
+  "order": "نوط",
+  "order_rejected": "رفض الأمر",
+  "order_cancel": "إلغاء الأمر",
+  "drop_off_address": "عنوان الإسقاط",
+  "delivered_success": "تم التسليم بنجاح",
+  "billing_details": "تفاصيل الفوترة",
+  "track_order": "ترتيب المسار",
+  "food_prepared": "يجري إعداد الطعام",
+  "order_pickup": "الطلب جاهز للاستلام",
+  "successfully_delivered": "تم تسليمها بنجاح",
+  "press_exit": "اضغط مرة أخرى للخروج",
+  "view_all": "عرض الكل",
+  "alert":"انذر",
+  "your_session_expired":"انتهت مدة الجلسة",
+  "ok":"حسنًا."
+}

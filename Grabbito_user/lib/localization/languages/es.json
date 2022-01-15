@@ -1,0 +1,260 @@
+{
+  "Deliver_Anything": "Entregue cualquier cosa",
+  "Deliver_Anything_Desc": "Entregue cualquier cosa con el servicio más rápido de \nGrabbito.",
+  "Deliver_Anything_2": "Entrega más rápida",
+  "Deliver_Anything_Desc_2": "Entrega más rápida de \nyour cualquier producto \nenin 45 minutos.",
+  "Deliver_Anything_3": "ofertas y más",
+  "Deliver_Anything_Desc_3": "Cupón que te ayuda \npara ahorrar tu dinero.",
+
+
+  "skip": "Correo electrónico",
+  "email": "Correo electrónico",
+  "email_hint": "Ingrese su correo electrónico",
+  "password": "Contraseña",
+  "password_hint": "Introduzca su contraseña",
+  "remember_me": "Recuérdame.",
+  "forgot_password": "¿Olvidó su contraseña?",
+  "login_on_grabbito": "Inicie sesión en Grabbito",
+  "do_not_have_an_account": "¿No tienes una cuenta? Regístrate",
+
+
+  "create_new_account": "Crear nueva cuenta",
+  "full_name": "Nombre completo",
+  "full_name_hint": "Ingrese su nombre completo",
+  "email_address": "Dirección de correo electrónico",
+  "email_address_hint": "Ingrese su ID de correo electrónico",
+  "contact_number": "Número de contacto",
+  "contact_number_hint": "000 000 000",
+  "confirm_password": "Confirmar contraseña",
+  "confirm_password_hint": "Vuelva a introducir su contraseña",
+  "terms_desc": "Al hacer clic en el botón Crear cuenta, Usted acepta con nuestro",
+  "terms": "Términos y condiciones",
+  "and_text": "y",
+  "privacy": "y Política de Privacidad",
+  "create_account": "Crear cuenta",
+  "already_have_an_account_login": "¿Ya tienes una cuenta? Iniciar sesión",
+
+
+  "forgot_password_title": "Olvidé mi contraseña",
+  "verify_account": "Verificar cuenta",
+  "forgot_message": "Verifique su ID de correo electrónico, compartiremos un OTP con usted.No comparta su OTP con ningún otro.",
+
+
+  "add_new_password": "Agregar nueva contraseña",
+  "new_password": "Nueva contraseña",
+  "new_password_hint": "Introduzca una nueva contraseña",
+  "change_password": "Cambiar contraseña",
+
+
+  "OTP_verification": "Verificación OTP",
+  "Verify_OTP": "Verificar OTP",
+  "OTP_message": "Compartiremos un código OTP, no comparta este código con ninguna otra gente, verifique su dispositivo.",
+  "resend_OTP": "¿No recibe OTP? Reenviar de nuevo",
+
+
+  "no_internet": "¡Sin Internet!",
+  "no_internet_desc": "Parece que no estás conecténdote a Internet ni a ninguna conexión Wi-Fi.",
+  "no_data": "UH - أوه...",
+  "no_data_desc": "No se han encontrado datos en este momento.",
+  "no_coupon_desc": "No se ha encontrado ningún cupón en este momento.",
+  "add_address_Label_hint": "Introduzca la etiqueta de su dirección",
+
+
+  "setup_location": "Ubicación de configuración",
+  "location": "Ubicación",
+  "offers_at_grocery": "Ofertas en Grocery",
+  "show_all": "Mostrar todo",
+  "offers_at_fruits": "Ofertas en Frutas y Verduras",
+  "offers_at_restaurant": "Grandes ofertas en restaurantes",
+  "setup_desc": "Según esta ubicación, verá los resultados de la página de inicio antes de establecer la ubicación.",
+  "set_location": "Establecer ubicación",
+  "set_location_for_pickup": "Establecer la ubicación para la recogida",
+  "set_location_for_delivery": "Establecer ubicación para la entrega",
+  "change_location": "Cambiar ubicación",
+  "search_location": "Buscar ubicación",
+  "select_location_from_map": "Seleccione la ubicación en el mapa",
+  "recent_search": "Búsquedas recientes",
+  "no_recent_search": "Sin búsquedas recientes",
+  "clear_all": "Borrar todo",
+  "order_is_text": "El orden es",
+  "shops" : "Shops",
+
+
+  "search_hint": "Buscar restaurantes / tiendas / artículos...",
+  "search_by_category": "Buscar por categoría",
+  "fined_result": "Resultados multados",
+  "search_shop": "Tiendas",
+  "search_item": "Artículos",
+  "search_item_price": "Precio",
+  "search_food_in_text": "Buscar comida en",
+  "search_food_text": "Buscar comida",
+  "founded_results": "Resultados fundados",
+
+
+  "offers_title": "ofertas",
+  "copy_text": "Copia",
+  "get_text": "Get",
+
+
+
+  "past_orders": "Past",
+  "past_orders2": "Pedidos",
+  "upcoming_orders": "Próximo",
+  "upcoming_orders2": "Pedidos",
+  "pickup_orders": "Recoger y",
+  "pickup_orders2": "Entrega de pedidos",
+  "re_order": "Detalles del pedido",
+
+
+  "profile_title": "Perfil",
+  "order_title" : "Orders",
+  "edit_profile": "Editar perfil",
+  "change_language": "Cambiar idioma",
+  "manage_location": "Administrar ubicación",
+  "notification_center": "Centro de notificaciones",
+  "support": "Apoyo",
+  "about": "Acerca de",
+  "privacy_policy": "Política de Privacidad",
+  "terms_and_conditions": "Términos y Condiciones",
+  "login": "Inicio de sesión",
+  "logout": "Cerrar sesión",
+  "version_text": "Versión 1.0.0",
+
+
+
+  "cancel": "Cancelar",
+
+
+  "old_password": "Contraseña antigua",
+  "old_password_hint": "Ingrese su contraseña antigua",
+
+
+  "add_button_text": "Sumar",
+
+
+  "restaurant_available": "Restaurantes disponibles",
+  "store_available": "Tiendas disponibles",
+
+
+  "km_distance_text": "km",
+  "veg_and_non_veg_text": "Veg. & Non. Veg",
+  "veg_text": "Hortaliza.",
+  "non_veg_text": "No. Veg",
+  "for_text": "para 2",
+  "menu_text": "Menú",
+  "menu_desc_text_food": "Los elementos de este menú son proporcionados por el restaurante.",
+  "menu_desc_text": "Los artículos de este menú son proporcionados por Shop.",
+  "food_type_text": "Hortaliza. Solamente",
+
+
+  "customization_and_more": "Personalización y más",
+  "service_items" : "Essentials delivered to your doorstep",
+  "top_picks" : "Top picks for you",
+  "total_items": "Artículos",
+  "add_item_text": "Agregar elemento",
+  "off_upto_text": "off hasta",
+  "use_code_text": "Usar código",
+  "coupon_copied": "Cupón copiado ..!",
+  "add_to_bag": "Añadir a la bolsa",
+  "label_no_goBack": "No, volver",
+  "label_yes_remove_it": "Sí, retíralo",
+  "label_remove_cartItem": "¿Eliminar el artículo del carrito?",
+  "label_your_cart_contains_dishes_from": "Su carrito contiene platos de",
+  "label_your_cart_contains1": "¿Quieres descartar la selección y añadir platos de",
+
+
+  "cart_page_title": "Carro",
+  "location_change": "cambian",
+  "minutes_text": "Minutos",
+  "customize_order_text": "Personalizar pedido",
+  "note_for_delivery_guy_text": "Cualquier nota para el repartidor",
+  "note_for_delivery_guy_text2": "Nota para el repartidor",
+  "promocode_text": "Código promocional",
+  "promocode_hint_text": "Escriba o pegue el código promocional",
+  "apply_promo_text": "Aplicar cupón",
+  "go_to_coupon_section_text": "Ir a la sección de cupones",
+  "coupon_apply_successfully": "Cupón Aplicar con éxito",
+  "or_select_anyone_from_it": "O seleccione a cualquiera de él",
+  "apply_this_coupon": "Aplicar este cupón",
+  "continue_text": "Continuaremos",
+  "subtotal_text": "Subtotal",
+  "tax_text": "Impuesto",
+  "delivery_charges_text": "Gastos de envío",
+  "promocode_discount": "Descuento en código promocional",
+  "remove_coupon": "Eliminar cupón",
+  "to_pay": "Pagar",
+  "total_pay": "Pago total",
+  "proceed_to_pay": "Proceder al pago",
+
+
+  "select_address": "Seleccione Dirección",
+  "your_current_location": "Su ubicación actual",
+  "or_text": "O",
+  "select_from_saved_location": "Seleccione desde la ubicación guardada",
+  "Select_building_Name": "Seleccione el nombre del piso/piso/edificio",
+  "research": "Investigación",
+  "enter_here_text": "Entra aquí",
+  "landmark_if_any": "Punto de referencia, si lo hay.",
+  "enter_your_landMark": "Introduce tu landmark",
+  "save_address": "Guardar dirección",
+  "add_address": "Agregar dirección",
+
+
+  "payment_method_title": "Método de pago",
+  "total_payable_amount": "Monto total a pagar",
+  "razorpay_text": "Razorpay",
+  "stripe_text": "De raya",
+  "cash_on_delivery_text": "Contra reembolso",
+  "proceed_and_pay_text": "Proceder y pagar",
+  "select_payment_method": "Seleccione el método de pago",
+
+
+  "stripe_payment_screen_title": "Pago de Stripe",
+  "stripe_payment_complete": "Pago completo",
+  "stripe_payment_done": "Pago de Stripe completo",
+
+
+  "pickup_address_text": "Dirección de recogida",
+  "tap_to_select_pickup_address": "Toca Para seleccionar la dirección de recogida",
+  "tap_to_select_delivery_address": "Toca Para seleccionar Dirección de entrega",
+  "delivery_address_text": "Dirección de entrega",
+  "pickup_content_text": "Contenido del paquete",
+  "select_pickup_content_text": "Seleccione el contenido del paquete",
+  "package_weight_text": "Peso del paquete",
+  "weight_of_package_text": "Peso de su paquete",
+  "instructions_for_deliveryman": "Instrucciones para el repartidor",
+  "pickup_screen_desc": "El pedido no contiene artículos ilegales/restringidos.",
+  "pickup_screen_desc2": "el socio puede solicitar verificar el contenido del paquete.",
+  "confirm_order": "Confirmar pedido",
+  "provide_package_content": "Por favor, proporcione el contenido del paquete",
+  "please_login": "Por favor, inicie sesión para continuar",
+
+
+  "reorder_it": "Reordenarlo",
+  "view_details": "Ver más detalles",
+  "shop_close": "Lo sentimos, esta tienda actualmente cerrada",
+  "pick_up": "Recoger",
+  "drop_off": "Dejar",
+  "edit_location": "Editar ubicación",
+  "remove_this_address": "Eliminar esta dirección",
+  "mute_notification": "Silenciar notificación",
+  "mute_noti_desc": "No recibirá ningún tipo de notificación de la aplicación si la deshabilitó.",
+  "login_please": "Inicie sesión por favor",
+
+
+  "order": "ordenas",
+  "order_rejected": "Rechazo de pedido",
+  "order_cancel": "Cancelar pedido",
+  "drop_off_address": "Dirección de dropoff",
+  "delivered_success": "Entregado con éxito",
+  "billing_details": "Detalles de facturación",
+  "track_order": "Seguimiento de pedidos",
+  "food_prepared": "Se está preparando comida",
+  "order_pickup": "El pedido está listo para ser recogido",
+  "successfully_delivered": "Entregado con éxito",
+  "press_exit": "Presione de nuevo para salir",
+  "view_all": "Ver todo",
+  "alert":"Alerta",
+  "your_session_expired":"Su sesión ha caducado",
+  "ok":"De acuerdo"
+}
