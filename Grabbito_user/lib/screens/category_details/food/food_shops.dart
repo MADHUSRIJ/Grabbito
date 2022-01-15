@@ -226,7 +226,6 @@ class _FoodDeliveryShopState extends State<FoodDeliveryShop>
                                   fontSize: 20),
                             ),
                           ),
-
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.start,
@@ -236,7 +235,9 @@ class _FoodDeliveryShopState extends State<FoodDeliveryShop>
                                 size: 16,
                                 color: colorOrange,
                               ),
-                              SizedBox(width: 5,),
+                              SizedBox(
+                                width: 5,
+                              ),
                               Text(
                                 distance == 0
                                     ? "0.1km"
@@ -246,13 +247,18 @@ class _FoodDeliveryShopState extends State<FoodDeliveryShop>
                                   fontFamily: groldReg,
                                   fontWeight: FontWeight.w200,
                                 ),
-                              ),SizedBox(width: 10,),
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
                               Icon(
                                 IconlyBold.time_circle,
                                 size: 16,
                                 color: colorPurple,
                               ),
-                              SizedBox(width: 5,),
+                              SizedBox(
+                                width: 5,
+                              ),
                               Text(
                                 restaurantEstimatedTime.toString() + "mins",
                                 style: TextStyle(
@@ -376,94 +382,100 @@ class _FoodDeliveryShopState extends State<FoodDeliveryShop>
                   } else {
                     return menus.isNotEmpty
                         ? CustomTabView(
-                        initPosition: initPosition,
-                        itemCount: menus.length > 1 ? menus.length : 1,
-                        onPositionChange: (index) {
-                          initPosition = index!;
-                        },
-                        tabBuilder: (context, index) => Tab(
-                            child: TabContainer(
-                                menus[index].name.toString(), index)),
-                        pageBuilder: (context, index) => Padding(
-                          padding: EdgeInsets.symmetric(vertical: 16),
-                          child: subMenus(index),
-                        ))
+                            initPosition: initPosition,
+                            itemCount: menus.length > 1 ? menus.length : 1,
+                            onPositionChange: (index) {
+                              initPosition = index!;
+                            },
+                            tabBuilder: (context, index) => Tab(
+                                child: TabContainer(
+                                    menus[index].name.toString(), index)),
+                            pageBuilder: (context, index) => Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 16),
+                                  child: subMenus(index),
+                                ))
                         : Center(child: Text(noDataDesc));
                   }
                 },
               ),
-            )
+            ),
           ],
         ),
       ),
       bottomNavigationBar: Visibility(
         visible: ScopedModel.of<CartModel>(context, rebuildOnChange: true)
-            .cart
-            .isNotEmpty
+                .cart
+                .isNotEmpty
             ? true
             : false,
         child: GestureDetector(
           onTap: () => Navigator.pushNamed(context, cartScreenRoute),
-          child: Container(
-            height: 60,
-            width: SizeConfig.screenWidth,
-            color: colorGreen,
-            padding: EdgeInsets.only(
-              left: 20,
-              right: 20,
-            ),
-            child: SizedBox(
-              width: MediaQuery.of(context).size.width,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        '$totalQty ${getTranslated(context, totalItems).toString()}',
-                        style: TextStyle(
-                            fontSize: 18,
-                            color: Colors.white,
-                            fontFamily: groldBold),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      VerticalDivider(
-                        thickness: 3,
-                        width: 10,
-                        indent: 20,
-                        endIndent: 20,
-                        color: colorWhite,
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Text(
-                        '${PreferenceUtils.getString(PreferenceNames.currencySymbolSetting)} $totalCartAmount',
-                        style: TextStyle(
-                            fontSize: 18,
-                            color: Colors.white,
-                            fontFamily: groldBold),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        getTranslated(context, addToBag).toString(),
-                        style: TextStyle(
-                            fontSize: 18,
-                            color: Colors.white,
-                            fontFamily: groldReg),
-                      ),
-                      SizedBox(width: 5),
-                      Image(image: AssetImage('assets/images/bag.png')),
-                    ],
-                  ),
-                ],
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: Container(
+              height: 48,
+              width: SizeConfig.screenWidth,
+             decoration: BoxDecoration(
+               color: colorOrange,
+               borderRadius: BorderRadius.circular(50)
+             ),
+              padding: EdgeInsets.only(
+                left: 30,
+                right: 30,
+              ),
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          '$totalQty ${getTranslated(context, totalItems).toString()}',
+                          style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.white,
+                              fontFamily: groldReg),
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        VerticalDivider(
+                          thickness: 1,
+                          width: 10,
+                          indent: 20,
+                          endIndent: 20,
+                          color: colorWhite,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          '${PreferenceUtils.getString(PreferenceNames.currencySymbolSetting)} $totalCartAmount',
+                          style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.white,
+                              fontFamily: groldBold),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          getTranslated(context, addToBag).toString(),
+                          style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.white,
+                              fontFamily: groldReg),
+                        ),
+                        SizedBox(width: 10),
+                        Icon(IconlyBold.bag_2,color: Colors.white,size: 20,),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -602,12 +614,17 @@ class _FoodDeliveryShopState extends State<FoodDeliveryShop>
                 physics: ClampingScrollPhysics(),
                 scrollDirection: Axis.vertical,
                 separatorBuilder: (context, index) => SizedBox(
-                      height: 32,
+                      height: 16,
                     ),
                 itemBuilder: (BuildContext context, int subMenuIndex) {
                   return Container(
                     width: SizeConfig.screenWidth,
-                    margin: EdgeInsets.only(left: 20, right: 20),
+                    height:   menus[index]
+                        .submenu![subMenuIndex]
+                        .fullImage!
+                        .toString() ==
+                        "https://grabbito.com/public/images/upload/prod_default.png" ? 100 : 120,
+                    margin: EdgeInsets.only(left: 24, right: 0),
                     child: Row(
                       children: [
                         Expanded(
@@ -616,118 +633,862 @@ class _FoodDeliveryShopState extends State<FoodDeliveryShop>
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Row(
-                                children: [
-                                  widget.businessTypeId == 2
-                                      ? CircleAvatar(
-                                    backgroundColor: menus[index]
-                                        .submenu![subMenuIndex]
-                                        .type ==
-                                        "veg"
-                                        ? Colors.green
-                                        : Colors.red,
-                                    radius: 6.0,
-                                  )
-                                      : SizedBox(
-                                    height: 0.1,
-                                    width: 0.1,
-                                  ),
-                                  widget.businessTypeId == 2
-                                      ? SizedBox(width: 9)
-                                      : SizedBox(
-                                    height: 0.1,
-                                    width: 0.1,
-                                  ),
-                                  SizedBox(
-                                    child: Text(
-                                      menus[index]
-                                          .submenu![subMenuIndex]
-                                          .name
-                                          .toString(),
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(
-                                          color: colorBlack,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w400,
-                                          fontFamily: groldReg
+                              Expanded(
+                                child: Row(
+                                  children: [
+                                    widget.businessTypeId == 2
+                                        ? CircleAvatar(
+                                            backgroundColor: menus[index]
+                                                        .submenu![subMenuIndex]
+                                                        .type ==
+                                                    "veg"
+                                                ? Colors.green
+                                                : Colors.red,
+                                            radius: 6.0,
+                                          )
+                                        : SizedBox(
+                                            height: 0.1,
+                                            width: 0.1,
+                                          ),
+                                    widget.businessTypeId == 2
+                                        ? SizedBox(width: 9)
+                                        : SizedBox(
+                                            height: 0.1,
+                                            width: 0.1,
+                                          ),
+                                    SizedBox(
+                                      child: Text(
+                                        menus[index]
+                                            .submenu![subMenuIndex]
+                                            .name
+                                            .toString(),
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: TextStyle(
+                                            color: colorBlack,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w400,
+                                            fontFamily: groldReg),
                                       ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                              menus[index]
-                                  .submenu![subMenuIndex]
-                                  .description == "-" ? SizedBox(height: 6,) :SizedBox(height: 4),
-                              menus[index]
-                                  .submenu![subMenuIndex]
-                                  .description == "-" ? SizedBox() : Text(
-                                menus[index]
-                                    .submenu![subMenuIndex]
-                                    .description
-                                    .toString(),
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                    color: Color(0xff54545A),
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w400,
-                                    fontFamily: groldReg
+                                  ],
                                 ),
                               ),
-                              menus[index]
-                                  .submenu![subMenuIndex]
-                                  .description == "-" ? SizedBox() : SizedBox(height: 4,),
-                              Text(
-                                "${menus[index].submenu![subMenuIndex].unit} ${menus[index].submenu![subMenuIndex].units!.name}",
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                    color: Color(0xff54545A),
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w400,
-                                    fontFamily: groldReg
+                              menus[index].submenu![subMenuIndex].description ==
+                                      "-"
+                                  ? SizedBox()
+                                  : Expanded(
+                                      child: Text(
+                                        menus[index]
+                                            .submenu![subMenuIndex]
+                                            .description
+                                            .toString(),
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: TextStyle(
+                                            color: Color(0xff54545A),
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w400,
+                                            fontFamily: groldReg),
+                                      ),
+                                    ),
+                              Expanded(
+                                child: Text(
+                                  "${menus[index].submenu![subMenuIndex].unit} ${menus[index].submenu![subMenuIndex].units!.name}",
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                      color: Color(0xff54545A),
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w400,
+                                      fontFamily: groldReg),
                                 ),
                               ),
-                              menus[index]
-                                  .submenu![subMenuIndex]
-                                  .description == "-" ? SizedBox(height: 6,) :SizedBox(height: 4),
-                              Text(
-                                "RS"+' ${menus[index].submenu![subMenuIndex].price}',
-                                style: TextStyle(
-                                    color: colorBlack,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w400,
-                                    fontFamily: groldReg
+                              Expanded(
+                                child: Text(
+                                  "RS" +
+                                      ' ${menus[index].submenu![subMenuIndex].price}',
+                                  style: TextStyle(
+                                      color: colorBlack,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w500,
+                                      fontFamily: groldReg),
                                 ),
-                              ),
+                              )
                             ],
                           ),
                         ),
-                        menus[index].submenu![subMenuIndex].fullImage!.toString() == "https://grabbito.com/public/images/upload/prod_default.png" ? Expanded(child: Container(),) :Expanded(
-                          child: CachedNetworkImage(
-                            width: 80,
-                            height: 80,
-                            alignment: Alignment.center,
-                            fit: BoxFit.fill,
-                            imageUrl:
-                                menus[index].submenu![subMenuIndex].fullImage!,
-                            imageBuilder: (context, imageProvider) => Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(16),
-                                image: DecorationImage(
-                                  image: imageProvider,
-                                  fit: BoxFit.fill,
-                                  alignment: Alignment.center,
+                        Expanded(
+                            flex: 2,
+                            child: Column(
+                              children: [
+                                menus[index]
+                                            .submenu![subMenuIndex]
+                                            .fullImage!
+                                            .toString() ==
+                                        "https://grabbito.com/public/images/upload/prod_default.png"
+                                    ? Container()
+                                    : Expanded(
+                                        flex: 2,
+                                        child: CachedNetworkImage(
+                                          width: 100,
+                                          height: 60,
+                                          alignment: Alignment.center,
+                                          fit: BoxFit.fill,
+                                          imageUrl: menus[index]
+                                              .submenu![subMenuIndex]
+                                              .fullImage!,
+                                          imageBuilder:
+                                              (context, imageProvider) =>
+                                                  Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(16),
+                                              image: DecorationImage(
+                                                image: imageProvider,
+                                                fit: BoxFit.fill,
+                                                alignment: Alignment.center,
+                                              ),
+                                            ),
+                                          ),
+                                          placeholder: (context, url) =>
+                                              SpinKitFadingCircle(
+                                                  color: colorRed),
+                                          errorWidget: (context, url, error) =>
+                                              Image.asset(
+                                                  "assets/images/Merchant.png"),
+                                        ),
+                                      ),
+                                Expanded(
+                                  flex: 1,
+                                  child: Padding(
+                                    padding: menus[index]
+                                                .submenu![subMenuIndex]
+                                                .fullImage!
+                                                .toString() ==
+                                            "https://grabbito.com/public/images/upload/prod_default.png"
+                                          ? EdgeInsets.symmetric(vertical: 30)
+                                        : EdgeInsets.only(top: 10),
+                                    child: Container(
+                                      child: menus[index]
+                                              .submenu![subMenuIndex]
+                                              .isAdded!
+                                          ? Container(
+                                              width: 80,
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(4),
+                                                color:
+                                                    colorPurple.withAlpha(30),
+                                              ),
+                                              child: Row(
+                                                children: [
+                                                  SizedBox(
+                                                    height: ScreenUtil()
+                                                        .setHeight(20),
+                                                    width: ScreenUtil()
+                                                        .setWidth(24),
+                                                    child: IconButton(
+                                                      onPressed: () {
+                                                        if (menus[index]
+                                                                .submenu![
+                                                                    subMenuIndex]
+                                                                .custimization!
+                                                                .isNotEmpty &&
+                                                            menus[index]
+                                                                .submenu![
+                                                                    subMenuIndex]
+                                                                .isRepeatCustomization!) {
+                                                          int isRepeatCustomization = menus[
+                                                                      index]
+                                                                  .submenu![
+                                                                      subMenuIndex]
+                                                                  .isRepeatCustomization!
+                                                              ? 1
+                                                              : 0;
+
+                                                          setState(() {
+                                                            if (menus[index]
+                                                                    .submenu![
+                                                                        subMenuIndex]
+                                                                    .count !=
+                                                                1) {
+                                                              menus[index]
+                                                                  .submenu![
+                                                                      subMenuIndex]
+                                                                  .count--;
+                                                            } else {
+                                                              menus[index]
+                                                                  .submenu![
+                                                                      subMenuIndex]
+                                                                  .isAdded = false;
+                                                              menus[index]
+                                                                  .submenu![
+                                                                      subMenuIndex]
+                                                                  .count = 0;
+                                                            }
+                                                          });
+                                                          model.updateProduct(
+                                                              menus[index]
+                                                                  .submenu![
+                                                                      subMenuIndex]
+                                                                  .id,
+                                                              menus[index]
+                                                                  .submenu![
+                                                                      subMenuIndex]
+                                                                  .count);
+                                                          String?
+                                                              finalFoodCustomization;
+                                                          double? price,
+                                                              tempPrice;
+                                                          int? qty;
+                                                          for (int z = 0;
+                                                              z <
+                                                                  model.cart
+                                                                      .length;
+                                                              z++) {
+                                                            if (menus[index]
+                                                                    .submenu![
+                                                                        subMenuIndex]
+                                                                    .id ==
+                                                                model.cart[z]
+                                                                    .id) {
+                                                              json.decode(model
+                                                                  .cart[z]
+                                                                  .foodCustomization!);
+                                                              finalFoodCustomization =
+                                                                  model.cart[z]
+                                                                      .foodCustomization;
+                                                              price = model
+                                                                  .cart[z]
+                                                                  .price;
+                                                              qty = model
+                                                                  .cart[z].qty;
+                                                              tempPrice = model
+                                                                  .cart[z]
+                                                                  .tempPrice;
+                                                            }
+                                                          }
+                                                          if (qty != null &&
+                                                              tempPrice !=
+                                                                  null) {
+                                                            price =
+                                                                tempPrice * qty;
+                                                          } else {
+                                                            price = 0;
+                                                          }
+                                                          _updateForCustomizedFood(
+                                                              menus[index]
+                                                                  .submenu![
+                                                                      subMenuIndex]
+                                                                  .id,
+                                                              menus[index]
+                                                                  .submenu![
+                                                                      subMenuIndex]
+                                                                  .count,
+                                                              price.toString(),
+                                                              menus[index]
+                                                                  .submenu![
+                                                                      subMenuIndex]
+                                                                  .price
+                                                                  .toString(),
+                                                              menus[index]
+                                                                  .submenu![
+                                                                      subMenuIndex]
+                                                                  .image,
+                                                              menus[index]
+                                                                  .submenu![
+                                                                      subMenuIndex]
+                                                                  .name,
+                                                              restaurantId,
+                                                              restaurantName,
+                                                              finalFoodCustomization,
+                                                              isRepeatCustomization,
+                                                              1);
+                                                        } else {
+                                                          setState(() {
+                                                            if (menus[index]
+                                                                    .submenu![
+                                                                        subMenuIndex]
+                                                                    .count !=
+                                                                1) {
+                                                              menus[index]
+                                                                  .submenu![
+                                                                      subMenuIndex]
+                                                                  .count--;
+                                                            } else {
+                                                              menus[index]
+                                                                  .submenu![
+                                                                      subMenuIndex]
+                                                                  .isAdded = false;
+                                                              menus[index]
+                                                                  .submenu![
+                                                                      subMenuIndex]
+                                                                  .count = 0;
+                                                            }
+                                                          });
+                                                          model.updateProduct(
+                                                              menus[index]
+                                                                  .submenu![
+                                                                      subMenuIndex]
+                                                                  .id,
+                                                              menus[index]
+                                                                  .submenu![
+                                                                      subMenuIndex]
+                                                                  .count);
+                                                          _update(
+                                                              menus[index]
+                                                                  .submenu![
+                                                                      subMenuIndex]
+                                                                  .id,
+                                                              menus[index]
+                                                                  .submenu![
+                                                                      subMenuIndex]
+                                                                  .count,
+                                                              menus[index]
+                                                                  .submenu![
+                                                                      subMenuIndex]
+                                                                  .price
+                                                                  .toString(),
+                                                              menus[index]
+                                                                  .submenu![
+                                                                      subMenuIndex]
+                                                                  .image,
+                                                              menus[index]
+                                                                  .submenu![
+                                                                      subMenuIndex]
+                                                                  .name,
+                                                              restaurantId,
+                                                              restaurantName,
+                                                              0,
+                                                              0,
+                                                              0,
+                                                              '0');
+                                                        }
+                                                      },
+                                                      padding: EdgeInsets.zero,
+                                                      iconSize: ScreenUtil()
+                                                          .setHeight(16),
+                                                      icon: Icon(
+                                                        Icons.remove,
+                                                        color: colorButton,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    width: ScreenUtil()
+                                                        .setWidth(24),
+                                                    color: colorWhite,
+                                                    child: Align(
+                                                      alignment:
+                                                          Alignment.center,
+                                                      child: Text(
+                                                        menus[index]
+                                                            .submenu![
+                                                                subMenuIndex]
+                                                            .count
+                                                            .toString(),
+                                                        style: TextStyle(
+                                                          fontFamily: groldReg,
+                                                          color: colorBlack,
+                                                          fontSize: 16,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    height: ScreenUtil()
+                                                        .setHeight(20),
+                                                    width: ScreenUtil()
+                                                        .setWidth(24),
+                                                    child: IconButton(
+                                                      onPressed: () {
+                                                        if (menus[index]
+                                                            .submenu![
+                                                                subMenuIndex]
+                                                            .custimization!
+                                                            .isNotEmpty) {
+                                                          var ab;
+                                                          String?
+                                                              finalFoodCustomization;
+                                                          double price = 0;
+                                                          int qty = 0;
+                                                          for (int z = 0;
+                                                              z <
+                                                                  model.cart
+                                                                      .length;
+                                                              z++) {
+                                                            if (menus[index]
+                                                                    .submenu![
+                                                                        subMenuIndex]
+                                                                    .id ==
+                                                                model.cart[z]
+                                                                    .id) {
+                                                              ab = json.decode(model
+                                                                  .cart[z]
+                                                                  .foodCustomization!);
+                                                              finalFoodCustomization =
+                                                                  model.cart[z]
+                                                                      .foodCustomization;
+                                                              price = model
+                                                                  .cart[z]
+                                                                  .price!;
+                                                              qty = model
+                                                                  .cart[z].qty!;
+                                                            }
+                                                          }
+                                                          List<String?>
+                                                              nameOfcustomization =
+                                                              [];
+                                                          for (int i = 0;
+                                                              i < ab.length;
+                                                              i++) {
+                                                            nameOfcustomization
+                                                                .add(ab[i]
+                                                                        ['data']
+                                                                    ['name']);
+                                                          }
+                                                          menus[index]
+                                                              .submenu![
+                                                                  subMenuIndex]
+                                                              .isRepeatCustomization = true;
+
+                                                          updateCustomizationFoodDataToDB(
+                                                            finalFoodCustomization,
+                                                            menus[index]
+                                                                    .submenu![
+                                                                subMenuIndex],
+                                                            model,
+                                                            price +=
+                                                                price * qty,
+                                                          );
+                                                        } else {
+                                                          setState(() {
+                                                            menus[index]
+                                                                .submenu![
+                                                                    subMenuIndex]
+                                                                .count++;
+                                                          });
+                                                          model.updateProduct(
+                                                              menus[index]
+                                                                  .submenu![
+                                                                      subMenuIndex]
+                                                                  .id,
+                                                              menus[index]
+                                                                  .submenu![
+                                                                      subMenuIndex]
+                                                                  .count);
+                                                          _update(
+                                                              menus[index]
+                                                                  .submenu![
+                                                                      subMenuIndex]
+                                                                  .id,
+                                                              menus[index]
+                                                                  .submenu![
+                                                                      subMenuIndex]
+                                                                  .count,
+                                                              menus[index]
+                                                                  .submenu![
+                                                                      subMenuIndex]
+                                                                  .price
+                                                                  .toString(),
+                                                              menus[index]
+                                                                  .submenu![
+                                                                      subMenuIndex]
+                                                                  .image,
+                                                              menus[index]
+                                                                  .submenu![
+                                                                      subMenuIndex]
+                                                                  .name,
+                                                              restaurantId,
+                                                              restaurantName,
+                                                              0,
+                                                              0,
+                                                              0,
+                                                              '0');
+                                                        }
+                                                      },
+                                                      padding: EdgeInsets.zero,
+                                                      iconSize: ScreenUtil()
+                                                          .setHeight(16),
+                                                      icon: Icon(
+                                                        Icons.add,
+                                                        color: colorButton,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            )
+                                          : GestureDetector(
+                                              onTap: () {
+                                                setState(() {
+                                                  if (menus[index]
+                                                      .submenu![subMenuIndex]
+                                                      .custimization!
+                                                      .isNotEmpty) {
+                                                    openFoodCustomisationBottomSheet(
+                                                      model,
+                                                      menus[index].submenu![
+                                                          subMenuIndex],
+                                                      double.parse(menus[index]
+                                                          .submenu![
+                                                              subMenuIndex]
+                                                          .price
+                                                          .toString()),
+                                                      totalCartAmount,
+                                                      totalQty,
+                                                      menus[index]
+                                                          .submenu![
+                                                              subMenuIndex]
+                                                          .custimization!,
+                                                    );
+                                                  } else {
+                                                    if (ScopedModel.of<
+                                                                CartModel>(
+                                                            context,
+                                                            rebuildOnChange:
+                                                                true)
+                                                        .cart
+                                                        .isEmpty) {
+                                                      setState(() {
+                                                        menus[index]
+                                                            .submenu![
+                                                                subMenuIndex]
+                                                            .isAdded = !menus[
+                                                                index]
+                                                            .submenu![
+                                                                subMenuIndex]
+                                                            .isAdded!;
+                                                        menus[index]
+                                                            .submenu![
+                                                                subMenuIndex]
+                                                            .count++;
+                                                      });
+                                                      products.add(Product(
+                                                        id: menus[index]
+                                                            .submenu![
+                                                                subMenuIndex]
+                                                            .id,
+                                                        qty: menus[index]
+                                                            .submenu![
+                                                                subMenuIndex]
+                                                            .count,
+                                                        price: double.parse(
+                                                            menus[index]
+                                                                .submenu![
+                                                                    subMenuIndex]
+                                                                .price
+                                                                .toString()),
+                                                        imgUrl: menus[index]
+                                                            .submenu![
+                                                                subMenuIndex]
+                                                            .image,
+                                                        type: menus[index]
+                                                            .submenu![
+                                                                subMenuIndex]
+                                                            .type,
+                                                        title: menus[index]
+                                                            .submenu![
+                                                                subMenuIndex]
+                                                            .name,
+                                                        restaurantsId:
+                                                            restaurantId,
+                                                        restaurantsName:
+                                                            restaurantName,
+                                                        restaurantImage:
+                                                            restaurantImage,
+                                                        foodCustomization: '',
+                                                        isRepeatCustomization:
+                                                            0,
+                                                        isCustomization: 0,
+                                                        itemQty: 0,
+                                                        tempPrice: 0,
+                                                        restaurantAddress:
+                                                            address,
+                                                        restaurantKm: distance,
+                                                        restaurantEstimatedTime:
+                                                            restaurantEstimatedTime,
+                                                      ));
+                                                      model.addProduct(Product(
+                                                        id: menus[index]
+                                                            .submenu![
+                                                                subMenuIndex]
+                                                            .id,
+                                                        qty: menus[index]
+                                                            .submenu![
+                                                                subMenuIndex]
+                                                            .count,
+                                                        price: double.parse(
+                                                            menus[index]
+                                                                .submenu![
+                                                                    subMenuIndex]
+                                                                .price
+                                                                .toString()),
+                                                        imgUrl: menus[index]
+                                                            .submenu![
+                                                                subMenuIndex]
+                                                            .image,
+                                                        type: menus[index]
+                                                            .submenu![
+                                                                subMenuIndex]
+                                                            .type,
+                                                        title: menus[index]
+                                                            .submenu![
+                                                                subMenuIndex]
+                                                            .name,
+                                                        restaurantsId:
+                                                            restaurantId,
+                                                        restaurantsName:
+                                                            restaurantName,
+                                                        restaurantImage:
+                                                            restaurantImage,
+                                                        foodCustomization: '',
+                                                        isRepeatCustomization:
+                                                            0,
+                                                        isCustomization: 0,
+                                                        itemQty: 0,
+                                                        tempPrice: 0,
+                                                        restaurantAddress:
+                                                            address,
+                                                        restaurantKm: distance,
+                                                        restaurantEstimatedTime:
+                                                            restaurantEstimatedTime,
+                                                      ));
+                                                      _insert(
+                                                          menus[index]
+                                                              .submenu![
+                                                                  subMenuIndex]
+                                                              .id,
+                                                          menus[index]
+                                                              .submenu![
+                                                                  subMenuIndex]
+                                                              .count,
+                                                          menus[index]
+                                                              .submenu![
+                                                                  subMenuIndex]
+                                                              .price
+                                                              .toString(),
+                                                          '0',
+                                                          menus[index]
+                                                              .submenu![
+                                                                  subMenuIndex]
+                                                              .image,
+                                                          menus[index]
+                                                              .submenu![
+                                                                  subMenuIndex]
+                                                              .type,
+                                                          menus[index]
+                                                              .submenu![
+                                                                  subMenuIndex]
+                                                              .name,
+                                                          restaurantId,
+                                                          restaurantName,
+                                                          restaurantImage,
+                                                          '',
+                                                          0,
+                                                          0,
+                                                          0,
+                                                          0,
+                                                          address,
+                                                          distance,
+                                                          restaurantEstimatedTime);
+                                                    } else {
+                                                      print(ScopedModel.of<
+                                                                  CartModel>(
+                                                              context,
+                                                              rebuildOnChange:
+                                                                  true)
+                                                          .getRestId());
+                                                      if (restaurantId !=
+                                                          ScopedModel.of<
+                                                                      CartModel>(
+                                                                  context,
+                                                                  rebuildOnChange:
+                                                                      true)
+                                                              .getRestId()) {
+                                                        showDialogRemoveCart(
+                                                            ScopedModel.of<
+                                                                        CartModel>(
+                                                                    context,
+                                                                    rebuildOnChange:
+                                                                        true)
+                                                                .getRestName(),
+                                                            restaurantName);
+                                                      } else {
+                                                        setState(() {
+                                                          menus[index]
+                                                              .submenu![
+                                                                  subMenuIndex]
+                                                              .isAdded = !menus[
+                                                                  index]
+                                                              .submenu![
+                                                                  subMenuIndex]
+                                                              .isAdded!;
+                                                          menus[index]
+                                                              .submenu![
+                                                                  subMenuIndex]
+                                                              .count++;
+                                                        });
+                                                        products.add(Product(
+                                                          id: menus[index]
+                                                              .submenu![
+                                                                  subMenuIndex]
+                                                              .id,
+                                                          qty: menus[index]
+                                                              .submenu![
+                                                                  subMenuIndex]
+                                                              .count,
+                                                          price: double.parse(
+                                                              menus[index]
+                                                                  .submenu![
+                                                                      subMenuIndex]
+                                                                  .price
+                                                                  .toString()),
+                                                          imgUrl: menus[index]
+                                                              .submenu![
+                                                                  subMenuIndex]
+                                                              .image,
+                                                          type: menus[index]
+                                                              .submenu![
+                                                                  subMenuIndex]
+                                                              .type,
+                                                          title: menus[index]
+                                                              .submenu![
+                                                                  subMenuIndex]
+                                                              .name,
+                                                          restaurantsId:
+                                                              restaurantId,
+                                                          restaurantsName:
+                                                              restaurantName,
+                                                          restaurantImage:
+                                                              restaurantImage,
+                                                          foodCustomization: '',
+                                                          isCustomization: 0,
+                                                          isRepeatCustomization:
+                                                              0,
+                                                          itemQty: 0,
+                                                          tempPrice: 0,
+                                                          restaurantAddress:
+                                                              address,
+                                                          restaurantKm:
+                                                              distance,
+                                                          restaurantEstimatedTime:
+                                                              restaurantEstimatedTime,
+                                                        ));
+                                                        model
+                                                            .addProduct(Product(
+                                                          id: menus[index]
+                                                              .submenu![
+                                                                  subMenuIndex]
+                                                              .id,
+                                                          qty: menus[index]
+                                                              .submenu![
+                                                                  subMenuIndex]
+                                                              .count,
+                                                          price: double.parse(
+                                                              menus[index]
+                                                                  .submenu![
+                                                                      subMenuIndex]
+                                                                  .price
+                                                                  .toString()),
+                                                          imgUrl: menus[index]
+                                                              .submenu![
+                                                                  subMenuIndex]
+                                                              .image,
+                                                          type: menus[index]
+                                                              .submenu![
+                                                                  subMenuIndex]
+                                                              .type,
+                                                          title: menus[index]
+                                                              .submenu![
+                                                                  subMenuIndex]
+                                                              .name,
+                                                          restaurantsId:
+                                                              restaurantId,
+                                                          restaurantsName:
+                                                              restaurantName,
+                                                          restaurantImage:
+                                                              restaurantImage,
+                                                          foodCustomization: '',
+                                                          isRepeatCustomization:
+                                                              0,
+                                                          isCustomization: 0,
+                                                          itemQty: 0,
+                                                          tempPrice: 0,
+                                                          restaurantAddress:
+                                                              address,
+                                                          restaurantKm:
+                                                              distance,
+                                                          restaurantEstimatedTime:
+                                                              restaurantEstimatedTime,
+                                                        ));
+                                                        _insert(
+                                                          menus[index]
+                                                              .submenu![
+                                                                  subMenuIndex]
+                                                              .id,
+                                                          menus[index]
+                                                              .submenu![
+                                                                  subMenuIndex]
+                                                              .count,
+                                                          menus[index]
+                                                              .submenu![
+                                                                  subMenuIndex]
+                                                              .price
+                                                              .toString(),
+                                                          '0',
+                                                          menus[index]
+                                                              .submenu![
+                                                                  subMenuIndex]
+                                                              .image,
+                                                          menus[index]
+                                                              .submenu![
+                                                                  subMenuIndex]
+                                                              .type,
+                                                          menus[index]
+                                                              .submenu![
+                                                                  subMenuIndex]
+                                                              .name,
+                                                          restaurantId,
+                                                          restaurantName,
+                                                          restaurantImage,
+                                                          '',
+                                                          0,
+                                                          0,
+                                                          0,
+                                                          0,
+                                                          address,
+                                                          distance,
+                                                          restaurantEstimatedTime,
+                                                        );
+                                                      }
+                                                    }
+                                                  }
+                                                });
+                                              },
+                                              child: Container(
+                                                height: 28,
+                                                width: 80,
+                                                alignment: Alignment.center,
+                                                decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            4),
+                                                    color: colorPurple
+                                                        .withAlpha(30)),
+                                                child: Icon(
+                                                  Icons.add,
+                                                  color: Colors.black,
+                                                  size: 20,
+                                                ),
+                                              ),
+                                            ),
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            ),
-                            placeholder: (context, url) =>
-                                SpinKitFadingCircle(color: colorRed),
-                            errorWidget: (context, url, error) =>
-                                Image.asset("assets/images/Merchant.png"),
-                          ),
-                        ),
+                              ],
+                            ))
                       ],
                     ),
                   );
@@ -1164,14 +1925,23 @@ class _FoodDeliveryShopState extends State<FoodDeliveryShop>
                                                 )
                                               : Center(
                                                   child: Column(
-                                                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .stretch,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
                                                     children: [
-                                                      Image.asset("assets/images/no_image.png"),
+                                                      Image.asset(
+                                                          "assets/images/no_image.png"),
                                                       Text(
-                                                        getTranslated(context, noDataDesc).toString(),
-                                                        textAlign: TextAlign.center,
-                                                        overflow: TextOverflow.ellipsis,
+                                                        getTranslated(context,
+                                                                noDataDesc)
+                                                            .toString(),
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
                                                         maxLines: 1,
                                                         style: TextStyle(
                                                           fontSize: 20,
@@ -1184,14 +1954,20 @@ class _FoodDeliveryShopState extends State<FoodDeliveryShop>
                                                 )
                                           : Center(
                                               child: Column(
-                                                crossAxisAlignment: CrossAxisAlignment.stretch,
-                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.stretch,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
                                                 children: [
-                                                  Image.asset("assets/images/no_image.png"),
+                                                  Image.asset(
+                                                      "assets/images/no_image.png"),
                                                   Text(
-                                                    getTranslated(context, noDataDesc).toString(),
+                                                    getTranslated(
+                                                            context, noDataDesc)
+                                                        .toString(),
                                                     textAlign: TextAlign.center,
-                                                    overflow: TextOverflow.ellipsis,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
                                                     maxLines: 1,
                                                     style: TextStyle(
                                                       fontSize: 20,

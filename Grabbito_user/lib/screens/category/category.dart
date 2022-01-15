@@ -10,9 +10,11 @@ import 'package:grabbito/constant/app_strings.dart';
 import 'package:grabbito/constant/color_constant.dart';
 import 'package:grabbito/constant/common_function.dart';
 import 'package:grabbito/localization/localization_constant.dart';
+import 'package:grabbito/model/cart_model.dart';
 import 'package:grabbito/model/homepage/business_types_model.dart';
 import 'package:grabbito/model/homepage/offers_at_restaurant_model.dart';
 import 'package:grabbito/model/shops_model.dart';
+import 'package:grabbito/model/single_shop_model.dart';
 import 'package:grabbito/network/api_header.dart';
 import 'package:grabbito/network/api_service.dart';
 import 'package:grabbito/network/base_model.dart';
@@ -28,6 +30,7 @@ import 'package:grabbito/utilities/preference_consts.dart';
 import 'package:grabbito/utilities/preference_utility.dart';
 import 'package:grabbito/utilities/transition.dart';
 import 'package:iconly/iconly.dart';
+import 'package:scoped_model/scoped_model.dart';
 
 class CategoryDetailPage extends StatefulWidget {
   final BusinessTypesData category;
@@ -55,6 +58,20 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
   late LatLng _center;
   bool isLocationSet = false;
   bool isNetworkAvailable = true;
+  bool isVegOnly = false;
+  bool isFirst = true;
+  String bannerImage = '';
+  bool veg = false;
+  bool nonVeg = false;
+  bool both = false;
+
+
+  double tempPrice = 0;
+  double totalCartAmount = 0;
+  int totalQty = 0;
+
+
+  List<Product> listCart = [];
 
   List<BusinessTypesData> businessTypes = [];
   List<OffersAtRestaurantData> offersAtRestaurant = [];
@@ -73,6 +90,95 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
     businessTypeShopsFuture = businessTypeShopsApi();
     offersAtRestaurantFuture =
         offersAtRestaurantApi(lat.toString(), long.toString());
+    singleShopApiOnlyFood();
+    _queryFirst(context);
+  }
+
+  void singleShopApiOnlyFood() async {
+
+          listCart.addAll(
+              ScopedModel.of<CartModel>(context, rebuildOnChange: true).cart);
+
+          print("LIST CART"+listCart.toString());
+
+  }
+
+  void _queryFirst(BuildContext context) async {
+    CartModel model = CartModel();
+
+    double tempTotal1 = 0, tempTotal2 = 0;
+    listCart.clear();
+    totalCartAmount = 0;
+    totalQty = 0;
+    final allRows = await dbHelper.queryAllRows();
+    print('query all rows:');
+    for (var row in allRows) {
+      print(row);
+    }
+    for (int i = 0; i < allRows.length; i++) {
+      listCart.add(Product(
+        id: allRows[i]['pro_id'],
+        restaurantsName: allRows[i]['restName'],
+        title: allRows[i]['pro_name'],
+        imgUrl: allRows[i]['pro_image'],
+        type: allRows[i]['pro_type'],
+        price: double.parse(allRows[i]['pro_price']),
+        qty: allRows[i]['pro_qty'],
+        restaurantsId: allRows[i]['restId'],
+        restaurantImage: allRows[i]['restImage'],
+        foodCustomization: allRows[i]['pro_customization'],
+        isRepeatCustomization: allRows[i]['isRepeatCustomization'],
+        tempPrice: double.parse(allRows[i]['itemTempPrice'].toString()),
+        itemQty: allRows[i]['itemQty'],
+        isCustomization: allRows[i]['isCustomization'],
+        restaurantAddress: allRows[i]['restAddress'],
+        restaurantKm: allRows[i]['restKm'],
+        restaurantEstimatedTime: allRows[i]['restEstimateTime'],
+      ));
+
+      model.addProduct(Product(
+        id: allRows[i]['pro_id'],
+        restaurantsName: allRows[i]['restName'],
+        title: allRows[i]['pro_name'],
+        imgUrl: allRows[i]['pro_image'],
+        type: allRows[i]['pro_type'],
+        price: double.parse(allRows[i]['pro_price']),
+        qty: allRows[i]['pro_qty'],
+        restaurantsId: allRows[i]['restId'],
+        restaurantImage: allRows[i]['restImage'],
+        foodCustomization: allRows[i]['pro_customization'],
+        isRepeatCustomization: allRows[i]['isRepeatCustomization'],
+        restaurantAddress: allRows[i]['restAddress'],
+        restaurantKm: allRows[i]['restKm'],
+        restaurantEstimatedTime: allRows[i]['restEstimateTime'],
+      ));
+      if (allRows[i]['pro_customization'] == '') {
+        totalCartAmount +=
+            double.parse(allRows[i]['pro_price']) * allRows[i]['pro_qty'];
+        tempTotal1 +=
+            double.parse(allRows[i]['pro_price']) * allRows[i]['pro_qty'];
+      } else {
+        totalCartAmount +=
+            double.parse(allRows[i]['pro_price']) + totalCartAmount;
+        tempTotal2 += double.parse(allRows[i]['pro_price']);
+      }
+
+      print(totalCartAmount);
+
+      print('First cart model cart data' +
+          ScopedModel.of<CartModel>(context, rebuildOnChange: true)
+              .cart
+              .toString());
+      print('First cart Listcart array' + listCart.length.toString());
+      print('First cart listcart string' + listCart.toString());
+
+      totalQty += allRows[i]['pro_qty'] as int;
+      print(totalQty);
+    }
+
+    print('TempTotal1 $tempTotal1');
+    print('TempTotal2 $tempTotal2');
+    totalCartAmount = tempTotal1 + tempTotal2;
   }
 
   @override
@@ -193,6 +299,85 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
                       ),
                     )
                   : NoInternetWidget(),
+            ),
+          ),
+        ),
+      ),
+      bottomNavigationBar: Visibility(
+        visible: ScopedModel.of<CartModel>(context, rebuildOnChange: true)
+            .cart
+            .isNotEmpty
+            ? true
+            : false,
+        child: GestureDetector(
+          onTap: () => Navigator.pushNamed(context, cartScreenRoute),
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: Container(
+              height: 48,
+              width: SizeConfig.screenWidth,
+              decoration: BoxDecoration(
+                  color: colorOrange,
+                  borderRadius: BorderRadius.circular(50)
+              ),
+              padding: EdgeInsets.only(
+                left: 30,
+                right: 30,
+              ),
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          '$totalQty ${getTranslated(context, totalItems).toString()}',
+                          style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.white,
+                              fontFamily: groldReg),
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        VerticalDivider(
+                          thickness: 1,
+                          width: 10,
+                          indent: 20,
+                          endIndent: 20,
+                          color: colorWhite,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          '${PreferenceUtils.getString(PreferenceNames.currencySymbolSetting)} $totalCartAmount',
+                          style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.white,
+                              fontFamily: groldBold),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          getTranslated(context, addToBag).toString(),
+                          style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.white,
+                              fontFamily: groldReg),
+                        ),
+                        SizedBox(width: 10),
+                        Icon(IconlyBold.bag_2,color: Colors.white,size: 20,),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
             ),
           ),
         ),
