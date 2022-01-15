@@ -378,7 +378,7 @@ class _SearchPageState extends State<SearchPage> {
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 1,
                       mainAxisSpacing: 10,
-                      mainAxisExtent: MediaQuery.of(context).size.height / 3
+                      mainAxisExtent: 130
                     ),
                     itemBuilder: (context, index) {
                       return InkWell(
@@ -577,7 +577,7 @@ class _SearchPageState extends State<SearchPage> {
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 1,
                       mainAxisSpacing: 10,
-                      mainAxisExtent: MediaQuery.of(context).size.height /3,
+                      mainAxisExtent: 130,
                     ),
                     itemBuilder: (context, index) {
                       return InkWell(
