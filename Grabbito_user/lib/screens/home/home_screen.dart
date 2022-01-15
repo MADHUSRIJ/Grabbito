@@ -93,95 +93,83 @@ class _HomeScreenState extends State<HomeScreen> {
                           'N/A'
                   ? Positioned(
                       bottom: 0,
-                      child: Container(
-                        height: ScreenUtil().setHeight(70),
-                        width: SizeConfig.screenWidth,
-                        color: Color(0xFF203049).withOpacity(0.5),
-                        child: ClipRRect(
-                          child: BackdropFilter(
-                            filter: ImageFilter.blur(sigmaX: 4.0, sigmaY: 4.0),
-                            child: Container(
-                              padding: EdgeInsets.only(left: 20, right: 20),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    children: [
-                                      SizedBox(
-                                        height: ScreenUtil().setHeight(56),
-                                        width: ScreenUtil().setWidth(95),
-                                        child: Card(
-                                            margin: EdgeInsets.zero,
-                                            elevation: 5,
-                                            child: CircleAvatar(
-                                              backgroundColor: colorOrange,
-                                              radius: 16.0,
-                                              child: Icon(
-                                                IconlyBold.home,
-                                                color: Colors.white,
-                                                size: 20.0,
-                                              ),
-                                            ),
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(20)))),
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 16,vertical: 8),
+                        child: GestureDetector(
+                          onTap: () {
+                            if (currentOrderPackage.id != null) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      TrackOrderScreen(
+                                        bookOrderPassingDataPickup:
+                                        currentOrderPackage,
+                                        bookOrderPassingData:
+                                        currentOrderData,
+                                        whichOrder: "pickupOrder",
                                       ),
-                                      Padding(
-                                        padding: EdgeInsets.only(
-                                            left: ScreenUtil().setWidth(10)),
-                                        child: Text(
-                                          "${getTranslated(context, orderIsText).toString()}${currentOrderData.orderStatus}",
-                                          overflow: TextOverflow.ellipsis,
-                                          maxLines: 2,
-                                          style: TextStyle(
-                                              color: colorWhite,
-                                              fontSize: 13,
-                                              fontFamily: groldBold),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                  CircleAvatar(
-                                    backgroundColor: colorWhite,
-                                    radius: 25,
-                                    child: IconButton(
-                                      icon: Icon(
-                                        Icons.arrow_forward,
-                                        color: colorBlue,
+                                ),
+                              );
+                            } else {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      TrackOrderScreen(
+                                        bookOrderPassingData:
+                                        currentOrderData,
+                                        whichOrder: "regularOrder",
                                       ),
-                                      onPressed: () {
-                                        if (currentOrderPackage.id != null) {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  TrackOrderScreen(
-                                                bookOrderPassingDataPickup:
-                                                    currentOrderPackage,
-                                                bookOrderPassingData:
-                                                    currentOrderData,
-                                                whichOrder: "pickupOrder",
-                                              ),
-                                            ),
-                                          );
-                                        } else {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  TrackOrderScreen(
-                                                bookOrderPassingData:
-                                                    currentOrderData,
-                                                whichOrder: "regularOrder",
-                                              ),
-                                            ),
-                                          );
-                                        }
-                                      },
+                                ),
+                              );
+                            }
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(16),
+                              color: colorOrange
+                            ),
+                            height: 60,
+                            alignment: Alignment.center,
+                            width: MediaQuery.of(context).size.width - 30,
+                            padding: EdgeInsets.only(left: 20, right: 20),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  children: [
+                                    SizedBox(
+                                      height: ScreenUtil().setHeight(56),
+                                      width: ScreenUtil().setWidth(95),
+                                      child: Icon(
+                                        IconlyBold.bag_2,
+                                        color: colorWhite,
+                                        size: 25.0,
+                                      ),
                                     ),
-                                  )
-                                ],
-                              ),
+                                    Padding(
+                                      padding: EdgeInsets.only(
+                                          left: ScreenUtil().setWidth(10)),
+                                      child: Text(
+                                        "${getTranslated(context, orderIsText).toString()}${currentOrderData.orderStatus}",
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: 2,
+                                        style: TextStyle(
+                                            color: colorWhite,
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w400,
+                                            fontFamily: groldReg),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                                Icon(
+                                  Icons.track_changes,
+                                  color: colorWhite,
+                                  size: 25,
+                                )
+                              ],
                             ),
                           ),
                         ),

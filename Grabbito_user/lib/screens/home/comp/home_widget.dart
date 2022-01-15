@@ -2,11 +2,9 @@ import 'dart:convert';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_html/shims/dart_ui_real.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:grabbito/model/cart_model.dart';
@@ -2123,25 +2121,25 @@ class _MainPageState extends State<MainPage> {
             PreferenceNames.amountSetting, response.data!.amount.toString());
         PreferenceUtils.setString(
             PreferenceNames.autoRefresh, response.data!.autoRefresh!);
-        if (response.data!.paypal == 1) {
-          PreferenceUtils.setBool(PreferenceNames.paypalAvailable, true);
+        if (response.data!.paypal == "1") {
+          PreferenceUtils.setString(PreferenceNames.paypalAvailable, "1");
         } else {
-          PreferenceUtils.setBool(PreferenceNames.paypalAvailable, false);
+          PreferenceUtils.setString(PreferenceNames.paypalAvailable, "0");
         }
-        if (response.data!.razor == 1) {
-          PreferenceUtils.setBool(PreferenceNames.razorPayAvailable, true);
+        if (response.data!.razor == "1") {
+          PreferenceUtils.setString(PreferenceNames.razorPayAvailable.toString(), "1");
         } else {
-          PreferenceUtils.setBool(PreferenceNames.razorPayAvailable, false);
+          PreferenceUtils.setString(PreferenceNames.razorPayAvailable.toString(), "0");
         }
-        if (response.data!.stripe == 1) {
-          PreferenceUtils.setBool(PreferenceNames.stripeAvailable, true);
+        if (response.data!.stripe == "1") {
+          PreferenceUtils.setString(PreferenceNames.stripeAvailable, "1");
         } else {
-          PreferenceUtils.setBool(PreferenceNames.stripeAvailable, false);
+          PreferenceUtils.setString(PreferenceNames.stripeAvailable, "0");
         }
-        if (response.data!.cod == 1) {
-          PreferenceUtils.setBool(PreferenceNames.codAvailable, true);
+        if (response.data!.cod == "1") {
+          PreferenceUtils.setString(PreferenceNames.codAvailable, "1");
         } else {
-          PreferenceUtils.setBool(PreferenceNames.codAvailable, false);
+          PreferenceUtils.setString(PreferenceNames.codAvailable, "0");
         }
         if (response.data!.razorKey != null) {
           PreferenceUtils.setString(

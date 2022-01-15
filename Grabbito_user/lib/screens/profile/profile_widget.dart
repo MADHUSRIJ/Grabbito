@@ -32,7 +32,7 @@ class _ProfilePageState extends State<ProfilePage>
   List<UpcomingOrder> upComingOrder = [];
   List<PickDropup> pickUpOrder = [];
   String userName = "UserName",
-      phoneNo = "123456789",
+      phoneNo = "163456789",
       emailAdd = "demo@gmail.com";
 
   Future<BaseModel<OrderHistoryModel>>? orderHistoryData;
@@ -182,8 +182,9 @@ class _ProfilePageState extends State<ProfilePage>
                                                         .name
                                                         .toString(),
                                                     style: TextStyle(
-                                                      fontSize: 14,
-                                                      fontFamily: groldBold,
+                                                      fontSize: 18,
+                                                      fontWeight: FontWeight.w400,
+                                                      fontFamily: groldReg,
                                                       color: colorBlack,
                                                     ),
                                                   ),
@@ -195,7 +196,7 @@ class _ProfilePageState extends State<ProfilePage>
                                                     overflow:
                                                         TextOverflow.ellipsis,
                                                     style: TextStyle(
-                                                      fontSize: 12,
+                                                      fontSize: 16,
                                                       fontFamily: groldReg,
                                                       color: colorDivider,
                                                     ),
@@ -209,17 +210,13 @@ class _ProfilePageState extends State<ProfilePage>
                                                         overflow: TextOverflow
                                                             .ellipsis,
                                                         style: TextStyle(
-                                                          fontSize: 12,
+                                                          fontSize: 16,
                                                           fontFamily: groldReg,
                                                           color: colorBlack,
                                                         ),
                                                         maxLines: 2,
                                                       ),
-                                                      Icon(
-                                                        Icons
-                                                            .arrow_forward_ios_outlined,
-                                                        size: 15,
-                                                      )
+
                                                     ],
                                                   ),
                                                 ],
@@ -238,7 +235,7 @@ class _ProfilePageState extends State<ProfilePage>
                                                     overflow:
                                                         TextOverflow.ellipsis,
                                                     style: TextStyle(
-                                                      fontSize: 12,
+                                                      fontSize: 16,
                                                       fontFamily: groldReg,
                                                       color: colorBlack,
                                                     ),
@@ -388,7 +385,7 @@ class _ProfilePageState extends State<ProfilePage>
                                             }
                                           }(),
                                           style: TextStyle(
-                                            fontSize: 12,
+                                            fontSize: 16,
                                             fontFamily: groldReg,
                                             color: colorBlack,
                                           ),
@@ -396,7 +393,7 @@ class _ProfilePageState extends State<ProfilePage>
                                         Text(
                                           pastOrder[index].date.toString(),
                                           style: TextStyle(
-                                            fontSize: 12,
+                                            fontSize: 16,
                                             fontFamily: groldReg,
                                             color: colorDivider,
                                           ),
@@ -445,7 +442,7 @@ class _ProfilePageState extends State<ProfilePage>
                                                 style: TextStyle(
                                                   color: colorBlue,
                                                   fontSize: 16,
-                                                  fontFamily: 'Grold Bold',
+                                                  fontFamily: 'GrolRegld',
                                                 ),
                                               )),
                                         ),
@@ -541,8 +538,9 @@ class _ProfilePageState extends State<ProfilePage>
                                                         .name
                                                         .toString(),
                                                     style: TextStyle(
-                                                      fontSize: 14,
-                                                      fontFamily: groldBold,
+                                                      fontSize: 18,
+                                                      fontWeight: FontWeight.w400,
+                                                      fontFamily: groldReg,
                                                       color: colorBlack,
                                                     ),
                                                   ),
@@ -554,7 +552,7 @@ class _ProfilePageState extends State<ProfilePage>
                                                     overflow:
                                                         TextOverflow.ellipsis,
                                                     style: TextStyle(
-                                                      fontSize: 12,
+                                                      fontSize: 16,
                                                       fontFamily: groldReg,
                                                       color: colorDivider,
                                                     ),
@@ -568,17 +566,13 @@ class _ProfilePageState extends State<ProfilePage>
                                                         overflow: TextOverflow
                                                             .ellipsis,
                                                         style: TextStyle(
-                                                          fontSize: 12,
+                                                          fontSize: 16,
                                                           fontFamily: groldReg,
                                                           color: colorBlack,
                                                         ),
                                                         maxLines: 2,
                                                       ),
-                                                      Icon(
-                                                        Icons
-                                                            .arrow_forward_ios_outlined,
-                                                        size: 15,
-                                                      )
+
                                                     ],
                                                   ),
                                                 ],
@@ -598,7 +592,7 @@ class _ProfilePageState extends State<ProfilePage>
                                                     overflow:
                                                         TextOverflow.ellipsis,
                                                     style: TextStyle(
-                                                      fontSize: 12,
+                                                      fontSize: 16,
                                                       fontFamily: groldReg,
                                                       color: colorBlack,
                                                     ),
@@ -754,7 +748,7 @@ class _ProfilePageState extends State<ProfilePage>
                                             }
                                           }(),
                                           style: TextStyle(
-                                            fontSize: 12,
+                                            fontSize: 16,
                                             fontFamily: groldReg,
                                             color: colorBlack,
                                           ),
@@ -762,7 +756,7 @@ class _ProfilePageState extends State<ProfilePage>
                                         Text(
                                           upComingOrder[index].date.toString(),
                                           style: TextStyle(
-                                            fontSize: 12,
+                                            fontSize: 16,
                                             fontFamily: groldReg,
                                             color: colorDivider,
                                           ),
@@ -811,7 +805,7 @@ class _ProfilePageState extends State<ProfilePage>
                                                 style: TextStyle(
                                                   color: colorBlue,
                                                   fontSize: 16,
-                                                  fontFamily: groldBold,
+                                                  fontFamily: groldReg,
                                                 ),
                                               )),
                                         ),
@@ -906,8 +900,9 @@ class _ProfilePageState extends State<ProfilePage>
                                                         .shop!
                                                         .name!,
                                                     style: TextStyle(
-                                                        fontSize: 15,
-                                                        fontFamily: groldBold,
+                                                        fontSize: 18,
+                                                        fontFamily: groldReg,
+                                                        fontWeight: FontWeight.w400,
                                                         color: colorBlack),
                                                   ),
                                                   SizedBox(height: 10),
@@ -968,17 +963,13 @@ class _ProfilePageState extends State<ProfilePage>
                                                         overflow: TextOverflow
                                                             .ellipsis,
                                                         style: TextStyle(
-                                                          fontSize: 12,
+                                                          fontSize: 16,
                                                           fontFamily: groldReg,
                                                           color: colorBlack,
                                                         ),
                                                         maxLines: 2,
                                                       ),
-                                                      Icon(
-                                                        Icons
-                                                            .arrow_forward_ios_outlined,
-                                                        size: 15,
-                                                      )
+
                                                     ],
                                                   ),
                                                 ],
@@ -999,7 +990,7 @@ class _ProfilePageState extends State<ProfilePage>
                                                         TextOverflow.ellipsis,
                                                     maxLines: 1,
                                                     style: TextStyle(
-                                                      fontSize: 12,
+                                                      fontSize: 16,
                                                       fontFamily: groldReg,
                                                       color: colorBlack,
                                                     ),
@@ -1115,7 +1106,7 @@ class _ProfilePageState extends State<ProfilePage>
                                         Text(
                                           pickUpOrder[index].category!.name!,
                                           style: TextStyle(
-                                            fontSize: 12,
+                                            fontSize: 16,
                                             fontFamily: groldReg,
                                             color: colorBlack,
                                           ),
@@ -1146,7 +1137,7 @@ class _ProfilePageState extends State<ProfilePage>
                                             }
                                           }(),
                                           style: TextStyle(
-                                            fontSize: 12,
+                                            fontSize: 16,
                                             fontFamily: groldReg,
                                             color: colorDivider,
                                           ),
@@ -1193,7 +1184,7 @@ class _ProfilePageState extends State<ProfilePage>
                                                 style: TextStyle(
                                                   color: colorBlue,
                                                   fontSize: 16,
-                                                  fontFamily: groldBold,
+                                                  fontFamily: groldReg,
                                                 ),
                                               )),
                                         ),

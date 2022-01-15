@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:iconly/iconly.dart';
 import 'package:intl/intl.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:scoped_model/scoped_model.dart';
@@ -168,7 +169,7 @@ class _CartScreenState extends State<CartScreen> {
         appBar: AppBar(
           backgroundColor: colorWhite,
           leading: IconButton(
-            icon: Icon(Icons.arrow_back, color: Colors.black),
+            icon: Icon(IconlyLight.arrow_left, color: Colors.black),
             onPressed: () => Navigator.pushReplacement(
               context,
               Transitions(
@@ -182,13 +183,14 @@ class _CartScreenState extends State<CartScreen> {
           title: Text(
             getTranslated(context, cartPageTitle).toString(),
             style: TextStyle(
-                fontFamily: 'Grold Black', color: colorBlack, fontSize: 18),
+              fontWeight: FontWeight.w400,
+                fontFamily: groldReg, color: colorBlack, fontSize: 18),
           ),
         ),
         body: ModalProgressHUD(
           inAsyncCall: _loading,
           opacity: 1.0,
-          color: Colors.transparent.withOpacity(0.2),
+          color: Colors.transparent,
           progressIndicator: SpinKitFadingCircle(color: colorRed),
           child: ListView(
             children: [
@@ -211,7 +213,7 @@ class _CartScreenState extends State<CartScreen> {
                             children: [
                               Icon(
                                 Icons.location_pin,
-                                color: colorBlack,
+                                color: colorOrange,
                                 size: 25,
                               ),
                               Container(
@@ -1228,52 +1230,61 @@ class _CartScreenState extends State<CartScreen> {
         bottomNavigationBar: Visibility(
           visible: !isCartEmpty,
           child: GestureDetector(
-            child: Container(
-              height: 60,
-              width: SizeConfig.screenWidth,
-              color: colorGreen,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    color: Colors.white24,
-                    width: SizeConfig.screenWidth! / 2,
-                    padding: EdgeInsets.only(left: 20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          getTranslated(context, totalPay).toString(),
-                          style: TextStyle(
-                              fontSize: 14,
-                              color: Colors.white,
-                              fontFamily: groldReg),
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16,vertical: 6),
+              child: Container(
+                height: 60,
+                width: SizeConfig.screenWidth,
+                decoration: BoxDecoration(
+                  color: colorPurple,
+                  borderRadius: BorderRadius.circular(50),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      width: SizeConfig.screenWidth! / 2,
+                      color: Colors.white30,
+                      padding: EdgeInsets.only(left: 20),
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 8),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              getTranslated(context, totalPay).toString(),
+                              style: TextStyle(
+                                  fontSize: 14,
+                                  color: Colors.white,
+                                  fontFamily: groldReg),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              '${PreferenceUtils.getString(PreferenceNames.currencySymbolSetting)}${finalTotalPrice.ceil().toString()}',
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  color: Colors.white,
+                                  fontFamily: groldBold),
+                            ),
+                          ],
                         ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          '${PreferenceUtils.getString(PreferenceNames.currencySymbolSetting)}${finalTotalPrice.ceil().toString()}',
-                          style: TextStyle(
-                              fontSize: 18,
-                              color: Colors.white,
-                              fontFamily: groldBold),
-                        ),
-                      ],
+                      ),
                     ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.only(right: 20),
-                    child: Text(
-                      getTranslated(context, proceedToPay).toString(),
-                      style: TextStyle(
-                          fontSize: 18,
-                          color: Colors.white,
-                          fontFamily: groldReg),
+                    Container(
+                      padding: EdgeInsets.only(right: 20),
+                      child: Text(
+                        getTranslated(context, proceedToPay).toString(),
+                        style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.white,
+                            fontFamily: groldReg),
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
             onTap: () async {

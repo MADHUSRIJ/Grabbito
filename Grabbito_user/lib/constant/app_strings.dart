@@ -73,6 +73,7 @@ const String noInternetDesc = 'no_internet_desc';
 const String noData = 'no_data';
 const String noDataDesc = 'no_data_desc';
 const String noCouponDesc = 'no_coupon_desc';
+const String noOffer = 'no_off_desc';
 
 ///set location screen
 const String addAddressLabelHint = 'add_address_Label_hint';

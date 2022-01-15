@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:iconly/iconly.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:grabbito/constant/app_strings.dart';
@@ -63,10 +64,35 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
     paymentData = widget.paymentData;
     payableAmount = paymentData["amount"].toString();
     //set all keys
-    paypal = PreferenceUtils.getBool(PreferenceNames.paypalAvailable);
-    razorPay = PreferenceUtils.getBool(PreferenceNames.razorPayAvailable);
-    stripe = PreferenceUtils.getBool(PreferenceNames.stripeAvailable);
-    cod = PreferenceUtils.getBool(PreferenceNames.codAvailable);
+    String p = PreferenceUtils.getString(PreferenceNames.paypalAvailable.toString());
+    if( p == "1"){
+      paypal = true;
+    }
+    else{
+      paypal = false;
+    }
+    String r = PreferenceUtils.getString(PreferenceNames.razorPayAvailable.toString());
+    if( r == "1"){
+      razorPay = true;
+    }
+    else{
+      razorPay = false;
+    }
+    String s = PreferenceUtils.getString(PreferenceNames.stripeAvailable.toString());
+    if(s == "1"){
+      stripe = true;
+    }
+    else{
+      stripe = false;
+    }
+    String c = PreferenceUtils.getString(PreferenceNames.codAvailable.toString());
+
+    if(c == "1"){
+      cod = true;
+    }
+    else{
+      cod = false;
+    }
     //razorpay
     _razorpay = Razorpay();
     _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
@@ -83,22 +109,24 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: colorWhite,
       appBar: AppBar(
         backgroundColor: colorWhite,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black),
+          icon: Icon(IconlyLight.arrow_left, color: Colors.black),
           onPressed: () => Navigator.of(context).pop(),
         ),
         title: Text(
           getTranslated(context, paymentMethodTitle).toString(),
           style: TextStyle(
-              fontFamily: groldBlack, color: colorBlack, fontSize: 18),
+            fontWeight: FontWeight.w400,
+              fontFamily: groldReg, color: colorBlack, fontSize: 18),
         ),
       ),
       body: ModalProgressHUD(
         inAsyncCall: _loading,
         opacity: 1.0,
-        color: Colors.transparent.withOpacity(0.2),
+        color: Colors.transparent,
         progressIndicator: SpinKitFadingCircle(color: colorRed),
         child: Stack(
           children: [
@@ -135,93 +163,103 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                   ),
                   Visibility(
                     visible: razorPay,
-                    child: Card(
-                        child: RadioListTile(
-                      contentPadding: EdgeInsets.zero,
-                      controlAffinity: ListTileControlAffinity.trailing,
-                      value: 1,
-                      groupValue: value,
-                      activeColor: colorPrimary,
-                      onChanged: (dynamic val) {
-                        setState(() {
-                          value = val;
-                        });
-                      },
-                      title: Row(
-                        children: [
-                          SizedBox(width: 15),
-                          Image.asset('assets/images/razorpay.png'),
-                          SizedBox(width: 10),
-                          Text(
-                            getTranslated(context, razorpayText).toString(),
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontFamily: groldReg,
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(vertical: 8),
+                      child: Card(
+                          child: RadioListTile(
+                        contentPadding: EdgeInsets.zero,
+                        controlAffinity: ListTileControlAffinity.trailing,
+                        value: 1,
+                        groupValue: value,
+                        activeColor: colorPrimary,
+                        onChanged: (dynamic val) {
+                          setState(() {
+                            value = val;
+                          });
+                        },
+                        title: Row(
+                          children: [
+                            SizedBox(width: 15),
+                            Image.asset('assets/images/razorpay.png'),
+                            SizedBox(width: 10),
+                            Text(
+                              getTranslated(context, razorpayText).toString(),
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontFamily: groldReg,
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                    )),
+                          ],
+                        ),
+                      )),
+                    ),
                   ),
                   Visibility(
                     visible: stripe,
-                    child: Card(
-                        child: RadioListTile(
-                      contentPadding: EdgeInsets.zero,
-                      controlAffinity: ListTileControlAffinity.trailing,
-                      value: 2,
-                      groupValue: value,
-                      activeColor: colorPrimary,
-                      onChanged: (dynamic val) {
-                        setState(() {
-                          value = val;
-                        });
-                      },
-                      title: Row(
-                        children: [
-                          SizedBox(width: 15),
-                          Image.asset('assets/images/stripe.png'),
-                          SizedBox(width: 10),
-                          Text(
-                            getTranslated(context, stripeText).toString(),
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontFamily: groldReg,
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 8),
+                      child: Card(
+                          child: RadioListTile(
+                        contentPadding: EdgeInsets.zero,
+                        controlAffinity: ListTileControlAffinity.trailing,
+                        value: 2,
+                        groupValue: value,
+                        activeColor: colorPrimary,
+                        onChanged: (dynamic val) {
+                          setState(() {
+                            value = val;
+                          });
+                        },
+                        title: Row(
+                          children: [
+                            SizedBox(width: 15),
+                            Image.asset('assets/images/stripe.png'),
+                            SizedBox(width: 10),
+                            Text(
+                              getTranslated(context, stripeText).toString(),
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontFamily: groldReg,
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                    )),
+                          ],
+                        ),
+                      )),
+                    ),
                   ),
                   Visibility(
                     visible: cod,
-                    child: Card(
-                        child: RadioListTile(
-                      contentPadding: EdgeInsets.zero,
-                      controlAffinity: ListTileControlAffinity.trailing,
-                      value: 3,
-                      groupValue: value,
-                      activeColor: colorPrimary,
-                      onChanged: (dynamic val) {
-                        setState(() {
-                          value = val;
-                        });
-                      },
-                      title: Row(
-                        children: [
-                          SizedBox(width: 15),
-                          SizedBox(width: 10),
-                          Text(
-                            getTranslated(context, cashOnDeliveryText)
-                                .toString(),
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontFamily: groldReg,
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 8),
+                      child: Card(
+                          child: RadioListTile(
+                        contentPadding: EdgeInsets.zero,
+                        controlAffinity: ListTileControlAffinity.trailing,
+                        value: 3,
+                        groupValue: value,
+                        activeColor: colorPrimary,
+                        onChanged: (dynamic val) {
+                          setState(() {
+                            value = val;
+                          });
+                        },
+                        title: Row(
+                          children: [
+                            SizedBox(width: 15),
+                            Icon(Icons.payment,color: Colors.green,size: 24,),
+                            SizedBox(width: 10),
+                            Text(
+                              getTranslated(context, cashOnDeliveryText)
+                                  .toString(),
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontFamily: groldReg,
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                    )),
+                          ],
+                        ),
+                      )),
+                    ),
                   ),
                 ],
               ),
@@ -232,13 +270,13 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
               right: 30,
               child: MaterialButton(
                 height: kBottomNavigationBarHeight,
-                color: colorButton,
+                color: colorOrange,
                 textColor: Colors.white,
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15)),
+                    borderRadius: BorderRadius.circular(50)),
                 child: Text(
                   getTranslated(context, proceedAndPayText).toString(),
-                  style: TextStyle(fontFamily: groldBold, fontSize: 16),
+                  style: TextStyle(fontFamily: groldReg, fontSize: 18),
                 ),
                 onPressed: () {
                   ///paypal

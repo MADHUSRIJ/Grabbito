@@ -56,6 +56,7 @@
   "no_internet_desc": "يبدو أنك لا تتصل بالإنترنت أو أي اتصال واي فاي.",
   "no_data": "UH - أوه...",
   "no_data_desc": "لا توجد أي بيانات في الوقت الحالي.",
+  "no_off_desc" : "No Offers right now !",
   "no_coupon_desc": "لا يوجد أي قسيمة الآن.",
   "add_address_Label_hint": "أدخل عنوانك التسمية",
 

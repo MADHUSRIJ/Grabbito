@@ -10,6 +10,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:iconly/iconly.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:grabbito/constant/app_strings.dart';
@@ -209,7 +210,7 @@ class _TrackOrderScreenState extends State<TrackOrderScreen> {
         appBar: AppBar(
           backgroundColor: colorWhite,
           leading: IconButton(
-            icon: Icon(Icons.arrow_back, color: Colors.black),
+            icon: Icon(IconlyLight.arrow_left, color: Colors.black),
             onPressed: () => Navigator.pushReplacement(
               context,
               MaterialPageRoute(
@@ -220,7 +221,8 @@ class _TrackOrderScreenState extends State<TrackOrderScreen> {
           title: Text(
             getTranslated(context, trackOrder).toString(),
             style: TextStyle(
-                fontFamily: 'Grold Black',
+                fontFamily: groldReg,
+                fontWeight: FontWeight.w400,
                 color: colorBlack,
                 fontSize: 18),
           ),
@@ -302,7 +304,7 @@ class _TrackOrderScreenState extends State<TrackOrderScreen> {
                 thickness: 2,
               ),
               indicatorStyle: IndicatorStyle(
-                color: colorBlack,
+                color: colorOrange,
                 width: 12.0,
                 height: 12.0,
               ),
@@ -318,8 +320,8 @@ class _TrackOrderScreenState extends State<TrackOrderScreen> {
                       getTranslated(context, foodPrepared).toString(),
                       style: TextStyle(
                         color: colorBlack,
-                        fontFamily: groldBold,
-                        fontSize: 14.0,
+                        fontFamily: groldReg,
+                        fontSize: 16.0,
                       ),
                     ),
                   ],
@@ -343,7 +345,7 @@ class _TrackOrderScreenState extends State<TrackOrderScreen> {
                 thickness: 2,
               ),
               indicatorStyle: IndicatorStyle(
-                color: readyForPickup ? colorBlack : colorDivider,
+                color: readyForPickup ? colorOrange: colorDivider,
                 width: 12.0,
                 height: 12.0,
               ),
@@ -359,8 +361,9 @@ class _TrackOrderScreenState extends State<TrackOrderScreen> {
                         getTranslated(context, orderPickup).toString(),
                         style: TextStyle(
                           color: colorBlack,
-                          fontFamily: groldBold,
-                          fontSize: 14.0,
+                          fontWeight: FontWeight.w400,
+                          fontFamily: groldReg,
+                          fontSize: 16.0,
                         ),
                       ),
                     ],
@@ -399,7 +402,8 @@ class _TrackOrderScreenState extends State<TrackOrderScreen> {
                                       driverName,
                                       style: TextStyle(
                                         fontSize: 16,
-                                        fontFamily: groldBold,
+                                        fontWeight: FontWeight.w400,
+                                        fontFamily: groldReg,
                                       ),
                                     ),
                                     Text(
@@ -453,7 +457,7 @@ class _TrackOrderScreenState extends State<TrackOrderScreen> {
                 thickness: 2,
               ),
               indicatorStyle: IndicatorStyle(
-                color: successfullyDelivered ? colorBlack : colorDivider,
+                color: successfullyDelivered ? colorOrange : colorDivider,
                 width: 12.0,
                 height: 12.0,
               ),
@@ -468,8 +472,9 @@ class _TrackOrderScreenState extends State<TrackOrderScreen> {
                           .toString(),
                       style: TextStyle(
                         color: colorBlack,
-                        fontFamily: groldBold,
-                        fontSize: 14.0,
+                        fontWeight: FontWeight.w400,
+                        fontFamily: groldReg,
+                        fontSize: 16.0,
                       ),
                     ),
                   ],

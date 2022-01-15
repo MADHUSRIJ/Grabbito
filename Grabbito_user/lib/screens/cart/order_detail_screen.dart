@@ -2,6 +2,7 @@ import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:iconly/iconly.dart';
 import 'package:intl/intl.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:timeline_tile/timeline_tile.dart';
@@ -66,23 +67,23 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-
     return ModalProgressHUD(
       inAsyncCall: _loading,
       opacity: 1.0,
-      color: Colors.transparent.withOpacity(0.2),
+      color: Colors.transparent,
       progressIndicator: SpinKitFadingCircle(color: colorRed),
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: colorWhite,
           leading: IconButton(
-            icon: Icon(Icons.arrow_back, color: Colors.black),
+            icon: Icon(IconlyLight.arrow_left, color: Colors.black),
             onPressed: () => Navigator.of(context).pop(),
           ),
           title: Text(
             '${getTranslated(context, order).toString()} $orderId',
             style: TextStyle(
-                fontFamily: groldBlack, color: colorBlack, fontSize: 18),
+              fontWeight: FontWeight.w400,
+                fontFamily: groldReg, color: colorBlack, fontSize: 18),
           ),
         ),
         body: SingleChildScrollView(
@@ -115,8 +116,8 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                         }(),
                         style: TextStyle(
                           color: colorBlack,
-                          fontFamily: groldBold,
-                          fontSize: 14.0,
+                          fontFamily: groldReg,
+                          fontSize: 16.0,
                         ),
                       ),
                     ),
@@ -128,9 +129,10 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                     child: Text(
                       getTranslated(context, billingDetails).toString(),
                       style: TextStyle(
-                          color: colorBlack,
+                          color: colorOrange,
                           fontSize: 18,
-                          fontFamily: groldXBold),
+                          fontWeight: FontWeight.w400,
+                          fontFamily: groldReg),
                     ),
                   ),
                   Container(
@@ -465,7 +467,7 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
               thickness: 2,
             ),
             indicatorStyle: IndicatorStyle(
-              color: colorButton,
+              color: colorOrange,
               width: 12.0,
               height: 12.0,
             ),
@@ -481,8 +483,9 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                         getTranslated(context, pickupAddressText).toString(),
                         style: TextStyle(
                           color: colorBlack,
-                          fontFamily: groldBold,
-                          fontSize: 14.0,
+                          fontWeight: FontWeight.w400,
+                          fontFamily: groldReg,
+                          fontSize: 16.0,
                         ),
                       ),
                     ],
@@ -529,7 +532,7 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
               thickness: 2,
             ),
             indicatorStyle: IndicatorStyle(
-              color: dropOffAddressStatus == true ? colorButton : colorDivider,
+              color: dropOffAddressStatus == true ? colorOrange : colorDivider,
               width: 12.0,
               height: 12.0,
             ),
@@ -546,8 +549,9 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                         getTranslated(context, dropOffAddressName).toString(),
                         style: TextStyle(
                           color: colorBlack,
-                          fontFamily: groldBold,
-                          fontSize: 14.0,
+                          fontFamily: groldReg,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 16.0,
                         ),
                       ),
                     ],
