@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:iconly/iconly.dart';
 import 'package:intl/intl.dart';
 import 'package:grabbito/constant/app_strings.dart';
@@ -155,7 +154,7 @@ class _ProfilePageState extends State<ProfilePage>
                                 physics: ClampingScrollPhysics(),
                                 padding: EdgeInsets.only(bottom: 30),
                                 separatorBuilder: (context, index) => SizedBox(
-                                    height: ScreenUtil().setHeight(20)),
+                                    height: 20),
                                 itemBuilder: (context, index) {
                                   return Container(
                                     // margin: EdgeInsets.only(top: 40),
@@ -225,8 +224,7 @@ class _ProfilePageState extends State<ProfilePage>
                                             Row(
                                               children: [
                                                 SizedBox(
-                                                  width: ScreenUtil()
-                                                      .setHeight(55),
+                                                  width: 55,
                                                   child: Text(
                                                     pastOrder[index]
                                                         .orderStatus
@@ -513,7 +511,7 @@ class _ProfilePageState extends State<ProfilePage>
                                 physics: ClampingScrollPhysics(),
                                 padding: EdgeInsets.only(bottom: 30),
                                 separatorBuilder: (context, index) => SizedBox(
-                                    height: ScreenUtil().setHeight(20)),
+                                    height: 20),
                                 itemBuilder: (context, index) {
                                   return Container(
                                     // margin: EdgeInsets.only(top: 40),
@@ -583,8 +581,7 @@ class _ProfilePageState extends State<ProfilePage>
                                             Row(
                                               children: [
                                                 SizedBox(
-                                                  width: ScreenUtil()
-                                                      .setHeight(55),
+                                                  width: 55,
                                                   child: Text(
                                                     upComingOrder[index]
                                                         .orderStatus
@@ -876,7 +873,7 @@ class _ProfilePageState extends State<ProfilePage>
                                 physics: ClampingScrollPhysics(),
                                 padding: EdgeInsets.only(bottom: 30),
                                 separatorBuilder: (context, index) => SizedBox(
-                                    height: ScreenUtil().setHeight(20)),
+                                    height: 20),
                                 itemBuilder: (context, index) {
                                   return Container(
                                     // margin: EdgeInsets.only(top: 40),
@@ -980,8 +977,7 @@ class _ProfilePageState extends State<ProfilePage>
                                             Row(
                                               children: [
                                                 SizedBox(
-                                                  width: ScreenUtil()
-                                                      .setHeight(55),
+                                                  width: 55,
                                                   child: Text(
                                                     pickUpOrder[index]
                                                         .orderStatus

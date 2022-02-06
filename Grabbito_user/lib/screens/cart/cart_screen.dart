@@ -307,8 +307,8 @@ class _CartScreenState extends State<CartScreen> {
                                 borderRadius: BorderRadius.circular(15.0),
                                 child: CachedNetworkImage(
                                   alignment: Alignment.center,
-                                  height: ScreenUtil().setHeight(60),
-                                  width: ScreenUtil().setWidth(60),
+                                  height: 60,
+                                  width: 60,
                                   fit: BoxFit.fill,
                                   imageUrl: restImage.toString(),
                                   placeholder: (context, url) =>
@@ -463,8 +463,7 @@ class _CartScreenState extends State<CartScreen> {
                                                             width: 1),
                                                     cartMenuItem.isNotEmpty
                                                         ? SizedBox(
-                                                            width: ScreenUtil()
-                                                                .setWidth(200),
+                                                            width: 200,
                                                             child: Text(
                                                               cartMenuItem[
                                                                       cartItemIndex]
@@ -495,8 +494,7 @@ class _CartScreenState extends State<CartScreen> {
                                                             .custimization!
                                                             .isNotEmpty
                                                     ? SizedBox(
-                                                        width: ScreenUtil()
-                                                            .setWidth(200),
+                                                        width: 200,
                                                         child: Text(
                                                           () {
                                                             var tempDataForCustomize;
@@ -587,8 +585,8 @@ class _CartScreenState extends State<CartScreen> {
                                           ),
                                           SizedBox(width: 5),
                                           Container(
-                                            height: ScreenUtil().setHeight(40),
-                                            width: ScreenUtil().setWidth(80),
+                                            height: 40,
+                                            width: 80,
                                             decoration: BoxDecoration(
                                                 borderRadius:
                                                     BorderRadius.circular(10),
@@ -600,14 +598,11 @@ class _CartScreenState extends State<CartScreen> {
                                               children: [
                                                 //decrement
                                                 SizedBox(
-                                                  height: ScreenUtil()
-                                                      .setHeight(25),
-                                                  width:
-                                                      ScreenUtil().setWidth(27),
+                                                  height: 25,
+                                                  width:27,
                                                   child: IconButton(
                                                     padding: EdgeInsets.zero,
-                                                    iconSize: ScreenUtil()
-                                                        .setHeight(20),
+                                                    iconSize: 20,
                                                     onPressed: () {
                                                       decrementFunction(
                                                           cartItemIndex, model);
@@ -621,8 +616,7 @@ class _CartScreenState extends State<CartScreen> {
                                                 //show count
                                                 cartMenuItem.isNotEmpty
                                                     ? Container(
-                                                        width: ScreenUtil()
-                                                            .setWidth(23),
+                                                        width: 23,
                                                         // height: 40,
                                                         color: colorWhite,
                                                         child: Align(
@@ -637,7 +631,7 @@ class _CartScreenState extends State<CartScreen> {
                                                               fontFamily:
                                                                   groldReg,
                                                               color: colorBlack,
-                                                              fontSize: 16.sp,
+                                                              fontSize: 16,
                                                             ),
                                                           ),
                                                         ),
@@ -648,14 +642,11 @@ class _CartScreenState extends State<CartScreen> {
                                                       ),
                                                 //increment
                                                 SizedBox(
-                                                  height: ScreenUtil()
-                                                      .setHeight(25),
-                                                  width:
-                                                      ScreenUtil().setWidth(27),
+                                                  height: 25,
+                                                  width:27,
                                                   child: IconButton(
                                                     padding: EdgeInsets.zero,
-                                                    iconSize: ScreenUtil()
-                                                        .setHeight(20),
+                                                    iconSize: 20,
                                                     onPressed: () {
                                                       incrementFunction(
                                                           cartItemIndex, model);
@@ -777,8 +768,7 @@ class _CartScreenState extends State<CartScreen> {
                                                   ],
                                                 ),
                                                 margin: EdgeInsets.only(
-                                                    top: ScreenUtil()
-                                                        .setHeight(5)),
+                                                    top: 5),
                                               ),
                                             )
                                           : Container(),
@@ -952,7 +942,7 @@ class _CartScreenState extends State<CartScreen> {
                               Visibility(
                                 visible: promoCodeSingleVendor,
                                 child: SizedBox(
-                                  height: ScreenUtil().setHeight(85),
+                                  height: 85,
                                   child: _couponList(),
                                 ),
                               ),
@@ -2157,8 +2147,7 @@ class _CartScreenState extends State<CartScreen> {
                                                               EdgeInsets.all(5),
                                                           child: Row(
                                                             mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .spaceBetween,
+                                                                MainAxisAlignment.spaceBetween,
                                                             children: [
                                                               Row(
                                                                 crossAxisAlignment:
@@ -2611,8 +2600,8 @@ class _CartScreenState extends State<CartScreen> {
 
   Widget getChecked() {
     return Container(
-      height: ScreenUtil().setHeight(25),
-      width: ScreenUtil().setWidth(25),
+      height: 25,
+      width: 25,
       child: Icon(
         Icons.check,
         size: 20,
@@ -2624,8 +2613,8 @@ class _CartScreenState extends State<CartScreen> {
 
   Widget getUnChecked() {
     return Container(
-      height: ScreenUtil().setHeight(25),
-      width: ScreenUtil().setWidth(25),
+      height: 25,
+      width: 25,
       decoration: myBoxDecorationChecked(colorUnCheckItem),
     );
   }

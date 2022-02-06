@@ -36,7 +36,7 @@ class _OnBoardPageState extends State<OnBoardPage> {
                 ),
               ),
               SizedBox(
-                height: 10,
+                height: 30,
               ),
               Container(
                 alignment: Alignment.center,
@@ -63,9 +63,6 @@ class _OnBoardPageState extends State<OnBoardPage> {
                       color: Color(0xff54545A)),
                   textAlign: TextAlign.center,
                 ),
-              ),
-              SizedBox(
-                height: 10,
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,

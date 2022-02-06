@@ -250,7 +250,7 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
                         children: [
                           Container(
                             width: SizeConfig.screenWidth,
-                            height: ScreenUtil().setHeight(200),
+                            height: 200,
                             margin: EdgeInsets.only(
                               left: 0.0,
                               right: 0.0,
@@ -612,8 +612,8 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
                                 Positioned(
                                   top: 0,
                                   left: 40,
-                                  width: ScreenUtil().setWidth(120),
-                                  height: ScreenUtil().setHeight(150),
+                                  width: 120,
+                                  height: 150,
                                   // Note: without ClipRect, the blur region will be expanded to full
                                   // size of the Image instead of custom size
                                   child: ClipRect(
@@ -789,8 +789,8 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
                                 SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 2,
                               childAspectRatio: 1,
-                              crossAxisSpacing: ScreenUtil().setWidth(16),
-                              mainAxisSpacing: ScreenUtil().setHeight(16),
+                              crossAxisSpacing: 16,
+                              mainAxisSpacing: 16,
                             ),
                             itemBuilder: (context, index) {
                               return GestureDetector(

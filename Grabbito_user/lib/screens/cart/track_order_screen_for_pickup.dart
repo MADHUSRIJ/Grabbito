@@ -251,7 +251,7 @@ class _TrackOrderScreenForPickupState extends State<TrackOrderScreenForPickup> {
         children: [
           //first
           SizedBox(
-            height: ScreenUtil().setHeight(18.0),
+            height: 18,
             child: TimelineTile(
               axis: TimelineAxis.vertical,
               alignment: TimelineAlign.manual,
@@ -292,7 +292,7 @@ class _TrackOrderScreenForPickupState extends State<TrackOrderScreenForPickup> {
           ),
           //second
           SizedBox(
-            height: ScreenUtil().setHeight(180),
+            height: 180,
             child: TimelineTile(
               axis: TimelineAxis.vertical,
               alignment: TimelineAlign.manual,
@@ -345,8 +345,8 @@ class _TrackOrderScreenForPickupState extends State<TrackOrderScreenForPickup> {
                                     alignment: Alignment.center,
                                     fit: BoxFit.fill,
                                     imageUrl: driverImage,
-                                    height: ScreenUtil().setHeight(50),
-                                    width: ScreenUtil().setWidth(50),
+                                    height: 50,
+                                    width: 50,
                                     placeholder: (context, url) =>
                                         SpinKitFadingCircle(color: colorRed),
                                     errorWidget: (context, url, error) =>
@@ -402,7 +402,7 @@ class _TrackOrderScreenForPickupState extends State<TrackOrderScreenForPickup> {
           ),
           //third
           SizedBox(
-            height: ScreenUtil().setHeight(18.0),
+            height: 18,
             child: TimelineTile(
               axis: TimelineAxis.vertical,
               alignment: TimelineAlign.manual,

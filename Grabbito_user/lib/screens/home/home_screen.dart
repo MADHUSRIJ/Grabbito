@@ -140,8 +140,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                 Row(
                                   children: [
                                     SizedBox(
-                                      height: ScreenUtil().setHeight(56),
-                                      width: ScreenUtil().setWidth(95),
+                                      height: 180,
+                                      width: 95,
                                       child: Icon(
                                         IconlyBold.bag_2,
                                         color: colorWhite,
@@ -150,7 +150,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ),
                                     Padding(
                                       padding: EdgeInsets.only(
-                                          left: ScreenUtil().setWidth(10)),
+                                          left: 10),
                                       child: Text(
                                         "${getTranslated(context, orderIsText).toString()}${currentOrderData.orderStatus}",
                                         overflow: TextOverflow.ellipsis,

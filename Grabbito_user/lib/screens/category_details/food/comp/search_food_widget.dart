@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:grabbito/constant/app_strings.dart';
 import 'package:grabbito/constant/color_constant.dart';
@@ -450,8 +449,8 @@ class _SearchFoodState extends State<SearchFood> {
                                   child: singleShopSearchData[subMenuIndex]
                                           .isAdded!
                                       ? Container(
-                                          height: ScreenUtil().setHeight(40),
-                                          width: ScreenUtil().setWidth(65),
+                                          height: 40,
+                                          width: 65,
                                           decoration: BoxDecoration(
                                             borderRadius:
                                                 BorderRadius.circular(10),
@@ -461,9 +460,9 @@ class _SearchFoodState extends State<SearchFood> {
                                             children: [
                                               SizedBox(
                                                 height:
-                                                    ScreenUtil().setHeight(20),
+                                                    20,
                                                 width:
-                                                    ScreenUtil().setWidth(23),
+                                                    23,
                                                 child: IconButton(
                                                   onPressed: () {
                                                     if (singleShopSearchData[
@@ -622,7 +621,7 @@ class _SearchFoodState extends State<SearchFood> {
                                               ),
                                               Container(
                                                 width:
-                                                    ScreenUtil().setWidth(17),
+                                                    17,
                                                 color: colorWhite,
                                                 child: Align(
                                                   alignment: Alignment.center,
@@ -641,9 +640,9 @@ class _SearchFoodState extends State<SearchFood> {
                                               ),
                                               SizedBox(
                                                 height:
-                                                    ScreenUtil().setHeight(20),
+                                                    20,
                                                 width:
-                                                    ScreenUtil().setWidth(23),
+                                                    23,
                                                 child: IconButton(
                                                   onPressed: () {
                                                     if (singleShopSearchData[
@@ -796,8 +795,8 @@ class _SearchFoodState extends State<SearchFood> {
                                           ),
                                         )
                                       : Container(
-                                          height: ScreenUtil().setHeight(40),
-                                          width: ScreenUtil().setWidth(65),
+                                          height: 40,
+                                          width: 65,
                                           decoration: BoxDecoration(
                                               borderRadius:
                                                   BorderRadius.circular(10),
@@ -1859,7 +1858,7 @@ class _SearchFoodState extends State<SearchFood> {
               padding: const EdgeInsets.only(
                   left: 10, right: 10, bottom: 0, top: 10),
               child: SizedBox(
-                height: ScreenUtil().setHeight(170),
+                height: 170,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
@@ -1883,7 +1882,7 @@ class _SearchFoodState extends State<SearchFood> {
                       ],
                     ),
                     SizedBox(
-                      height: ScreenUtil().setHeight(5),
+                      height: 5,
                     ),
                     Divider(
                       thickness: 1,
@@ -1894,28 +1893,28 @@ class _SearchFoodState extends State<SearchFood> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         SizedBox(
-                          height: ScreenUtil().setHeight(5),
+                          height: 5,
                         ),
                         SizedBox(
-                          height: ScreenUtil().setHeight(70),
+                          height: 70,
                           child: Text(
                             '${getTranslated(context, labelYourCartContainsDishesFrom).toString()} $restName. ${getTranslated(context, labelYourCartContains1).toString()} $currentRestName?',
                             overflow: TextOverflow.ellipsis,
                             maxLines: 4,
                             style: TextStyle(
-                                fontSize: ScreenUtil().setSp(14),
+                                fontSize: 14,
                                 color: colorBlack),
                           ),
                         ),
                         SizedBox(
-                          height: ScreenUtil().setHeight(5),
+                          height: 5,
                         ),
                         Divider(
                           thickness: 1,
                           color: Color(0xffcccccc),
                         ),
                         SizedBox(
-                          height: ScreenUtil().setHeight(20),
+                          height: 20,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
@@ -2182,8 +2181,8 @@ class _SearchFoodState extends State<SearchFood> {
 
   Widget getChecked() {
     return Container(
-      height: ScreenUtil().setHeight(25),
-      width: ScreenUtil().setWidth(25),
+      height: 25,
+      width: 25,
       child: Icon(
         Icons.check,
         size: 20,
@@ -2195,8 +2194,8 @@ class _SearchFoodState extends State<SearchFood> {
 
   Widget getUnChecked() {
     return Container(
-      height: ScreenUtil().setHeight(25),
-      width: ScreenUtil().setWidth(25),
+      height: 25,
+      width: 25,
       decoration: myBoxDecorationChecked(colorUnCheckItem),
     );
   }

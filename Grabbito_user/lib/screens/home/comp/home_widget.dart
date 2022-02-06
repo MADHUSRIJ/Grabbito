@@ -165,13 +165,6 @@ class _MainPageState extends State<MainPage> {
       if (aspect1 > 0.33) break;
     }
     SizeConfig().init(context);
-    ScreenUtil.init(
-        BoxConstraints(
-            maxWidth: MediaQuery.of(context).size.width,
-            maxHeight: MediaQuery.of(context).size.height),
-        designSize: Size(MediaQuery.of(context).size.width,
-            MediaQuery.of(context).size.height),
-        orientation: Orientation.portrait);
     return Scaffold(
       backgroundColor: colorWhite,
       appBar: AppBar(
@@ -308,8 +301,8 @@ class _MainPageState extends State<MainPage> {
               ),
               isCartSymbolAvailable == true
                   ? Positioned(
-                      top: ScreenUtil().setHeight(4),
-                      right: ScreenUtil().setWidth(8),
+                      top: 4,
+                      right: 8,
                       child: CircleAvatar(
                         backgroundColor: Colors.red,
                         radius: 10.0,
@@ -365,7 +358,7 @@ class _MainPageState extends State<MainPage> {
                               Container(
                                 alignment: Alignment.center,
                                 width: SizeConfig.screenWidth,
-                                height: ScreenUtil().setHeight(136),
+                                height: 136,
                                 margin: EdgeInsets.only(
                                   left: 0.0,
                                   right: 0.0,
@@ -374,7 +367,7 @@ class _MainPageState extends State<MainPage> {
                               ),
                               Container(
                                 margin: EdgeInsets.symmetric(horizontal: 16),
-                                //height: ScreenUtil().setHeight(260),
+                                //height: 260),
                                 child: FutureBuilder(
                                   future: businessTypeFuture,
                                   builder: (context, snapshot) {
@@ -383,7 +376,7 @@ class _MainPageState extends State<MainPage> {
                                       return SizedBox();
                                     } else {
                                       return Container(
-                                        height: 320,
+                                        height: 300,
                                         alignment: Alignment.center,
                                         width: MediaQuery.of(context).size.width,
                                         child: Column(
@@ -407,130 +400,124 @@ class _MainPageState extends State<MainPage> {
                                                   style: TextStyle(
                                                       fontWeight: FontWeight.w400,
                                                       fontFamily: groldReg,
-                                                      fontSize: 18,
+                                                      fontSize: 16,
                                                       color: colorBlack),
                                                 ),
                                               ),
                                             ),
                                             Expanded(
-                                              child: Container(
-                                                height: 500,
-                                                alignment: Alignment.center,
-                                                child: GridView.builder(
-                                                  itemCount: 4,
-                                                  shrinkWrap: true,
-                                                  primary: false,
-                                                  physics: NeverScrollableScrollPhysics(),
-                                                  gridDelegate:
-                                                      SliverGridDelegateWithFixedCrossAxisCount(
-                                                    crossAxisCount: 2,
-                                                    childAspectRatio: 1.5,
-                                                    crossAxisSpacing:16,
-                                                    mainAxisSpacing:16,
-                                                  ),
-                                                  itemBuilder: (context, index) {
-                                                    return GestureDetector(
-                                                      onTap: () {
-                                                        index == 0 ? Navigator.pushNamed(context,
-                                                            categoryDetailPageRoute,
-                                                            arguments:
-                                                            businessTypes[index]) : ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                                          content: Text(businessTypes[index]
-                                                              .name
-                                                              .toString()+"is currently not available in your place"),
-                                                          backgroundColor: colorOrange,
-                                                        ));
-                                                      },
-                                                      child: Container(
-                                                        decoration: BoxDecoration(
-                                                          borderRadius:
-                                                              BorderRadius.circular(16),
-                                                          color: colorPurple,
-                                                        ),
-                                                        child: Row(
-                                                          children: [
-                                                            Expanded(
-                                                                child: Padding(
-                                                              padding: EdgeInsets.only(
-                                                                  top: 16, left: 12),
-                                                              child: Column(
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .start,
-                                                                crossAxisAlignment:
-                                                                    CrossAxisAlignment
-                                                                        .start,
-                                                                children: [
-                                                                  Text(
-                                                                    businessTypes[index]
-                                                                        .name
-                                                                        .toString(),
-                                                                    textAlign:
-                                                                        TextAlign.start,
-                                                                    maxLines: 2,
-                                                                    overflow: TextOverflow
-                                                                        .ellipsis,
-                                                                    style: TextStyle(
-                                                                      fontSize: (MediaQuery.of(
-                                                                                      context)
-                                                                                  .size
-                                                                                  .width /
-                                                                              100) *
-                                                                          3.8,
-                                                                      fontFamily:
-                                                                          groldReg,
-                                                                      color: colorWhite,
-                                                                    ),
-                                                                  ),
-                                                                  SizedBox(height: 10),
-                                                                  CircleAvatar(
-                                                                    backgroundColor:
-                                                                        colorWhite,
-                                                                    radius: 10,
-                                                                    child: Icon(
-                                                                      IconlyLight
-                                                                          .arrow_right,
-                                                                      color: colorBlack,
-                                                                      size: 12,
-                                                                    ),
-                                                                  )
-                                                                ],
-                                                              ),
-                                                            )),
-                                                            Expanded(
-                                                                child: Column(
-                                                              children: [
-                                                                SizedBox(height: 28),
-                                                                CachedNetworkImage(
-                                                                  alignment:
-                                                                      Alignment.center,
-                                                                  fit: BoxFit.fill,
-                                                                  height: ScreenUtil()
-                                                                      .setHeight(80),
-                                                                  width: ScreenUtil()
-                                                                      .setWidth(80),
-                                                                  imageUrl:
-                                                                      businessTypes[index]
-                                                                          .fullImage
-                                                                          .toString(),
-                                                                  placeholder: (context,
-                                                                          url) =>
-                                                                      SpinKitFadingCircle(
-                                                                          color:
-                                                                              colorRed),
-                                                                  errorWidget: (context,
-                                                                          url, error) =>
-                                                                      Image.asset(
-                                                                          "assets/images/no_image.png"),
-                                                                ),
-                                                              ],
-                                                            ))
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    );
-                                                  },
+                                              child: GridView.builder(
+                                                itemCount: 4,
+                                                shrinkWrap: true,
+                                                primary: false,
+                                                physics: NeverScrollableScrollPhysics(),
+                                                gridDelegate:
+                                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                                  crossAxisCount: 2,
+                                                  childAspectRatio: 1.5,
+                                                  crossAxisSpacing:16,
+                                                  mainAxisSpacing:16,
                                                 ),
+                                                itemBuilder: (context, index) {
+                                                  return GestureDetector(
+                                                    onTap: () {
+                                                      index == 0 ? Navigator.pushNamed(context,
+                                                          categoryDetailPageRoute,
+                                                          arguments:
+                                                          businessTypes[index]) : ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                                        content: Text(businessTypes[index]
+                                                            .name
+                                                            .toString()+"is currently not available in your place"),
+                                                        backgroundColor: colorOrange,
+                                                      ));
+                                                    },
+                                                    child: Container(
+                                                      decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius.circular(16),
+                                                        color: colorPurple,
+                                                      ),
+                                                      child: Row(
+                                                        children: [
+                                                          Expanded(
+                                                              child: Padding(
+                                                            padding: EdgeInsets.only(
+                                                                top: 16, left: 12),
+                                                            child: Column(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .start,
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Text(
+                                                                  businessTypes[index]
+                                                                      .name
+                                                                      .toString(),
+                                                                  textAlign:
+                                                                      TextAlign.start,
+                                                                  maxLines: 2,
+                                                                  overflow: TextOverflow
+                                                                      .ellipsis,
+                                                                  style: TextStyle(
+                                                                    fontSize: (MediaQuery.of(
+                                                                                    context)
+                                                                                .size
+                                                                                .width /
+                                                                            100) *
+                                                                        3.8,
+                                                                    fontFamily:
+                                                                        groldReg,
+                                                                    color: colorWhite,
+                                                                  ),
+                                                                ),
+                                                                SizedBox(height: 10),
+                                                                CircleAvatar(
+                                                                  backgroundColor:
+                                                                      colorWhite,
+                                                                  radius: 10,
+                                                                  child: Icon(
+                                                                    IconlyLight
+                                                                        .arrow_right,
+                                                                    color: colorBlack,
+                                                                    size: 12,
+                                                                  ),
+                                                                )
+                                                              ],
+                                                            ),
+                                                          )),
+                                                          Expanded(
+                                                              child: Column(
+                                                            children: [
+                                                              SizedBox(height: 20),
+                                                              CachedNetworkImage(
+                                                                alignment:
+                                                                    Alignment.center,
+                                                                fit: BoxFit.fill,
+                                                                height: 80,
+                                                                width: 80,
+                                                                imageUrl:
+                                                                    businessTypes[index]
+                                                                        .fullImage
+                                                                        .toString(),
+                                                                placeholder: (context,
+                                                                        url) =>
+                                                                    SpinKitFadingCircle(
+                                                                        color:
+                                                                            colorRed),
+                                                                errorWidget: (context,
+                                                                        url, error) =>
+                                                                    Image.asset(
+                                                                        "assets/images/no_image.png"),
+                                                              ),
+                                                            ],
+                                                          ))
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  );
+                                                },
                                               ),
                                             ),
                                           ],
@@ -543,7 +530,7 @@ class _MainPageState extends State<MainPage> {
 
                               Container(
                                 margin: EdgeInsets.symmetric(horizontal: 12),
-                                height: ScreenUtil().setHeight(100),
+
                                 alignment: Alignment.center,
                                 child: FutureBuilder(
                                   future: businessTypeFuture,
@@ -561,8 +548,7 @@ class _MainPageState extends State<MainPage> {
                                             SliverGridDelegateWithFixedCrossAxisCount(
                                           crossAxisCount: 4,
                                           childAspectRatio: 1,
-                                          mainAxisSpacing:
-                                              ScreenUtil().setHeight(7),
+                                          mainAxisSpacing:7,
                                         ),
                                         itemBuilder: (context, index) {
                                           return GestureDetector(
@@ -579,8 +565,7 @@ class _MainPageState extends State<MainPage> {
                                               ));
                                             },
                                             child: Container(
-                                              height:
-                                                  ScreenUtil().setHeight(88),
+                                              height:88,
                                               margin: EdgeInsets.symmetric(
                                                   horizontal: 4),
                                               decoration: BoxDecoration(
@@ -604,10 +589,8 @@ class _MainPageState extends State<MainPage> {
                                                       alignment:
                                                           Alignment.center,
                                                       fit: BoxFit.fill,
-                                                      height: ScreenUtil()
-                                                          .setHeight(40),
-                                                      width: ScreenUtil()
-                                                          .setWidth(40),
+                                                      height: 40,
+                                                      width: 40,
                                                       imageUrl: businessTypes[
                                                               index + 4]
                                                           .fullImage
@@ -663,7 +646,7 @@ class _MainPageState extends State<MainPage> {
 
                               Container(
                                 width: SizeConfig.screenWidth,
-                                height: ScreenUtil().setHeight(200),
+                                height: 200,
                                 margin: EdgeInsets.only(
                                   left: 0.0,
                                   right: 0.0,
@@ -950,7 +933,7 @@ class _MainPageState extends State<MainPage> {
                               imageUrl: banners[index].fullImage.toString(),
                               imageBuilder: (context, imageProvider) =>
                                   Container(
-                                height: ScreenUtil().setHeight(145),
+                                height: 145,
                                 width: MediaQuery.of(context).size.width -
                                     (MediaQuery.of(context).size.width / 100) *
                                         10,
@@ -981,10 +964,10 @@ class _MainPageState extends State<MainPage> {
                             ),
                           ),
                           // Positioned(
-                          //   top: ScreenUtil().setHeight(36),
-                          //   left: ScreenUtil().setHeight(40),
+                          //   top: 36),
+                          //   left: 40),
                           //   child: SizedBox(
-                          //     width: ScreenUtil().setWidth(100),
+                          //     width: 100,
                           //     child: Text(
                           //       banners[index].name.toString(),
                           //       textAlign: TextAlign.left,
@@ -1125,8 +1108,8 @@ class _MainPageState extends State<MainPage> {
                                 Positioned(
                                   top: 0,
                                   left: 40,
-                                  width: ScreenUtil().setWidth(120),
-                                  height: ScreenUtil().setHeight(150),
+                                  width: 120,
+                                  height: 150,
                                   // Note: without ClipRect, the blur region will be expanded to full
                                   // size of the Image instead of custom size
                                   child: ClipRect(
@@ -1309,8 +1292,8 @@ class _MainPageState extends State<MainPage> {
   //                       },
   //                       child: Container(
   //                         margin: EdgeInsets.all(5),
-  //                         height: ScreenUtil().setWidth(75),
-  //                         width: ScreenUtil().setWidth(75),
+  //                         height: 75,
+  //                         width: 75,
   //                         decoration: BoxDecoration(
   //                             color: Colors.white,
   //                             borderRadius: BorderRadius.circular(10),
@@ -1331,8 +1314,8 @@ class _MainPageState extends State<MainPage> {
   //                                 CachedNetworkImage(
   //                                   alignment: Alignment.center,
   //                                   fit: BoxFit.fill,
-  //                                   height: ScreenUtil().setWidth(75),
-  //                                   width: ScreenUtil().setWidth(75),
+  //                                   height: 75,
+  //                                   width: 75,
   //                                   imageUrl: offersAtGrocery[index]
   //                                       .fullImage
   //                                       .toString(),
@@ -1360,7 +1343,7 @@ class _MainPageState extends State<MainPage> {
   //                                 Positioned(
   //                                   bottom: 0,
   //                                   child: Container(
-  //                                     height: ScreenUtil().setHeight(23),
+  //                                     height: 23),
   //                                     decoration: BoxDecoration(
   //                                         color: Color(0xFFA5D6B6)
   //                                             .withOpacity(0.8),
@@ -1373,7 +1356,7 @@ class _MainPageState extends State<MainPage> {
   //                                         filter: ImageFilter.blur(
   //                                             sigmaX: 4.0, sigmaY: 4.0),
   //                                         child: Container(
-  //                                           width: ScreenUtil().setWidth(75),
+  //                                           width: 75,
   //                                           alignment: Alignment.center,
   //                                           decoration: BoxDecoration(
   //                                               borderRadius:
@@ -1417,7 +1400,7 @@ class _MainPageState extends State<MainPage> {
   //                                 crossAxisAlignment: CrossAxisAlignment.start,
   //                                 children: [
   //                                   SizedBox(
-  //                                     height: ScreenUtil().setHeight(15),
+  //                                     height: 15),
   //                                     child: Text(
   //                                       offersAtGrocery[index].name.toString(),
   //                                       overflow: TextOverflow.ellipsis,
@@ -1432,7 +1415,7 @@ class _MainPageState extends State<MainPage> {
   //                                     height: 5,
   //                                   ),
   //                                   SizedBox(
-  //                                     height: ScreenUtil().setHeight(25),
+  //                                     height: 25),
   //                                     child: Text(
   //                                       () {
   //                                         if (offersAtGrocery[index]
@@ -1472,7 +1455,7 @@ class _MainPageState extends State<MainPage> {
   //                                     height: 5,
   //                                   ),
   //                                   SizedBox(
-  //                                     height: ScreenUtil().setHeight(16),
+  //                                     height: 16),
   //                                     child: Row(
   //                                       children: [
   //                                         Icon(
@@ -1513,7 +1496,7 @@ class _MainPageState extends State<MainPage> {
   //                                   ),
   //                                   SizedBox(height: 5),
   //                                   SizedBox(
-  //                                     height: ScreenUtil().setHeight(21),
+  //                                     height: 21),
   //                                     child: Row(
   //                                       mainAxisAlignment:
   //                                           MainAxisAlignment.spaceBetween,
@@ -1635,8 +1618,8 @@ class _MainPageState extends State<MainPage> {
   //                       },
   //                       child: Container(
   //                         margin: EdgeInsets.all(5),
-  //                         height: ScreenUtil().setWidth(75),
-  //                         width: ScreenUtil().setWidth(75),
+  //                         height: 75,
+  //                         width: 75,
   //                         decoration: BoxDecoration(
   //                             color: Colors.white,
   //                             borderRadius: BorderRadius.circular(10),
@@ -1657,8 +1640,8 @@ class _MainPageState extends State<MainPage> {
   //                                 CachedNetworkImage(
   //                                   alignment: Alignment.center,
   //                                   fit: BoxFit.fill,
-  //                                   height: ScreenUtil().setWidth(75),
-  //                                   width: ScreenUtil().setWidth(75),
+  //                                   height: 75,
+  //                                   width: 75,
   //                                   imageUrl: offersAtFruit[index]
   //                                       .fullImage
   //                                       .toString(),
@@ -1686,7 +1669,7 @@ class _MainPageState extends State<MainPage> {
   //                                 Positioned(
   //                                   bottom: 0,
   //                                   child: Container(
-  //                                     height: ScreenUtil().setHeight(23),
+  //                                     height: 23),
   //                                     decoration: BoxDecoration(
   //                                         color: Color(0xFF6F85C1)
   //                                             .withOpacity(0.8),
@@ -1699,7 +1682,7 @@ class _MainPageState extends State<MainPage> {
   //                                         filter: ImageFilter.blur(
   //                                             sigmaX: 4.0, sigmaY: 4.0),
   //                                         child: Container(
-  //                                           width: ScreenUtil().setWidth(75),
+  //                                           width: 75,
   //                                           alignment: Alignment.center,
   //                                           decoration: BoxDecoration(
   //                                               borderRadius:
@@ -1743,7 +1726,7 @@ class _MainPageState extends State<MainPage> {
   //                                 crossAxisAlignment: CrossAxisAlignment.start,
   //                                 children: [
   //                                   SizedBox(
-  //                                     height: ScreenUtil().setHeight(15),
+  //                                     height: 15),
   //                                     child: Text(
   //                                       offersAtFruit[index].name.toString(),
   //                                       overflow: TextOverflow.ellipsis,
@@ -1756,7 +1739,7 @@ class _MainPageState extends State<MainPage> {
   //                                   ),
   //                                   SizedBox(height: 5),
   //                                   SizedBox(
-  //                                     height: ScreenUtil().setHeight(25),
+  //                                     height: 25),
   //                                     child: Text(
   //                                       () {
   //                                         if (offersAtFruit[index]
@@ -1794,7 +1777,7 @@ class _MainPageState extends State<MainPage> {
   //                                   ),
   //                                   SizedBox(height: 5),
   //                                   SizedBox(
-  //                                     height: ScreenUtil().setHeight(16),
+  //                                     height: 16),
   //                                     child: Row(
   //                                       children: [
   //                                         Icon(
@@ -1833,7 +1816,7 @@ class _MainPageState extends State<MainPage> {
   //                                   ),
   //                                   SizedBox(height: 5),
   //                                   SizedBox(
-  //                                     height: ScreenUtil().setHeight(21),
+  //                                     height: 21),
   //                                     child: Row(
   //                                       mainAxisAlignment:
   //                                           MainAxisAlignment.spaceBetween,

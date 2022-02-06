@@ -323,7 +323,7 @@ class _OffersPageState extends State<OffersPage> {
                           children: [
                             Container(
                               width: SizeConfig.screenWidth,
-                              height: ScreenUtil().setHeight(200),
+                              height: 200,
                               margin: EdgeInsets.only(
                                 left: 0.0,
                                 right: 0.0,
@@ -333,7 +333,7 @@ class _OffersPageState extends State<OffersPage> {
                             SizedBox(height: 16),
                             Container(
                               width: SizeConfig.screenWidth,
-                              height: ScreenUtil().setHeight(200),
+                              height: 200,
                               margin: EdgeInsets.only(
                                 left: 0.0,
                                 right: 0.0,
@@ -343,7 +343,7 @@ class _OffersPageState extends State<OffersPage> {
                             SizedBox(height: 16),
                             Container(
                               width: SizeConfig.screenWidth,
-                              height: ScreenUtil().setHeight(200),
+                              height: 200,
                               margin: EdgeInsets.only(
                                 left: 0.0,
                                 right: 0.0,
@@ -427,8 +427,8 @@ class _OffersPageState extends State<OffersPage> {
                                 },
                                 child: Container(
                                   margin: EdgeInsets.all(5),
-                                  height: ScreenUtil().setWidth(75),
-                                  width: ScreenUtil().setWidth(75),
+                                  height: 75,
+                                  width: 75,
                                   decoration: BoxDecoration(
                                       color: Colors.white,
                                       borderRadius: BorderRadius.circular(10),
@@ -449,8 +449,8 @@ class _OffersPageState extends State<OffersPage> {
                                           CachedNetworkImage(
                                             alignment: Alignment.center,
                                             fit: BoxFit.fill,
-                                            height: ScreenUtil().setWidth(75),
-                                            width: ScreenUtil().setWidth(75),
+                                            height: 75,
+                                            width: 75,
                                             imageUrl: offersAtGrocery[index]
                                                 .fullImage
                                                 .toString(),
@@ -475,7 +475,7 @@ class _OffersPageState extends State<OffersPage> {
                                           Positioned(
                                             bottom: 0,
                                             child: Container(
-                                              height: ScreenUtil().setHeight(23),
+                                              height: 23,
                                               decoration: BoxDecoration(
                                                   color: Color(0xFFA5D6B6)
                                                       .withOpacity(0.8),
@@ -488,7 +488,7 @@ class _OffersPageState extends State<OffersPage> {
                                                   filter: ImageFilter.blur(
                                                       sigmaX: 4.0, sigmaY: 4.0),
                                                   child: Container(
-                                                    width: ScreenUtil().setWidth(75),
+                                                    width: 75,
                                                     alignment: Alignment.center,
                                                     decoration: BoxDecoration(
                                                         borderRadius:
@@ -532,7 +532,7 @@ class _OffersPageState extends State<OffersPage> {
                                           crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
                                             SizedBox(
-                                              height: ScreenUtil().setHeight(15),
+                                              height: 15,
                                               child: Text(
                                                 offersAtGrocery[index].name.toString(),
                                                 overflow: TextOverflow.ellipsis,
@@ -547,7 +547,7 @@ class _OffersPageState extends State<OffersPage> {
                                               height: 5,
                                             ),
                                             SizedBox(
-                                              height: ScreenUtil().setHeight(25),
+                                              height: 25,
                                               child: Text(
                                                 () {
                                                   if (offersAtGrocery[index]
@@ -587,7 +587,7 @@ class _OffersPageState extends State<OffersPage> {
                                               height: 5,
                                             ),
                                             SizedBox(
-                                              height: ScreenUtil().setHeight(16),
+                                              height: 16,
                                               child: Row(
                                                 children: [
                                                   Icon(
@@ -628,7 +628,7 @@ class _OffersPageState extends State<OffersPage> {
                                             ),
                                             SizedBox(height: 5),
                                             SizedBox(
-                                              height: ScreenUtil().setHeight(21),
+                                              height: 21,
                                               child: Row(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.spaceBetween,
@@ -768,8 +768,8 @@ class _OffersPageState extends State<OffersPage> {
                                 },
                                 child: Container(
                                   margin: EdgeInsets.all(5),
-                                  height: ScreenUtil().setWidth(75),
-                                  width: ScreenUtil().setWidth(75),
+                                  height: 75,
+                                  width: 75,
                                   decoration: BoxDecoration(
                                       color: Colors.white,
                                       borderRadius: BorderRadius.circular(10),
@@ -791,8 +791,8 @@ class _OffersPageState extends State<OffersPage> {
                                           CachedNetworkImage(
                                             alignment: Alignment.center,
                                             fit: BoxFit.fill,
-                                            height: ScreenUtil().setWidth(75),
-                                            width: ScreenUtil().setWidth(75),
+                                            height: 75,
+                                            width: 75,
                                             imageUrl: offersAtFruit[index]
                                                 .fullImage
                                                 .toString(),
@@ -820,7 +820,7 @@ class _OffersPageState extends State<OffersPage> {
                                           Positioned(
                                             bottom: 0,
                                             child: Container(
-                                              height: ScreenUtil().setHeight(23),
+                                              height: 23,
                                               decoration: BoxDecoration(
                                                   color: Color(0xFF6F85C1)
                                                       .withOpacity(0.8),
@@ -835,8 +835,7 @@ class _OffersPageState extends State<OffersPage> {
                                                   filter: ImageFilter.blur(
                                                       sigmaX: 4.0, sigmaY: 4.0),
                                                   child: Container(
-                                                    width:
-                                                        ScreenUtil().setWidth(75),
+                                                    width:75,
                                                     alignment: Alignment.center,
                                                     decoration: BoxDecoration(
                                                         borderRadius:
@@ -884,7 +883,7 @@ class _OffersPageState extends State<OffersPage> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             SizedBox(
-                                              height: ScreenUtil().setHeight(15),
+                                              height: 15,
                                               child: Text(
                                                 offersAtFruit[index]
                                                     .name
@@ -899,7 +898,7 @@ class _OffersPageState extends State<OffersPage> {
                                             ),
                                             SizedBox(height: 5),
                                             SizedBox(
-                                              height: ScreenUtil().setHeight(25),
+                                              height: 25,
                                               child: Text(
                                                 () {
                                                   if (offersAtFruit[index]
@@ -937,7 +936,7 @@ class _OffersPageState extends State<OffersPage> {
                                             ),
                                             SizedBox(height: 5),
                                             SizedBox(
-                                              height: ScreenUtil().setHeight(16),
+                                              height: 16,
                                               child: Row(
                                                 children: [
                                                   Icon(
@@ -976,7 +975,7 @@ class _OffersPageState extends State<OffersPage> {
                                             ),
                                             SizedBox(height: 5),
                                             SizedBox(
-                                              height: ScreenUtil().setHeight(21),
+                                              height: 21,
                                               child: Row(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.spaceBetween,
@@ -1159,8 +1158,8 @@ class _OffersPageState extends State<OffersPage> {
                                 Positioned(
                                   top: 0,
                                   left: 40,
-                                  width: ScreenUtil().setWidth(120),
-                                  height: ScreenUtil().setHeight(150),
+                                  width: 120,
+                                  height: 150,
                                   // Note: without ClipRect, the blur region will be expanded to full
                                   // size of the Image instead of custom size
                                   child: ClipRect(
@@ -1323,7 +1322,7 @@ class _OffersPageState extends State<OffersPage> {
                 SizedBox(height: 20),
             itemBuilder: (context, index) {
               return Container(
-                height: ScreenUtil().setHeight(100),
+                height:100,
                 decoration: BoxDecoration(
                     color: Colors.grey.withAlpha(20),
                     borderRadius: BorderRadius.circular(15)),

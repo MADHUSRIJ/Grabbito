@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:grabbito/constant/app_strings.dart';
 import 'package:grabbito/constant/color_constant.dart';
 import 'package:grabbito/localization/localization_constant.dart';
@@ -45,7 +44,7 @@ class _ChangeLanguageScreenState extends State<ChangeLanguageScreen> {
           itemCount: Language.languageList().length,
           padding: EdgeInsets.only(bottom: 20),
           separatorBuilder: (context, index) => SizedBox(
-            height: ScreenUtil().setHeight(10),
+            height: 10,
           ),
           itemBuilder: (context, index) {
             value = 0;
@@ -62,7 +61,7 @@ class _ChangeLanguageScreenState extends State<ChangeLanguageScreen> {
             return Card(
               margin: EdgeInsets.zero,
               child: Container(
-                height: ScreenUtil().setHeight(75),
+                height: 75,
                 alignment: Alignment.center,
                 child: RadioListTile(
                   tileColor: colorWhite,

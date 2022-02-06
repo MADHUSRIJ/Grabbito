@@ -278,7 +278,7 @@ class _FoodDeliveryShopState extends State<FoodDeliveryShop>
               padding: EdgeInsets.symmetric(horizontal: 16),
               child: SizedBox(
                 width: SizeConfig.screenWidth,
-                height: ScreenUtil().setHeight(60),
+                height: 68,
                 child: _couponList(),
               ),
             ),
@@ -426,20 +426,18 @@ class _FoodDeliveryShopState extends State<FoodDeliveryShop>
               child: SizedBox(
                 width: MediaQuery.of(context).size.width,
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Text(
-                          '$totalQty ${getTranslated(context, totalItems).toString()}',
-                          style: TextStyle(
-                              fontSize: 18,
-                              color: Colors.white,
-                              fontFamily: groldReg),
-                        ),
-                        SizedBox(
-                          width: 10,
+                        Container(
+                          child: Text(
+                            '$totalQty ${getTranslated(context, totalItems).toString()}',
+                            style: TextStyle(
+                                fontSize: 18,
+                                color: Colors.white,
+                                fontFamily: groldReg),
+                          ),
                         ),
                         VerticalDivider(
                           thickness: 1,
@@ -449,28 +447,32 @@ class _FoodDeliveryShopState extends State<FoodDeliveryShop>
                           color: colorWhite,
                         ),
                         SizedBox(
-                          width: 10,
+                          width: 4,
                         ),
-                        Text(
-                          '${PreferenceUtils.getString(PreferenceNames.currencySymbolSetting)} $totalCartAmount',
-                          style: TextStyle(
-                              fontSize: 18,
-                              color: Colors.white,
-                              fontFamily: groldBold),
+                        Container(
+                          child: Text(
+                            '${PreferenceUtils.getString(PreferenceNames.currencySymbolSetting)} $totalCartAmount',
+                            style: TextStyle(
+                                fontSize: 18,
+                                color: Colors.white,
+                                fontFamily: groldBold),
+                          ),
                         ),
                       ],
                     ),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Text(
-                          getTranslated(context, addToBag).toString(),
-                          style: TextStyle(
-                              fontSize: 18,
-                              color: Colors.white,
-                              fontFamily: groldReg),
+                        Container(
+                          child: Text(
+                            getTranslated(context, addToBag).toString(),
+                            softWrap: true,
+                            style: TextStyle(
+                                fontSize: 18,
+                                color: Colors.white,
+                                fontFamily: groldReg),
+                          ),
                         ),
-                        SizedBox(width: 10),
                         Icon(IconlyBold.bag_2,color: Colors.white,size: 20,),
                       ],
                     ),
@@ -792,10 +794,8 @@ class _FoodDeliveryShopState extends State<FoodDeliveryShop>
                                               child: Row(
                                                 children: [
                                                   SizedBox(
-                                                    height: ScreenUtil()
-                                                        .setHeight(20),
-                                                    width: ScreenUtil()
-                                                        .setWidth(24),
+                                                    height: 20,
+                                                    width: 24,
                                                     child: IconButton(
                                                       onPressed: () {
                                                         if (menus[index]
@@ -975,8 +975,7 @@ class _FoodDeliveryShopState extends State<FoodDeliveryShop>
                                                         }
                                                       },
                                                       padding: EdgeInsets.zero,
-                                                      iconSize: ScreenUtil()
-                                                          .setHeight(16),
+                                                      iconSize: 16,
                                                       icon: Icon(
                                                         Icons.remove,
                                                         color: colorButton,
@@ -984,8 +983,7 @@ class _FoodDeliveryShopState extends State<FoodDeliveryShop>
                                                     ),
                                                   ),
                                                   Container(
-                                                    width: ScreenUtil()
-                                                        .setWidth(24),
+                                                    width: 24,
                                                     color: colorWhite,
                                                     child: Align(
                                                       alignment:
@@ -1005,10 +1003,8 @@ class _FoodDeliveryShopState extends State<FoodDeliveryShop>
                                                     ),
                                                   ),
                                                   SizedBox(
-                                                    height: ScreenUtil()
-                                                        .setHeight(20),
-                                                    width: ScreenUtil()
-                                                        .setWidth(24),
+                                                    height: 20,
+                                                    width: 24,
                                                     child: IconButton(
                                                       onPressed: () {
                                                         if (menus[index]
@@ -1117,8 +1113,7 @@ class _FoodDeliveryShopState extends State<FoodDeliveryShop>
                                                         }
                                                       },
                                                       padding: EdgeInsets.zero,
-                                                      iconSize: ScreenUtil()
-                                                          .setHeight(16),
+                                                      iconSize: 16,
                                                       icon: Icon(
                                                         Icons.add,
                                                         color: colorButton,
@@ -1560,7 +1555,6 @@ class _FoodDeliveryShopState extends State<FoodDeliveryShop>
                       return GestureDetector(
                         child: Container(
                           alignment: Alignment.centerLeft,
-                          width: 200,
                           margin: EdgeInsets.symmetric(horizontal: 8),
                           decoration: BoxDecoration(
                               border: Border.all(
@@ -1753,7 +1747,7 @@ class _FoodDeliveryShopState extends State<FoodDeliveryShop>
                                 itemCount: customization.length,
                                 shrinkWrap: true,
                                 separatorBuilder: (context, index) => SizedBox(
-                                  height: ScreenUtil().setHeight(20),
+                                  height: 20,
                                 ),
                                 itemBuilder: (context, outerIndex) {
                                   return Column(
@@ -2101,7 +2095,7 @@ class _FoodDeliveryShopState extends State<FoodDeliveryShop>
               padding: const EdgeInsets.only(
                   left: 10, right: 10, bottom: 0, top: 10),
               child: SizedBox(
-                height: ScreenUtil().setHeight(170),
+                height: 170,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
@@ -2125,7 +2119,7 @@ class _FoodDeliveryShopState extends State<FoodDeliveryShop>
                       ],
                     ),
                     SizedBox(
-                      height: ScreenUtil().setHeight(5),
+                      height: 5,
                     ),
                     Divider(
                       thickness: 1,
@@ -2136,23 +2130,23 @@ class _FoodDeliveryShopState extends State<FoodDeliveryShop>
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         SizedBox(
-                          height: ScreenUtil().setHeight(5),
+                          height: 5,
                         ),
                         SizedBox(
-                          height: ScreenUtil().setHeight(70),
+                          height: 70,
                           child: RichText(
                             text: TextSpan(
                               text:
                                   '${getTranslated(context, labelYourCartContainsDishesFrom).toString()} ',
                               style: TextStyle(
-                                fontSize: ScreenUtil().setSp(14),
+                                fontSize: 14,
                                 color: colorBlack,
                               ),
                               children: <TextSpan>[
                                 TextSpan(
                                   text: '$restName',
                                   style: TextStyle(
-                                    fontSize: ScreenUtil().setSp(14),
+                                    fontSize: 14,
                                     color: colorBlack,
                                     fontWeight: FontWeight.bold,
                                   ),
@@ -2161,14 +2155,14 @@ class _FoodDeliveryShopState extends State<FoodDeliveryShop>
                                   text:
                                       '. ${getTranslated(context, labelYourCartContains1).toString()} ',
                                   style: TextStyle(
-                                    fontSize: ScreenUtil().setSp(14),
+                                    fontSize: 14,
                                     color: colorBlack,
                                   ),
                                 ),
                                 TextSpan(
                                   text: '$currentRestName',
                                   style: TextStyle(
-                                    fontSize: ScreenUtil().setSp(14),
+                                    fontSize: 14,
                                     color: colorBlack,
                                     fontWeight: FontWeight.bold,
                                   ),
@@ -2176,7 +2170,7 @@ class _FoodDeliveryShopState extends State<FoodDeliveryShop>
                                 TextSpan(
                                   text: '?',
                                   style: TextStyle(
-                                    fontSize: ScreenUtil().setSp(14),
+                                    fontSize: 14,
                                     color: colorBlack,
                                   ),
                                 ),
@@ -2191,7 +2185,7 @@ class _FoodDeliveryShopState extends State<FoodDeliveryShop>
                           color: Color(0xffcccccc),
                         ),
                         SizedBox(
-                          height: ScreenUtil().setHeight(30),
+                          height: 30,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
@@ -2681,8 +2675,8 @@ class _FoodDeliveryShopState extends State<FoodDeliveryShop>
 
   Widget getChecked() {
     return Container(
-      height: ScreenUtil().setHeight(25),
-      width: ScreenUtil().setWidth(25),
+      height: 25,
+      width: 25,
       child: Icon(
         Icons.check,
         size: 20,
@@ -2694,8 +2688,8 @@ class _FoodDeliveryShopState extends State<FoodDeliveryShop>
 
   Widget getUnChecked() {
     return Container(
-      height: ScreenUtil().setHeight(25),
-      width: ScreenUtil().setWidth(25),
+      height:25,
+      width: 25,
       decoration: myBoxDecorationChecked(colorUnCheckItem),
     );
   }
