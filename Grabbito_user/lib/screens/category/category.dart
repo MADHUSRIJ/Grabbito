@@ -779,17 +779,17 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
                                               businessTypeId: businessTypeId,
                                             ));
                                   } else {
-                                    // Navigator.pushNamed(
-                                    //     context, foodShopPageRoute,
-                                    //     // arguments: shopData[index].id,
-                                    //     arguments: FoodDeliveryShop(
-                                    //       singleShopId:
-                                    //       shopData[index].id!.toInt(),
-                                    //       businessTypeId: businessTypeId,
-                                    //     ));
-                                    CommonFunction.toastMessage(
-                                        getTranslated(context, shopClose)
-                                            .toString());
+                                    Navigator.pushNamed(
+                                        context, foodShopPageRoute,
+                                        // arguments: shopData[index].id,
+                                        arguments: FoodDeliveryShop(
+                                          singleShopId:
+                                          shopData[index].id!.toInt(),
+                                          businessTypeId: businessTypeId,
+                                        ));
+                                    // CommonFunction.toastMessage(
+                                    //     getTranslated(context, shopClose)
+                                    //         .toString());
                                   }
                                 },
                                 child: Stack(
@@ -938,21 +938,20 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
                                                 child: CachedNetworkImage(
                                                   alignment: Alignment.center,
                                                   fit: BoxFit.fill,
-                                                  imageUrl: shopData[index]
-                                                      .image
+                                                  imageUrl: "https://grabbito.com/public/images/upload/"+shopData[index]
+                                                      .bannerImage
                                                       .toString(),
                                                   imageBuilder: (context,
                                                           imageProvider) =>
                                                       Container(
+
                                                     width:
                                                         MediaQuery.of(context)
                                                                 .size
                                                                 .width /
                                                             1.4,
                                                     decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              16.0),
+                                                      shape: BoxShape.circle,
                                                       image: DecorationImage(
                                                         image: imageProvider,
                                                         fit: BoxFit.fill,

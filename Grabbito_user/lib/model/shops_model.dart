@@ -93,7 +93,7 @@ class Shop {
         ? Discount.fromJson(json['discount'])
         : null;
     fullImage = json['fullImage'];
-    print("============***************************=========="+image.toString()+"  "+fullImage.toString()+" "+bannerImage.toString());
+    print("============***************************=========="+name.toString()+image.toString()+"  "+fullImage.toString()+" "+bannerImage.toString());
   }
 
   Map<String, dynamic> toJson() {

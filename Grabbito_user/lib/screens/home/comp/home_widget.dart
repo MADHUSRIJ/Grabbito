@@ -47,6 +47,8 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+
+
   final dbHelper = DatabaseHelper.instance;
   bool isCartSymbolAvailable = false;
   int cartSymbolAvailableItems = 0;
@@ -60,6 +62,9 @@ class _MainPageState extends State<MainPage> {
   late LatLng _center;
   bool isLocationSet = false;
   bool isNetworkAvailable = true;
+  ScrollController? _scrollController;
+  bool isScrolledToTop = true;
+  static const double EMPTY_SPACE = 10.0;
 
   bool isVegOnly = false;
   bool isFirst = true;
@@ -68,17 +73,14 @@ class _MainPageState extends State<MainPage> {
   bool nonVeg = false;
   bool both = false;
 
-
   double tempPrice = 0;
   double totalCartAmount = 0;
   int totalQty = 0;
-
 
   List<Product> listCart = [];
 
   List<BusinessTypesData> businessTypes = [];
   List<OffersAtRestaurantData> offersAtRestaurant = [];
-
 
   List<BannerData> banners = [];
   List<OffersAtGroceryData> offersAtGrocery = [];
@@ -98,7 +100,37 @@ class _MainPageState extends State<MainPage> {
     bannerDataFuture = bannerApi();
     businessTypeFuture = businessTypesApi();
     singleShopApiOnlyFood();
+    _scrollController = ScrollController();
+    _scrollController!.addListener(_scrollListener);
     _queryFirst(context);
+  }
+
+  _scrollListener() {
+    if (_scrollController!.offset <= _scrollController!.position.minScrollExtent &&
+        !_scrollController!.position.outOfRange) {
+      //call setState only when values are about to change
+      if(!isScrolledToTop) {
+        setState(() {
+          //reach the top
+          isScrolledToTop = true;
+        });
+      }
+
+    }else{
+      //call setState only when values are about to change
+      if(_scrollController!.offset > EMPTY_SPACE && isScrolledToTop) {
+        setState(() {
+          //not the top
+          isScrolledToTop = false;
+        });
+      }
+    }
+  }
+
+  @override
+  void dispose() {
+    _scrollController!.dispose();
+    super.dispose();
   }
 
   void initializeController() {
@@ -146,86 +178,87 @@ class _MainPageState extends State<MainPage> {
       appBar: AppBar(
         leadingWidth: 0,
         backgroundColor: colorWhite,
-        title:  GestureDetector(
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  height: 36,
-                  width: 36,
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: colorWidgetBorder,
-                      border: Border.all(width: 1, color: colorWidgetBg)),
-                  child: Icon(
-                    IconlyBold.location,
-                    color: colorOrange,
-                    size: 20.0,
-                  ),
+        elevation: isScrolledToTop ? 0 : 2,
+        title: GestureDetector(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                height: 36,
+                width: 36,
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: colorWidgetBorder,
+                    border: Border.all(width: 1, color: colorWidgetBg)),
+                child: Icon(
+                  IconlyBold.location,
+                  color: colorOrange,
+                  size: 20.0,
                 ),
-                SizedBox(
-                  child: Container(
-                    margin: EdgeInsets.only(left: 8, right: 4),
-                    child: Row(
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                Text(
-                                  getTranslated(context, location).toString(),
-                                  style: TextStyle(
-                                    fontFamily: groldReg,
-                                    color: Colors.grey.shade500,
-                                    fontSize: 14,
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 2,
-                                ),
-                                Icon(
-                                  IconlyBold.arrow_down_2,
-                                  color: colorOrange,
-                                  size: 16,
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width / 2.5,
-                              child: Text(
-                                selectedLocation,
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 1,
+              ),
+              SizedBox(
+                child: Container(
+                  margin: EdgeInsets.only(left: 8, right: 4),
+                  child: Row(
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Text(
+                                getTranslated(context, location).toString(),
                                 style: TextStyle(
                                   fontFamily: groldReg,
-                                  color: colorBlack,
-                                  fontSize: 16,
+                                  color: Colors.grey.shade500,
+                                  fontSize: 14,
                                 ),
                               ),
+                              SizedBox(
+                                width: 2,
+                              ),
+                              Icon(
+                                IconlyBold.arrow_down_2,
+                                color: colorOrange,
+                                size: 16,
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width / 2.5,
+                            child: Text(
+                              selectedLocation,
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1,
+                              style: TextStyle(
+                                fontFamily: groldReg,
+                                color: colorBlack,
+                                fontSize: 16,
+                              ),
                             ),
-                          ],
-                        ),
-                      ],
-                    ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
-              ],
-            ),
-            onTap: () {
-              Navigator.pushNamed(context, setLocationRoute);
-              setState(() {
-                initializeController();
-              });
-            },
+              ),
+            ],
           ),
+          onTap: () {
+            Navigator.pushNamed(context, setLocationRoute);
+            setState(() {
+              initializeController();
+            });
+          },
+        ),
         leading: SizedBox(
           width: 1,
           height: 1,
         ),
         actions: [
           Container(
-            margin: EdgeInsets.only(top: 8,bottom: 8,right: 8),
+            margin: EdgeInsets.only(top: 8, bottom: 8, right: 8),
             height: 40,
             decoration: BoxDecoration(
                 shape: BoxShape.circle,
@@ -251,7 +284,7 @@ class _MainPageState extends State<MainPage> {
           Stack(
             children: [
               Container(
-                margin: EdgeInsets.only(top: 8,bottom: 8,right: 16),
+                margin: EdgeInsets.only(top: 8, bottom: 8, right: 16),
                 height: 40,
                 decoration: BoxDecoration(
                     shape: BoxShape.circle,
@@ -297,290 +330,135 @@ class _MainPageState extends State<MainPage> {
                       height: 1,
                       width: 1,
                     ),
-
             ],
           ),
         ],
-        elevation: 1,
-        shadowColor: Colors.white,
+
+        shadowColor: isScrolledToTop ? Colors.white : colorDivider,
         excludeHeaderSemantics: true,
       ),
       body: RefreshIndicator(
         onRefresh: _onRefresh,
         color: Colors.white,
         child: SingleChildScrollView(
-            child: Container(
-              child: isNetworkAvailable == true
-                  ? isLocationSet == true
-                      ? SizedBox(
-                width: SizeConfig.screenWidth,
-                height: SizeConfig.screenHeight,
+          controller: _scrollController,
+          child: Container(
+            child: isNetworkAvailable == true
+                ? isLocationSet == true
+                    ? SizedBox(
+                        width: SizeConfig.screenWidth,
+                        height: SizeConfig.screenHeight,
                         child: RefreshIndicator(
-                            onRefresh: _onRefresh,
-                            child: ListView(
-                              shrinkWrap: true,
-                              padding: widget.isTrackOrderPadding == true
-                                  ? EdgeInsets.only(
-                                      bottom: MediaQuery.of(context).size.height *
-                                          0.30)
-                                  : EdgeInsets.only(
-                                      bottom: MediaQuery.of(context).size.height *
-                                          0.20),
-                              children: [
-                                SizedBox(
-                                  height: 16,
+                          onRefresh: _onRefresh,
+                          child: ListView(
+                            shrinkWrap: true,
+                            padding: widget.isTrackOrderPadding == true
+                                ? EdgeInsets.only(
+                                    bottom: MediaQuery.of(context).size.height *
+                                        0.30)
+                                : EdgeInsets.only(
+                                    bottom: MediaQuery.of(context).size.height *
+                                        0.20),
+                            children: [
+                              SizedBox(
+                                height: 16,
+                              ),
+                              Container(
+                                alignment: Alignment.center,
+                                width: SizeConfig.screenWidth,
+                                height: ScreenUtil().setHeight(136),
+                                margin: EdgeInsets.only(
+                                  left: 0.0,
+                                  right: 0.0,
                                 ),
-                                Container(
-                                  alignment: Alignment.center,
-                                  width: SizeConfig.screenWidth,
-                                  height: ScreenUtil().setHeight(136),
-                                  margin: EdgeInsets.only(
-                                    left: 0.0,
-                                    right: 0.0,
-                                  ),
-                                  child: _buildBanners(),
+                                child: _buildBanners(),
+                              ),
+                              Container(
+                                alignment: Alignment.bottomLeft,
+                                margin: EdgeInsets.only(
+                                  left: 16.0,
+                                  right: 16.0,
+                                  top: 20.0,
                                 ),
-                                Container(
-                                  alignment: Alignment.bottomLeft,
-                                  margin: EdgeInsets.only(
-                                    left: 16.0,
-                                    right: 16.0,
-                                    top: 20.0,
-                                  ),
-                                  child: SizedBox(
-                                    height: (MediaQuery.of(context).size.height /
-                                            100) *
-                                        5,
-                                    child: Text(
-                                      getTranslated(context, serviceList)
-                                          .toString(),
-                                      textAlign: TextAlign.start,
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w400,
-                                          fontFamily: groldReg,
-                                          fontSize: 18,
-                                          color: colorBlack),
-                                    ),
+                                child: SizedBox(
+                                  height: (MediaQuery.of(context).size.height /
+                                          100) *
+                                      5,
+                                  child: Text(
+                                    getTranslated(context, serviceList)
+                                        .toString(),
+                                    textAlign: TextAlign.start,
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w400,
+                                        fontFamily: groldReg,
+                                        fontSize: 18,
+                                        color: colorBlack),
                                   ),
                                 ),
-                                Container(
-                                  margin: EdgeInsets.symmetric(horizontal: 16),
-                                  //height: ScreenUtil().setHeight(260),
-                                  child: FutureBuilder(
-                                    future: businessTypeFuture,
-                                    builder: (context, snapshot) {
-                                      if (snapshot.connectionState !=
-                                          ConnectionState.done) {
-                                        return SpinKitFadingCircle(
-                                            color: colorRed);
-                                      } else {
-                                        return GridView.builder(
-                                          itemCount: 4,
-                                          shrinkWrap: true,
-                                          primary: false,
-                                          physics: NeverScrollableScrollPhysics(),
-                                          gridDelegate:
-                                              SliverGridDelegateWithFixedCrossAxisCount(
-                                            crossAxisCount: 2,
-                                            childAspectRatio: 1.5,
-
-                                                crossAxisSpacing: ScreenUtil().setWidth(16),
-                                            mainAxisSpacing:
-                                                ScreenUtil().setHeight(16),
-
-                                          ),
-                                          itemBuilder: (context, index) {
-                                            return GestureDetector(
-                                              onTap: () {
-                                                print("BusinessTypes=========="+businessTypes[index].name.toString());
-                                                Navigator.pushNamed(context,
-                                                    categoryDetailPageRoute,
-                                                    arguments:
-                                                        businessTypes[index]);
-                                              },
-                                              child: Container(
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(16),
-                                                  color: colorPurple,
-                                                ),
-                                                child: Row(
-                                                  children: [
-                                                    Expanded(
-                                                        child: Padding(
-                                                      padding: EdgeInsets.only(
-                                                          top: 16, left: 12),
-                                                      child: Column(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .start,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Text(
-                                                            businessTypes[index]
-                                                                .name
-                                                                .toString(),
-                                                            textAlign:
-                                                                TextAlign.start,
-                                                            maxLines: 2,
-                                                            overflow: TextOverflow
-                                                                .ellipsis,
-                                                            style: TextStyle(
-                                                              fontSize: (MediaQuery.of(
-                                                                              context)
-                                                                          .size
-                                                                          .width /
-                                                                      100) *
-                                                                  3.8,
-                                                              fontFamily:
-                                                                  groldReg,
-                                                              color: colorWhite,
-                                                            ),
-                                                          ),
-                                                          SizedBox(height: 10),
-                                                          CircleAvatar(
-                                                            backgroundColor:
-                                                                colorWhite,
-                                                            radius: 10,
-                                                            child: Icon(
-                                                              IconlyLight
-                                                                  .arrow_right,
-                                                              color: colorBlack,
-                                                              size: 12,
-                                                            ),
-                                                          )
-                                                        ],
-                                                      ),
-                                                    )),
-                                                    Expanded(
-                                                        child: Column(
-                                                      children: [
-                                                        SizedBox(height: 28),
-                                                        CachedNetworkImage(
-                                                          alignment:
-                                                              Alignment.center,
-                                                          fit: BoxFit.fill,
-                                                          height: ScreenUtil()
-                                                              .setHeight(80),
-                                                          width: ScreenUtil()
-                                                              .setWidth(80),
-                                                          imageUrl:
-                                                              businessTypes[index]
-                                                                  .fullImage
-                                                                  .toString(),
-                                                          placeholder: (context,
-                                                                  url) =>
-                                                              SpinKitFadingCircle(
-                                                                  color:
-                                                                      colorRed),
-                                                          errorWidget: (context,
-                                                                  url, error) =>
-                                                              Image.asset(
-                                                                  "assets/images/no_image.png"),
-                                                        ),
-                                                      ],
-                                                    ))
-                                                  ],
-                                                ),
+                              ),
+                              Container(
+                                margin: EdgeInsets.symmetric(horizontal: 16),
+                                //height: ScreenUtil().setHeight(260),
+                                child: FutureBuilder(
+                                  future: businessTypeFuture,
+                                  builder: (context, snapshot) {
+                                    if (snapshot.connectionState !=
+                                        ConnectionState.done) {
+                                      return SpinKitFadingCircle(
+                                          color: colorRed);
+                                    } else {
+                                      return GridView.builder(
+                                        itemCount: 4,
+                                        shrinkWrap: true,
+                                        primary: false,
+                                        physics: NeverScrollableScrollPhysics(),
+                                        gridDelegate:
+                                            SliverGridDelegateWithFixedCrossAxisCount(
+                                          crossAxisCount: 2,
+                                          childAspectRatio: 1.5,
+                                          crossAxisSpacing:
+                                              ScreenUtil().setWidth(16),
+                                          mainAxisSpacing:
+                                              ScreenUtil().setHeight(16),
+                                        ),
+                                        itemBuilder: (context, index) {
+                                          return GestureDetector(
+                                            onTap: () {
+                                              print("BusinessTypes==========" +
+                                                  businessTypes[index]
+                                                      .name
+                                                      .toString());
+                                              Navigator.pushNamed(context,
+                                                  categoryDetailPageRoute,
+                                                  arguments:
+                                                      businessTypes[index]);
+                                            },
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(16),
+                                                color: colorPurple,
                                               ),
-                                            );
-                                          },
-                                        );
-                                      }
-                                    },
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 16,
-                                ),
-                                Container(
-                                  margin: EdgeInsets.symmetric(horizontal: 12),
-                                  height: ScreenUtil().setHeight(100),
-                                  alignment: Alignment.center,
-                                  child: FutureBuilder(
-                                    future: businessTypeFuture,
-                                    builder: (context, snapshot) {
-                                      if (snapshot.connectionState !=
-                                          ConnectionState.done) {
-                                        return SpinKitFadingCircle(
-                                            color: colorRed);
-                                      } else {
-                                        return GridView.builder(
-                                          itemCount: 4,
-                                          shrinkWrap: true,
-                                          primary: false,
-                                          physics: NeverScrollableScrollPhysics(),
-                                          gridDelegate:
-                                              SliverGridDelegateWithFixedCrossAxisCount(
-                                            crossAxisCount: 4,
-                                            childAspectRatio: 1,
-                                            mainAxisSpacing:
-                                                ScreenUtil().setHeight(7),
-                                          ),
-                                          itemBuilder: (context, index) {
-                                            return GestureDetector(
-                                              onTap: () {
-                                                Navigator.pushNamed(context,
-                                                    categoryDetailPageRoute,
-                                                    arguments:
-                                                        businessTypes[index + 4]);
-                                              },
-                                              child: Container(
-                                                height:
-                                                    ScreenUtil().setHeight(88),
-                                                margin: EdgeInsets.symmetric(
-                                                    horizontal: 4),
-                                                decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(16),
-                                                    color: colorWhite,
-                                                    border: Border.all(
-                                                        width: 1,
-                                                        color:
-                                                            Color(0xffF6F6F6))),
-                                                child: Padding(
-                                                  padding: EdgeInsets.symmetric(
-                                                      horizontal: 8),
-                                                  child: Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.center,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment.center,
-                                                    children: [
-                                                      CachedNetworkImage(
-                                                        alignment:
-                                                            Alignment.center,
-                                                        fit: BoxFit.fill,
-                                                        height: ScreenUtil()
-                                                            .setHeight(40),
-                                                        width: ScreenUtil()
-                                                            .setWidth(40),
-                                                        imageUrl: businessTypes[
-                                                                index + 4]
-                                                            .fullImage
-                                                            .toString(),
-                                                        placeholder: (context,
-                                                                url) =>
-                                                            SpinKitFadingCircle(
-                                                                color: colorRed),
-                                                        errorWidget: (context,
-                                                                url, error) =>
-                                                            Image.asset(
-                                                                "assets/images/no_image.png"),
-                                                      ),
-                                                      SizedBox(height: 10),
-                                                      Padding(
-                                                        padding:
-                                                            EdgeInsets.symmetric(
-                                                                horizontal: 2),
-                                                        child: Text(
-                                                          businessTypes[index + 4]
+                                              child: Row(
+                                                children: [
+                                                  Expanded(
+                                                      child: Padding(
+                                                    padding: EdgeInsets.only(
+                                                        top: 16, left: 12),
+                                                    child: Column(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text(
+                                                          businessTypes[index]
                                                               .name
                                                               .toString(),
                                                           textAlign:
-                                                              TextAlign.center,
+                                                              TextAlign.start,
                                                           maxLines: 2,
                                                           overflow: TextOverflow
                                                               .ellipsis,
@@ -590,145 +468,302 @@ class _MainPageState extends State<MainPage> {
                                                                         .size
                                                                         .width /
                                                                     100) *
-                                                                3,
-                                                            fontFamily: groldReg,
-                                                            fontWeight:
-                                                                FontWeight.w400,
-                                                            color: colorBlack,
+                                                                3.8,
+                                                            fontFamily:
+                                                                groldReg,
+                                                            color: colorWhite,
                                                           ),
                                                         ),
+                                                        SizedBox(height: 10),
+                                                        CircleAvatar(
+                                                          backgroundColor:
+                                                              colorWhite,
+                                                          radius: 10,
+                                                          child: Icon(
+                                                            IconlyLight
+                                                                .arrow_right,
+                                                            color: colorBlack,
+                                                            size: 12,
+                                                          ),
+                                                        )
+                                                      ],
+                                                    ),
+                                                  )),
+                                                  Expanded(
+                                                      child: Column(
+                                                    children: [
+                                                      SizedBox(height: 28),
+                                                      CachedNetworkImage(
+                                                        alignment:
+                                                            Alignment.center,
+                                                        fit: BoxFit.fill,
+                                                        height: ScreenUtil()
+                                                            .setHeight(80),
+                                                        width: ScreenUtil()
+                                                            .setWidth(80),
+                                                        imageUrl:
+                                                            businessTypes[index]
+                                                                .fullImage
+                                                                .toString(),
+                                                        placeholder: (context,
+                                                                url) =>
+                                                            SpinKitFadingCircle(
+                                                                color:
+                                                                    colorRed),
+                                                        errorWidget: (context,
+                                                                url, error) =>
+                                                            Image.asset(
+                                                                "assets/images/no_image.png"),
                                                       ),
                                                     ],
-                                                  ),
+                                                  ))
+                                                ],
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                      );
+                                    }
+                                  },
+                                ),
+                              ),
+                              SizedBox(
+                                height: 16,
+                              ),
+                              Container(
+                                margin: EdgeInsets.symmetric(horizontal: 12),
+                                height: ScreenUtil().setHeight(100),
+                                alignment: Alignment.center,
+                                child: FutureBuilder(
+                                  future: businessTypeFuture,
+                                  builder: (context, snapshot) {
+                                    if (snapshot.connectionState !=
+                                        ConnectionState.done) {
+                                      return SpinKitFadingCircle(
+                                          color: colorRed);
+                                    } else {
+                                      return GridView.builder(
+                                        itemCount: 4,
+                                        shrinkWrap: true,
+                                        primary: false,
+                                        physics: NeverScrollableScrollPhysics(),
+                                        gridDelegate:
+                                            SliverGridDelegateWithFixedCrossAxisCount(
+                                          crossAxisCount: 4,
+                                          childAspectRatio: 1,
+                                          mainAxisSpacing:
+                                              ScreenUtil().setHeight(7),
+                                        ),
+                                        itemBuilder: (context, index) {
+                                          return GestureDetector(
+                                            onTap: () {
+                                              Navigator.pushNamed(context,
+                                                  categoryDetailPageRoute,
+                                                  arguments:
+                                                      businessTypes[index + 4]);
+                                            },
+                                            child: Container(
+                                              height:
+                                                  ScreenUtil().setHeight(88),
+                                              margin: EdgeInsets.symmetric(
+                                                  horizontal: 4),
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(16),
+                                                  color: colorWhite,
+                                                  border: Border.all(
+                                                      width: 1,
+                                                      color:
+                                                          Color(0xffF6F6F6))),
+                                              child: Padding(
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 8),
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.center,
+                                                  children: [
+                                                    CachedNetworkImage(
+                                                      alignment:
+                                                          Alignment.center,
+                                                      fit: BoxFit.fill,
+                                                      height: ScreenUtil()
+                                                          .setHeight(40),
+                                                      width: ScreenUtil()
+                                                          .setWidth(40),
+                                                      imageUrl: businessTypes[
+                                                              index + 4]
+                                                          .fullImage
+                                                          .toString(),
+                                                      placeholder: (context,
+                                                              url) =>
+                                                          SpinKitFadingCircle(
+                                                              color: colorRed),
+                                                      errorWidget: (context,
+                                                              url, error) =>
+                                                          Image.asset(
+                                                              "assets/images/no_image.png"),
+                                                    ),
+                                                    SizedBox(height: 10),
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsets.symmetric(
+                                                              horizontal: 2),
+                                                      child: Text(
+                                                        businessTypes[index + 4]
+                                                            .name
+                                                            .toString(),
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                        maxLines: 2,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                        style: TextStyle(
+                                                          fontSize: (MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width /
+                                                                  100) *
+                                                              3,
+                                                          fontFamily: groldReg,
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          color: colorBlack,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
                                                 ),
                                               ),
-                                            );
-                                          },
-                                        );
-                                      }
-                                    },
-                                  ),
+                                            ),
+                                          );
+                                        },
+                                      );
+                                    }
+                                  },
                                 ),
-                                Container(
-                                  alignment: Alignment.bottomLeft,
-                                  margin: EdgeInsets.only(
-                                    left: 24.0,
-                                    right: 16.0,
-                                    top: 20.0,
-                                  ),
-                                  child: SizedBox(
-                                    height: (MediaQuery.of(context).size.height /
-                                            100) *
-                                        5,
-                                    child: Text(
-                                      getTranslated(context, topPicks).toString(),
-                                      textAlign: TextAlign.start,
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w400,
-                                          fontFamily: groldReg,
-                                          fontSize: 18,
-                                          color: colorBlack),
-                                    ),
-                                  ),
-                                ),
-                                Container(
-                                  width: SizeConfig.screenWidth,
-                                  height: ScreenUtil().setHeight(150),
-                                  margin: EdgeInsets.only(
-                                    left: 0.0,
-                                    right: 0.0,
-                                  ),
-                                  child: _buildOffersRestaurant(),
-                                ),
-                                SizedBox(height: 16),
-                              ],
-                            ),
-                          ),
-                      )
-                      : SizedBox(
-                width: SizeConfig.screenWidth,
-                height: MediaQuery.of(context).size.height/2 +200,
-                        child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                height: height / 2,
-                                child: Image.asset(
-                                    'assets/images/setup_location.png'),
                               ),
-                              SizedBox(height: 10),
-                              Text(
-                                getTranslated(context, setupLocation).toString(),
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w600,
-                                    fontFamily: groldReg,
-                                    fontSize: 20),
-                              ),
-                              SizedBox(height: 15),
                               Container(
-                                margin: EdgeInsets.only(left: 20, right: 20),
-                                child: Text(
-                                  getTranslated(context, setupDesc).toString(),
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      color: colorBlack,
-                                      fontSize: 16,
-                                      fontFamily: groldReg),
+                                alignment: Alignment.bottomLeft,
+                                margin: EdgeInsets.only(
+                                  left: 24.0,
+                                  right: 16.0,
+                                  top: 20.0,
+                                ),
+                                child: SizedBox(
+                                  height: (MediaQuery.of(context).size.height /
+                                          100) *
+                                      5,
+                                  child: Text(
+                                    getTranslated(context, topPicks).toString(),
+                                    textAlign: TextAlign.start,
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w400,
+                                        fontFamily: groldReg,
+                                        fontSize: 18,
+                                        color: colorBlack),
+                                  ),
                                 ),
                               ),
-                              SizedBox(height: 20),
-                              ListTile(
-                                onTap: () async {
-                                  if (PreferenceUtils.getBool(
-                                          PreferenceNames.checkLogin) ==
-                                      true) {
-                                    await Navigator.pushNamed(
-                                        context, manageLocationRoute);
-                                    setState(() {
-                                      initializeController();
-                                    });
-                                  } else {
-                                    Navigator.pushNamed(
-                                        context, setLocationRoute);
-                                  }
-                                },
-                                title: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      getTranslated(context, changeLocation)
-                                          .toString(),
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          fontFamily: groldBold,
-                                          fontSize: 16,
-                                          color: colorBlue),
-                                    ),
-                                    Padding(
-                                      padding:
-                                          EdgeInsets.symmetric(horizontal: 4),
-                                      child: Icon(
-                                        IconlyBold.arrow_right_2,
-                                        color: colorBlue,
-                                        size: 16,
-                                      ),
-                                    )
-                                  ],
+                              Container(
+                                width: SizeConfig.screenWidth,
+                                height: ScreenUtil().setHeight(150),
+                                margin: EdgeInsets.only(
+                                  left: 0.0,
+                                  right: 0.0,
                                 ),
+                                child: _buildOffersRestaurant(),
                               ),
+                              SizedBox(height: 16),
                             ],
                           ),
+                        ),
                       )
-                  : NoInternetWidget(),
-            ),
+                    : SizedBox(
+                        width: SizeConfig.screenWidth,
+                        height: MediaQuery.of(context).size.height / 2 + 200,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              height: height / 2,
+                              child: Image.asset(
+                                  'assets/images/setup_location.png'),
+                            ),
+                            SizedBox(height: 10),
+                            Text(
+                              getTranslated(context, setupLocation).toString(),
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontFamily: groldReg,
+                                  fontSize: 20),
+                            ),
+                            SizedBox(height: 15),
+                            Container(
+                              margin: EdgeInsets.only(left: 20, right: 20),
+                              child: Text(
+                                getTranslated(context, setupDesc).toString(),
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: colorBlack,
+                                    fontSize: 16,
+                                    fontFamily: groldReg),
+                              ),
+                            ),
+                            SizedBox(height: 20),
+                            ListTile(
+                              onTap: () async {
+                                if (PreferenceUtils.getBool(
+                                        PreferenceNames.checkLogin) ==
+                                    true) {
+                                  await Navigator.pushNamed(
+                                      context, manageLocationRoute);
+                                  setState(() {
+                                    initializeController();
+                                  });
+                                } else {
+                                  Navigator.pushNamed(
+                                      context, setLocationRoute);
+                                }
+                              },
+                              title: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    getTranslated(context, changeLocation)
+                                        .toString(),
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        fontFamily: groldBold,
+                                        fontSize: 16,
+                                        color: colorBlue),
+                                  ),
+                                  Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 4),
+                                    child: Icon(
+                                      IconlyBold.arrow_right_2,
+                                      color: colorBlue,
+                                      size: 16,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                : NoInternetWidget(),
           ),
         ),
+      ),
       bottomNavigationBar: Visibility(
         visible: ScopedModel.of<CartModel>(context, rebuildOnChange: true)
-            .cart
-            .isNotEmpty
+                .cart
+                .isNotEmpty
             ? true
             : false,
         child: GestureDetector(
@@ -739,9 +774,7 @@ class _MainPageState extends State<MainPage> {
               height: 48,
               width: SizeConfig.screenWidth,
               decoration: BoxDecoration(
-                  color: colorOrange,
-                  borderRadius: BorderRadius.circular(50)
-              ),
+                  color: colorOrange, borderRadius: BorderRadius.circular(50)),
               padding: EdgeInsets.only(
                 left: 30,
                 right: 30,
@@ -794,7 +827,11 @@ class _MainPageState extends State<MainPage> {
                               fontFamily: groldReg),
                         ),
                         SizedBox(width: 10),
-                        Icon(IconlyBold.bag_2,color: Colors.white,size: 20,),
+                        Icon(
+                          IconlyBold.bag_2,
+                          color: Colors.white,
+                          size: 20,
+                        ),
                       ],
                     ),
                   ],
@@ -808,12 +845,10 @@ class _MainPageState extends State<MainPage> {
   }
 
   void singleShopApiOnlyFood() async {
+    listCart
+        .addAll(ScopedModel.of<CartModel>(context, rebuildOnChange: true).cart);
 
-    listCart.addAll(
-        ScopedModel.of<CartModel>(context, rebuildOnChange: true).cart);
-
-    print("LIST CART"+listCart.toString());
-
+    print("LIST CART" + listCart.toString());
   }
 
   void _queryFirst(BuildContext context) async {
@@ -920,7 +955,9 @@ class _MainPageState extends State<MainPage> {
                               imageBuilder: (context, imageProvider) =>
                                   Container(
                                 height: ScreenUtil().setHeight(145),
-                                    width: MediaQuery.of(context).size.width - (MediaQuery.of(context).size.width/100)*10,
+                                width: MediaQuery.of(context).size.width -
+                                    (MediaQuery.of(context).size.width / 100) *
+                                        10,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(20.0),
                                   color: Colors.grey,
@@ -1008,163 +1045,167 @@ class _MainPageState extends State<MainPage> {
             } else {
               return offersAtRestaurant.isNotEmpty
                   ? Padding(
-                padding: EdgeInsets.only(left: 8),
-                child: GridView.builder(
-                  itemCount: offersAtRestaurant.length,
-                  scrollDirection: Axis.horizontal,
-                  shrinkWrap: true,
-                  primary: false,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 1,
-                    mainAxisExtent: MediaQuery.of(context).size.width/1.25
-                  ),
-                  itemBuilder: (context, index) {
-                    return Stack(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.symmetric(horizontal: 8),
-                          child: CachedNetworkImage(
-                            alignment: Alignment.center,
-                            fit: BoxFit.fill,
-                            imageUrl: offersAtRestaurant[index]
-                                .fullImage
-                                .toString(),
-                            imageBuilder: (context, imageProvider) =>
-                                Container(
-                                  width:
-                                  MediaQuery.of(context).size.width / 1,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20.0),
-
-                                    image: DecorationImage(
-                                      image: imageProvider,
-                                      fit: BoxFit.fill,
-                                      alignment: Alignment.center,
+                      padding: EdgeInsets.only(left: 8),
+                      child: GridView.builder(
+                        itemCount: offersAtRestaurant.length,
+                        scrollDirection: Axis.horizontal,
+                        shrinkWrap: true,
+                        primary: false,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 1,
+                            mainAxisExtent:
+                                MediaQuery.of(context).size.width / 1.25),
+                        itemBuilder: (context, index) {
+                          return Stack(
+                            children: [
+                              Container(
+                                margin: EdgeInsets.symmetric(horizontal: 8),
+                                child: CachedNetworkImage(
+                                  alignment: Alignment.center,
+                                  fit: BoxFit.fill,
+                                  imageUrl: offersAtRestaurant[index]
+                                      .fullImage
+                                      .toString(),
+                                  imageBuilder: (context, imageProvider) =>
+                                      Container(
+                                    width:
+                                        MediaQuery.of(context).size.width / 1,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20.0),
+                                      image: DecorationImage(
+                                        image: imageProvider,
+                                        fit: BoxFit.fill,
+                                        alignment: Alignment.center,
+                                      ),
                                     ),
                                   ),
+                                  placeholder: (context, url) =>
+                                      SpinKitFadingCircle(color: colorRed),
+                                  errorWidget: (context, url, error) =>
+                                      Image.asset("assets/images/no_image.png"),
                                 ),
-                            placeholder: (context, url) =>
-                                SpinKitFadingCircle(color: colorRed),
-                            errorWidget: (context, url, error) =>
-                                Image.asset("assets/images/no_image.png"),
-                          ),
-                        ),
-                        Positioned(
-                          top: 0,
-                          left: 40,
-                          width: ScreenUtil().setWidth(120),
-                          height: ScreenUtil().setHeight(150),
-                          // Note: without ClipRect, the blur region will be expanded to full
-                          // size of the Image instead of custom size
-                          child: ClipRect(
-                            child: BackdropFilter(
-                              filter: ImageFilter.blur(
-                                  sigmaX: 0.1, sigmaY: 0.1),
-                              child: Container(
-                                color: Colors.black.withOpacity(0.7),
-                                alignment: Alignment.center,
-                                child: Column(
-                                  mainAxisAlignment:
-                                  MainAxisAlignment.center,
-                                  crossAxisAlignment:
-                                  CrossAxisAlignment.start,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 8),
+                              ),
+                              Positioned(
+                                top: 0,
+                                left: 40,
+                                width: ScreenUtil().setWidth(120),
+                                height: ScreenUtil().setHeight(150),
+                                // Note: without ClipRect, the blur region will be expanded to full
+                                // size of the Image instead of custom size
+                                child: ClipRect(
+                                  child: BackdropFilter(
+                                    filter: ImageFilter.blur(
+                                        sigmaX: 0.1, sigmaY: 0.1),
+                                    child: Container(
+                                      color: Colors.black.withOpacity(0.7),
+                                      alignment: Alignment.center,
                                       child: Column(
                                         mainAxisAlignment:
-                                        MainAxisAlignment.center,
+                                            MainAxisAlignment.center,
                                         crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                            CrossAxisAlignment.start,
                                         children: [
-                                          Text(
-                                            offersAtRestaurant[index].discount![index].discount.toString()+"%",
-                                            style: TextStyle(
-                                                fontWeight:
-                                                FontWeight.w900,
-                                                fontFamily: groldItalic,
-                                                fontSize: 48,
-                                                color: colorWhite),
-                                          ),
-                                          Transform.translate(
-                                            offset: Offset(-1.0, -9.0),
-                                            child : Text(
-                                              "OFF",
-                                              style: TextStyle(
-                                                  fontWeight:
-                                                  FontWeight.w500,
-                                                  fontFamily: groldItalic,
-                                                  fontSize: 24,
-                                                  color: colorWhite),
+                                          Padding(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 8),
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  offersAtRestaurant[index]
+                                                          .discount![index]
+                                                          .discount
+                                                          .toString() +
+                                                      "%",
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.w900,
+                                                      fontFamily: groldItalic,
+                                                      fontSize: 48,
+                                                      color: colorWhite),
+                                                ),
+                                                Transform.translate(
+                                                  offset: Offset(-1.0, -9.0),
+                                                  child: Text(
+                                                    "OFF",
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontFamily: groldItalic,
+                                                        fontSize: 24,
+                                                        color: colorWhite),
+                                                  ),
+                                                ),
+                                                Transform.translate(
+                                                  offset: Offset(-1.0, -2.0),
+                                                  child: Text(
+                                                    "ON ORDERS ABOVE Rs 100",
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        fontFamily: groldXBold,
+                                                        fontSize: 8,
+                                                        color: colorWhite),
+                                                  ),
+                                                ),
+                                              ],
                                             ),
                                           ),
-                                          Transform.translate(
-                                            offset: Offset(-1.0,-2.0),
-                                            child: Text(
-                                              "ON ORDERS ABOVE Rs 100",
-                                              style: TextStyle(
-                                                  fontWeight:
-                                                  FontWeight.w400,
-                                                  fontFamily: groldXBold,
-                                                  fontSize: 8,
-                                                  color: colorWhite),
+                                          SizedBox(
+                                            height: 4,
+                                          ),
+                                          Container(
+                                            decoration: BoxDecoration(
+                                                color: colorOrange),
+                                            alignment: Alignment.center,
+                                            child: Padding(
+                                              padding: EdgeInsets.symmetric(
+                                                  vertical: 6, horizontal: 2),
+                                              child: Text(
+                                                offersAtRestaurant[index]
+                                                    .name!
+                                                    .toString()
+                                                    .toUpperCase(),
+                                                maxLines: 1,
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.w400,
+                                                    fontFamily: groldReg,
+                                                    fontSize: 16,
+                                                    color: colorWhite),
+                                              ),
                                             ),
                                           ),
                                         ],
                                       ),
                                     ),
-                                    SizedBox(
-                                      height: 4,
-                                    ),
-                                    Container(
-                                      decoration: BoxDecoration(
-                                          color: colorOrange),
-                                      alignment: Alignment.center,
-                                      child: Padding(
-                                        padding: EdgeInsets.symmetric(vertical: 6,horizontal: 2),
-                                        child: Text(
-                                          offersAtRestaurant[index]
-                                              .name!
-                                              .toString()
-                                              .toUpperCase(),
-                                          maxLines: 1,
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.w400,
-                                              fontFamily: groldReg,
-                                              fontSize: 16,
-                                              color: colorWhite),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
+                                  ),
                                 ),
                               ),
-                            ),
+                            ],
+                          );
+                        },
+                      ),
+                    )
+                  : SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.15,
+                      width: MediaQuery.of(context).size.width,
+                      child: Center(
+                        child: Text(
+                          getTranslated(context, noDataDesc).toString(),
+                          textAlign: TextAlign.center,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontFamily: groldReg,
                           ),
                         ),
-                      ],
+                      ),
                     );
-                  },
-                ),
-              )
-                  : SizedBox(
-                height: MediaQuery.of(context).size.height * 0.15,
-                width: MediaQuery.of(context).size.width,
-                child: Center(
-                  child: Text(
-                    getTranslated(context, noDataDesc).toString(),
-                    textAlign: TextAlign.center,
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontFamily: groldReg,
-                    ),
-                  ),
-                ),
-              );
             }
           }
         },
@@ -1950,7 +1991,7 @@ class _MainPageState extends State<MainPage> {
       if (response.success == true) {
         if (response.data!.isNotEmpty) {
           offersAtRestaurant.addAll(response.data!);
-          print("home_widget Line 1745"+response.data!.toString());
+          print("home_widget Line 1745" + response.data!.toString());
         }
       }
       setState(() {});
@@ -2127,9 +2168,11 @@ class _MainPageState extends State<MainPage> {
           PreferenceUtils.setString(PreferenceNames.paypalAvailable, "0");
         }
         if (response.data!.razor == "1") {
-          PreferenceUtils.setString(PreferenceNames.razorPayAvailable.toString(), "1");
+          PreferenceUtils.setString(
+              PreferenceNames.razorPayAvailable.toString(), "1");
         } else {
-          PreferenceUtils.setString(PreferenceNames.razorPayAvailable.toString(), "0");
+          PreferenceUtils.setString(
+              PreferenceNames.razorPayAvailable.toString(), "0");
         }
         if (response.data!.stripe == "1") {
           PreferenceUtils.setString(PreferenceNames.stripeAvailable, "1");
