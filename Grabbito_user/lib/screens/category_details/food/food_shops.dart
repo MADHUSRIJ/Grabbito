@@ -142,7 +142,7 @@ class _FoodDeliveryShopState extends State<FoodDeliveryShop>
         ),
         actions: [
           Container(
-            margin: EdgeInsets.only(top: 9, bottom: 9, left: 16),
+            margin: EdgeInsets.only(top: 9, bottom: 9, left: 16,right: 16),
             decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: colorWidgetBorder,
@@ -656,19 +656,23 @@ class _FoodDeliveryShopState extends State<FoodDeliveryShop>
                                             height: 0.1,
                                             width: 0.1,
                                           ),
-                                    SizedBox(
-                                      child: Text(
-                                        menus[index]
-                                            .submenu![subMenuIndex]
-                                            .name
-                                            .toString(),
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
-                                        style: TextStyle(
-                                            color: colorBlack,
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w400,
-                                            fontFamily: groldReg),
+                                    Expanded(
+                                      child: Container(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          menus[index]
+                                              .submenu![subMenuIndex]
+                                              .name
+                                              .toString(),
+                                          maxLines: 1,
+                                          softWrap: true,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                              color: colorBlack,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w400,
+                                              fontFamily: groldReg),
+                                        ),
                                       ),
                                     ),
                                   ],
@@ -678,18 +682,22 @@ class _FoodDeliveryShopState extends State<FoodDeliveryShop>
                                       "-"
                                   ? SizedBox()
                                   : Expanded(
-                                      child: Text(
-                                        menus[index]
-                                            .submenu![subMenuIndex]
-                                            .description
-                                            .toString(),
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
-                                        style: TextStyle(
-                                            color: Color(0xff54545A),
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.w400,
-                                            fontFamily: groldReg),
+                                      child: Container(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          menus[index]
+                                              .submenu![subMenuIndex]
+                                              .description
+                                              .toString(),
+                                          maxLines: 1,
+                                          softWrap: true,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                              color: Color(0xff54545A),
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w400,
+                                              fontFamily: groldReg),
+                                        ),
                                       ),
                                     ),
                               Expanded(

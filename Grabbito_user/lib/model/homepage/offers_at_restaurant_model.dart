@@ -62,9 +62,6 @@ class OffersAtRestaurantData {
     lang = json['lang'];
     availableNow = json['available_now'];
 
-    print("Id1"+id.toString());
-    print("====Available now"+name.toString());
-
     if (json['discount'] != null) {
       print("JSON DISCOUNT"+json['discount'].toString());
       discount = <Discount>[];
@@ -72,8 +69,6 @@ class OffersAtRestaurantData {
         discount!.add(Discount.fromJson(v));
       });
     }
-
-    print("Dicount"+discount![0].discount.toString());
 
     distance = json['distance'];
     menu = json['menu'].cast<String>();
@@ -119,10 +114,11 @@ class Discount {
     name = json['name'];
     code = json['code'];
     minAmount = json['min_order_amount'];
-    print("Min Amount"+minAmount.toString());
-    print("Discount Discount"+discount.toString());
-    print("Id2"+id.toString());
+
+    print("======= DISCOUNT 118 "+id.toString()+" "+name.toString());
+
   }
+
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};

@@ -183,6 +183,9 @@ class Menu {
         submenu!.add(Submenu.fromJson(v));
       });
     }
+
+    print("========= MENU "+id.toString()+" "+name.toString());
+
   }
 
   Map<String, dynamic> toJson() {

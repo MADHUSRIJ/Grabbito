@@ -141,7 +141,6 @@ class _ApiServices implements ApiServices {
                 queryParameters: queryParameters, data: _data)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = OffersAtRestaurantModel.fromJson(_result.data!);
-    print("========== VALUE"+_result.data!.toString());
     return value;
   }
 

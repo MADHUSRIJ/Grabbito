@@ -248,12 +248,9 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
                         shrinkWrap: true,
                         //padding: EdgeInsets.only( bottom: MediaQuery.of(context).size.height *0.30),
                         children: [
-                          SizedBox(
-                            height: 16,
-                          ),
                           Container(
                             width: SizeConfig.screenWidth,
-                            height: ScreenUtil().setHeight(150),
+                            height: ScreenUtil().setHeight(200),
                             margin: EdgeInsets.only(
                               left: 0.0,
                               right: 0.0,
@@ -507,136 +504,198 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
     );
   }
 
+
   _buildOffersRestaurant() => FutureBuilder<BaseModel<OffersAtRestaurantModel>>(
-        future: offersAtRestaurantFuture,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState != ConnectionState.done) {
-            return SpinKitFadingCircle(color: colorRed);
-          } else {
-            if (snapshot.data!.data == null) {
-              if (snapshot.data!.error
-                  .getErrorMessage()
-                  .toString()
-                  .contains('Unauthenticated.')) {
-                //clear session and logout
-                PreferenceUtils.clear();
-                Future.delayed(
-                    Duration.zero, () => dialogUnauthenticated(context));
-              }
-              return Center(
-                  child: Text(snapshot.data!.error.getErrorMessage()));
-            } else {
-              return offersAtRestaurant.isNotEmpty
-                  ? Padding(
-                      padding: EdgeInsets.only(left: 8),
-                      child: GridView.builder(
-                        itemCount: offersAtRestaurant.length,
+    future: offersAtRestaurantFuture,
+    builder: (context, snapshot) {
+      if (snapshot.connectionState != ConnectionState.done) {
+        return SpinKitFadingCircle(color: colorRed);
+      } else {
+        if (snapshot.data!.data == null) {
+          if (snapshot.data!.error
+              .getErrorMessage()
+              .toString()
+              .contains('Unauthenticated.')) {
+            //clear session and logout
+            PreferenceUtils.clear();
+            Future.delayed(
+                Duration.zero, () => dialogUnauthenticated(context));
+          }
+          return Center(
+              child: Text(snapshot.data!.error.getErrorMessage()));
+        } else {
+          return offersAtRestaurant.isNotEmpty
+              ? Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                alignment: Alignment.bottomLeft,
+                margin: EdgeInsets.only(
+                  left: 16.0,
+                  right: 16.0,
+                  top: 20.0,
+                ),
+                child: SizedBox(
+                  height:
+                  (MediaQuery.of(context).size.height / 100) * 5,
+                  child: Text(
+                    getTranslated(context, offersAtRestaurantName)
+                        .toString(),
+                    textAlign: TextAlign.start,
+                    style: TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontFamily: groldReg,
+                        fontSize: 20,
+                        color: colorBlack),
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  height: 152,
+                  alignment: Alignment.center,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    shrinkWrap: true,
+                    itemCount: offersAtRestaurant.length,
+                    itemBuilder: (context, index1) {
+                      return GridView.builder(
+                        itemCount: offersAtRestaurant[index1]
+                            .discount!
+                            .length,
                         scrollDirection: Axis.horizontal,
                         shrinkWrap: true,
                         primary: false,
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 1,
-                          mainAxisExtent: MediaQuery.of(context).size.width/1.25
-                        ),
+                        gridDelegate:
+                        SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 1,
+                            mainAxisExtent: MediaQuery.of(context)
+                                .size
+                                .width /
+                                1.4),
                         itemBuilder: (context, index) {
-                          return Stack(
-                            children: [
-                              Container(
-                                margin: EdgeInsets.symmetric(horizontal: 8),
-                                child: CachedNetworkImage(
+                          return Padding(
+                            padding: const EdgeInsets.only(left: 16),
+                            child: Stack(
+                              children: [
+                                CachedNetworkImage(
                                   alignment: Alignment.center,
                                   fit: BoxFit.fill,
-                                  imageUrl: offersAtRestaurant[index]
+                                  imageUrl: offersAtRestaurant[index1]
                                       .fullImage
                                       .toString(),
-                                  imageBuilder: (context, imageProvider) =>
+                                  imageBuilder:
+                                      (context, imageProvider) =>
                                       Container(
-                                    width:
-                                        MediaQuery.of(context).size.width / 1,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20.0),
-                                      image: DecorationImage(
-                                        image: imageProvider,
-                                        fit: BoxFit.fill,
-                                        alignment: Alignment.center,
+                                        width: MediaQuery.of(context)
+                                            .size
+                                            .width /
+                                            1,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                          BorderRadius.circular(20.0),
+                                          image: DecorationImage(
+                                            image: imageProvider,
+                                            fit: BoxFit.fill,
+                                            alignment: Alignment.center,
+                                          ),
+                                        ),
                                       ),
-                                    ),
-                                  ),
                                   placeholder: (context, url) =>
-                                      SpinKitFadingCircle(color: colorRed),
-                                  errorWidget: (context, url, error) =>
-                                      Image.asset("assets/images/no_image.png"),
+                                      SpinKitFadingCircle(
+                                          color: colorRed),
+                                  errorWidget: (context, url,
+                                      error) =>
+                                      Image.asset(
+                                          "assets/images/no_image.png"),
                                 ),
-                              ),
-                              Positioned(
-                                top: 0,
-                                left: 40,
-                                width: ScreenUtil().setWidth(120),
-                                height: ScreenUtil().setHeight(150),
-                                // Note: without ClipRect, the blur region will be expanded to full
-                                // size of the Image instead of custom size
-                                child: ClipRect(
-                                  child: BackdropFilter(
-                                    filter: ImageFilter.blur(
-                                        sigmaX: 0.1, sigmaY: 0.1),
-                                    child: Container(
-                                      color: Colors.black.withOpacity(0.7),
-                                      alignment: Alignment.center,
-                                      child: Padding(
-                                        padding:
-                                            EdgeInsets.symmetric(vertical: 8),
+                                Positioned(
+                                  top: 0,
+                                  left: 40,
+                                  width: ScreenUtil().setWidth(120),
+                                  height: ScreenUtil().setHeight(150),
+                                  // Note: without ClipRect, the blur region will be expanded to full
+                                  // size of the Image instead of custom size
+                                  child: ClipRect(
+                                    child: BackdropFilter(
+                                      filter: ImageFilter.blur(
+                                          sigmaX: 0.1, sigmaY: 0.1),
+                                      child: Container(
+                                        color: Colors.black
+                                            .withOpacity(0.7),
+                                        alignment: Alignment.center,
                                         child: Column(
                                           mainAxisAlignment:
-                                              MainAxisAlignment.center,
+                                          MainAxisAlignment.center,
                                           crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                          CrossAxisAlignment.start,
                                           children: [
                                             Padding(
-                                              padding: EdgeInsets.symmetric(
+                                              padding:
+                                              EdgeInsets.symmetric(
                                                   horizontal: 8),
                                               child: Column(
                                                 mainAxisAlignment:
-                                                    MainAxisAlignment.center,
+                                                MainAxisAlignment
+                                                    .center,
                                                 crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
+                                                CrossAxisAlignment
+                                                    .start,
                                                 children: [
                                                   Text(
-                                                    offersAtRestaurant[index]
-                                                            .discount![index]
-                                                            .discount
-                                                            .toString() +
+                                                    offersAtRestaurant[
+                                                    index1]
+                                                        .discount![
+                                                    index]
+                                                        .discount
+                                                        .toString() +
                                                         "%",
                                                     style: TextStyle(
                                                         fontWeight:
-                                                            FontWeight.w900,
-                                                        fontFamily: groldItalic,
+                                                        FontWeight
+                                                            .w900,
+                                                        fontFamily:
+                                                        groldItalic,
                                                         fontSize: 48,
-                                                        color: colorWhite),
+                                                        color:
+                                                        colorWhite),
                                                   ),
                                                   Transform.translate(
-                                                    offset: Offset(-1.0, -9.0),
+                                                    offset: Offset(
+                                                        -1.0, -9.0),
                                                     child: Text(
                                                       "OFF",
                                                       style: TextStyle(
                                                           fontWeight:
-                                                              FontWeight.w500,
+                                                          FontWeight
+                                                              .w500,
                                                           fontFamily:
-                                                              groldItalic,
+                                                          groldItalic,
                                                           fontSize: 24,
-                                                          color: colorWhite),
+                                                          color:
+                                                          colorWhite),
                                                     ),
                                                   ),
                                                   Transform.translate(
-                                                    offset: Offset(-1.0, -2.0),
+                                                    offset: Offset(
+                                                        -1.0, -2.0),
                                                     child: Text(
-                                                      "ON ORDERS ABOVE Rs 100",
+                                                      "ON ORDERS ABOVE Rs " +
+                                                          offersAtRestaurant[
+                                                          index1]
+                                                              .discount![
+                                                          index]
+                                                              .minAmount
+                                                              .toString(),
                                                       style: TextStyle(
                                                           fontWeight:
-                                                              FontWeight.w400,
+                                                          FontWeight
+                                                              .w400,
                                                           fontFamily:
-                                                              groldXBold,
+                                                          groldXBold,
                                                           fontSize: 8,
-                                                          color: colorWhite),
+                                                          color:
+                                                          colorWhite),
                                                     ),
                                                   ),
                                                 ],
@@ -648,23 +707,31 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
                                             Container(
                                               decoration: BoxDecoration(
                                                   color: colorOrange),
-                                              alignment: Alignment.center,
+                                              alignment:
+                                              Alignment.center,
                                               child: Padding(
-                                                padding: EdgeInsets.symmetric(
-                                                    vertical: 6, horizontal: 2),
+                                                padding: EdgeInsets
+                                                    .symmetric(
+                                                    vertical: 6,
+                                                    horizontal: 2),
                                                 child: Text(
-                                                  offersAtRestaurant[index]
+                                                  offersAtRestaurant[
+                                                  index]
                                                       .name!
                                                       .toString()
                                                       .toUpperCase(),
                                                   maxLines: 1,
-                                                  textAlign: TextAlign.center,
+                                                  textAlign:
+                                                  TextAlign.center,
                                                   style: TextStyle(
                                                       fontWeight:
-                                                          FontWeight.w400,
-                                                      fontFamily: groldReg,
+                                                      FontWeight
+                                                          .w400,
+                                                      fontFamily:
+                                                      groldReg,
                                                       fontSize: 16,
-                                                      color: colorWhite),
+                                                      color:
+                                                      colorWhite),
                                                 ),
                                               ),
                                             ),
@@ -674,32 +741,22 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
                                     ),
                                   ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           );
                         },
-                      ),
-                    )
-                  : SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.15,
-                      width: MediaQuery.of(context).size.width,
-                      child: Center(
-                        child: Text(
-                          getTranslated(context, noDataDesc).toString(),
-                          textAlign: TextAlign.center,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 1,
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontFamily: groldReg,
-                          ),
-                        ),
-                      ),
-                    );
-            }
-          }
-        },
-      );
+                      );
+                    },
+                  ),
+                ),
+              )
+            ],
+          )
+              : SizedBox();
+        }
+      }
+    },
+  );
 
   _buildRestaurant() => FutureBuilder(
         future: businessTypeShopsFuture,

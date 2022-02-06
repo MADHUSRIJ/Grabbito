@@ -67,17 +67,14 @@ class _OffersPageState extends State<OffersPage> {
   bool nonVeg = false;
   bool both = false;
 
-
   double tempPrice = 0;
   double totalCartAmount = 0;
   int totalQty = 0;
-
 
   List<Product> listCart = [];
 
   List<BusinessTypesData> businessTypes = [];
   List<OffersAtRestaurantData> offersAtRestaurant = [];
-
 
   List<BannerData> banners = [];
   List<OffersAtGroceryData> offersAtGrocery = [];
@@ -95,6 +92,7 @@ class _OffersPageState extends State<OffersPage> {
     super.initState();
     initializeController();
   }
+
   getUserLocation() async {
     final allRows = await dbHelper.queryAllRows();
     if (allRows.isNotEmpty) {
@@ -107,7 +105,7 @@ class _OffersPageState extends State<OffersPage> {
         PreferenceUtils.getDouble(PreferenceNames.longOfSetLocation) != 0.0) {
       double lat = PreferenceUtils.getDouble(PreferenceNames.latOfSetLocation);
       double long =
-      PreferenceUtils.getDouble(PreferenceNames.longOfSetLocation);
+          PreferenceUtils.getDouble(PreferenceNames.longOfSetLocation);
       //for initialize future data
       offersAtRestaurantFuture =
           offersAtRestaurantApi(lat.toString(), long.toString());
@@ -132,7 +130,8 @@ class _OffersPageState extends State<OffersPage> {
         PreferenceUtils.setDouble(
             PreferenceNames.longOfSetLocation, _center.longitude);
         //for initialize future data
-        offersAtRestaurantFuture = offersAtRestaurantApi(_center.latitude.toString(), _center.longitude.toString());
+        offersAtRestaurantFuture = offersAtRestaurantApi(
+            _center.latitude.toString(), _center.longitude.toString());
         offersAtGroceryFuture = offersAtGroceryApi(
             _center.latitude.toString(), _center.longitude.toString());
         offersAtFruitsFuture = offersAtFruitsAndVegetableApi(
@@ -152,6 +151,7 @@ class _OffersPageState extends State<OffersPage> {
     return Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);
   }
+
   Future<BaseModel<String>> addAddress() async {
     String response;
     try {
@@ -161,35 +161,35 @@ class _OffersPageState extends State<OffersPage> {
           lat = "",
           long = "";
       assert(PreferenceUtils.getString(
-          PreferenceNames.addressOfSetLocationWithoutLogin)
-          .isNotEmpty &&
-          PreferenceUtils.getString(
-              PreferenceNames.landMarkOfSetLocationWithoutLogin)
+                  PreferenceNames.addressOfSetLocationWithoutLogin)
               .isNotEmpty &&
           PreferenceUtils.getString(
-              PreferenceNames.locationTypeOfSetLocationWithoutLogin)
+                  PreferenceNames.landMarkOfSetLocationWithoutLogin)
+              .isNotEmpty &&
+          PreferenceUtils.getString(
+                  PreferenceNames.locationTypeOfSetLocationWithoutLogin)
               .isNotEmpty &&
           PreferenceUtils.getDouble(
-              PreferenceNames.latOfSetLocationWithoutLogin) >
+                  PreferenceNames.latOfSetLocationWithoutLogin) >
               0.0 &&
           PreferenceUtils.getDouble(
-              PreferenceNames.longOfSetLocationWithoutLogin) >
+                  PreferenceNames.longOfSetLocationWithoutLogin) >
               0.0);
       address = PreferenceUtils.getString(
           PreferenceNames.addressOfSetLocationWithoutLogin);
       landmark = PreferenceUtils.getString(
           PreferenceNames.landMarkOfSetLocationWithoutLogin);
       locationType = PreferenceUtils.getString(
-          PreferenceNames.locationTypeOfSetLocationWithoutLogin) ==
-          'N/A'
+                  PreferenceNames.locationTypeOfSetLocationWithoutLogin) ==
+              'N/A'
           ? "Home"
           : PreferenceUtils.getString(
-          PreferenceNames.locationTypeOfSetLocationWithoutLogin);
+              PreferenceNames.locationTypeOfSetLocationWithoutLogin);
       lat = PreferenceUtils.getDouble(
-          PreferenceNames.latOfSetLocationWithoutLogin)
+              PreferenceNames.latOfSetLocationWithoutLogin)
           .toString();
       long = PreferenceUtils.getDouble(
-          PreferenceNames.longOfSetLocationWithoutLogin)
+              PreferenceNames.longOfSetLocationWithoutLogin)
           .toString();
 
       Map<String, dynamic> bodyForApi = {
@@ -200,7 +200,7 @@ class _OffersPageState extends State<OffersPage> {
         'lang': long,
       };
       response =
-      await ApiServices(ApiHeader().dioData()).addLocation(bodyForApi);
+          await ApiServices(ApiHeader().dioData()).addLocation(bodyForApi);
 
       final body = json.decode(response);
       bool? success = body['success'];
@@ -226,6 +226,7 @@ class _OffersPageState extends State<OffersPage> {
     }
     return BaseModel()..data = response;
   }
+
   Future<void> _onRefresh() async {
     // monitor network fetch
     await Future.delayed(Duration(milliseconds: 1000));
@@ -253,19 +254,17 @@ class _OffersPageState extends State<OffersPage> {
     }
     CommonFunction.checkNetwork().then((value) => isNetworkAvailable = value);
     if (PreferenceUtils.getString(PreferenceNames.addressOfSetLocation)
-        .isNotEmpty &&
+            .isNotEmpty &&
         PreferenceUtils.getString(PreferenceNames.addressOfSetLocation) !=
             'N/A') {
       selectedLocation =
           PreferenceUtils.getString(PreferenceNames.addressOfSetLocation);
       isLocationSet = true;
     }
-
   }
 
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.of(context).size.height;
     aspect1 = 0.00;
     aspect = 0.00;
     for (var i = 0; i < 20; i++) {
@@ -283,17 +282,26 @@ class _OffersPageState extends State<OffersPage> {
             MediaQuery.of(context).size.height),
         orientation: Orientation.portrait);
     return Scaffold(
+      backgroundColor: colorWhite,
       appBar: AppBar(
         leadingWidth: 40,
         leading: Padding(
           padding: EdgeInsets.symmetric(horizontal: 20),
-          child: Icon(IconlyBold.discount,size: 24.0,color: colorBlack,),
+          child: Icon(
+            IconlyBold.discount,
+            size: 24.0,
+            color: colorBlack,
+          ),
         ),
+        elevation: 0,
         backgroundColor: colorWhite,
         title: Text(
           getTranslated(context, offersTitle).toString(),
           style: TextStyle(
-              fontFamily: groldReg, color: colorBlack, fontSize: 20,fontWeight: FontWeight.w400),
+              fontFamily: groldReg,
+              color: colorBlack,
+              fontSize: 20,
+              fontWeight: FontWeight.w400),
         ),
       ),
       body: RefreshIndicator(
@@ -303,766 +311,1222 @@ class _OffersPageState extends State<OffersPage> {
           child: Container(
             child: isNetworkAvailable == true
                 ? SizedBox(
-              width: SizeConfig.screenWidth,
-              height: SizeConfig.screenHeight,
-              child: RefreshIndicator(
-                onRefresh: _onRefresh,
-                child: ListView(
-                  shrinkWrap: true,
-                  padding: EdgeInsets.only(
-                      bottom: MediaQuery.of(context).size.height *
-                          0.20),
-                  children: [
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Container(
-                      alignment: Alignment.bottomLeft,
-                      margin: EdgeInsets.only(
-                        left: 24.0,
-                        right: 16.0,
-                        top: 20.0,
-                      ),
-                      child: SizedBox(
-                        height: (MediaQuery.of(context).size.height /
-                            100) *
-                            5,
-                        child: Text(
-                          getTranslated(context, offersAtRestaurantName).toString(),
-                          textAlign: TextAlign.start,
-                          style: TextStyle(
-                              fontWeight: FontWeight.w400,
-                              fontFamily: groldReg,
-                              fontSize: 20,
-                              color: colorBlack),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      width: SizeConfig.screenWidth,
-                      height: ScreenUtil().setHeight(150),
-                      margin: EdgeInsets.only(
-                        left: 0.0,
-                        right: 0.0,
-                      ),
-                      child: _buildOffersRestaurant(),
-                    ),
-                    SizedBox(height: 16),
-                    Container(
-                      alignment: Alignment.bottomLeft,
-                      margin: EdgeInsets.only(
-                        left: 24.0,
-                        right: 16.0,
-                        top: 20.0,
-                      ),
-                      child: SizedBox(
-                        height: (MediaQuery.of(context).size.height /
-                            100) *
-                            5,
-                        child: Text(
-                          getTranslated(context, offersAtFruitsName).toString(),
-                          textAlign: TextAlign.start,
-                          style: TextStyle(
-                              fontWeight: FontWeight.w400,
-                              fontFamily: groldReg,
-                              fontSize: 20,
-                              color: colorBlack),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      width: SizeConfig.screenWidth,
-                      height: ScreenUtil().setHeight(150),
-                      margin: EdgeInsets.only(
-                        left: 0.0,
-                        right: 0.0,
-                      ),
-                      child: _buildOffersFruits(),
-                    ),
-                    SizedBox(height: 16),
-                    Container(
-                      alignment: Alignment.bottomLeft,
-                      margin: EdgeInsets.only(
-                        left: 24.0,
-                        right: 16.0,
-                        top: 20.0,
-                      ),
-                      child: SizedBox(
-                        height: (MediaQuery.of(context).size.height /
-                            100) *
-                            5,
-                        child: Text(
-                          getTranslated(context, offersAtGroceryName).toString(),
-                          textAlign: TextAlign.start,
-                          style: TextStyle(
-                              fontWeight: FontWeight.w400,
-                              fontFamily: groldReg,
-                              fontSize: 20,
-                              color: colorBlack),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      width: SizeConfig.screenWidth,
-                      height: ScreenUtil().setHeight(150),
-                      margin: EdgeInsets.only(
-                        left: 0.0,
-                        right: 0.0,
-                      ),
-                      child: _buildOffersGrocery(),
-                    ),
-                    SizedBox(height: 16),
-                  ],
-                )
-              ),
-            )
+                    width: SizeConfig.screenWidth,
+                    height: SizeConfig.screenHeight,
+                    child: RefreshIndicator(
+                        onRefresh: _onRefresh,
+                        child: ListView(
+                          shrinkWrap: true,
+                          padding: EdgeInsets.only(
+                              bottom:
+                                  MediaQuery.of(context).size.height * 0.20),
+                          children: [
+                            Container(
+                              width: SizeConfig.screenWidth,
+                              height: ScreenUtil().setHeight(200),
+                              margin: EdgeInsets.only(
+                                left: 0.0,
+                                right: 0.0,
+                              ),
+                              child: _buildOffersRestaurant(),
+                            ),
+                            SizedBox(height: 16),
+                            Container(
+                              width: SizeConfig.screenWidth,
+                              height: ScreenUtil().setHeight(200),
+                              margin: EdgeInsets.only(
+                                left: 0.0,
+                                right: 0.0,
+                              ),
+                              child: _buildOffersFruits(),
+                            ),
+                            SizedBox(height: 16),
+                            Container(
+                              width: SizeConfig.screenWidth,
+                              height: ScreenUtil().setHeight(200),
+                              margin: EdgeInsets.only(
+                                left: 0.0,
+                                right: 0.0,
+                              ),
+                              child: _buildOffersGrocery(),
+                            ),
+                            SizedBox(height: 16),
+                          ],
+                        )),
+                  )
                 : NoInternetWidget(),
           ),
         ),
       ),
     );
   }
+
   _buildOffersGrocery() => FutureBuilder(
         future: offersAtGroceryFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState != ConnectionState.done) {
-            return SpinKitFadingCircle(color: colorRed);
+            return SizedBox();
           } else {
             return offersAtGrocery.isNotEmpty
-                ? GridView.builder(
-                    itemCount: offersAtGrocery.length,
-                    shrinkWrap: true,
-                    primary: false,
-                    scrollDirection: Axis.horizontal,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      mainAxisExtent: ScreenUtil().screenWidth /
-                          1.1, // <== change the height to fit your needs
+                ? Column(
+                  children: [
+                    Container(
+                      alignment: Alignment.bottomLeft,
+                      margin: EdgeInsets.only(
+                        left: 24.0,
+                        right: 16.0,
+                        top: 20.0,
+                      ),
+                      child: SizedBox(
+                        height:
+                        (MediaQuery.of(context).size.height / 100) *
+                            5,
+                        child: Text(
+                          getTranslated(context, offersAtGroceryName)
+                              .toString(),
+                          textAlign: TextAlign.start,
+                          style: TextStyle(
+                              fontWeight: FontWeight.w400,
+                              fontFamily: groldReg,
+                              fontSize: 20,
+                              color: colorBlack),
+                        ),
+                      ),
                     ),
-                    itemBuilder: (context, index) {
-                      return InkWell(
-                        onTap: () {
-                          if (offersAtGrocery[index].availableNow == 1) {
-                            Navigator.pushNamed(
-                              context,
-                              foodShopPageRoute,
-                              arguments: FoodDeliveryShop(
-                                singleShopId:
-                                    offersAtGrocery[index].id!.toInt(),
-                                businessTypeId: businessTypeIdForGrocery,
-                              ),
-                            );
-                          } else {
-                            CommonFunction.toastMessage(
-                                getTranslated(context, shopClose).toString());
-                          }
-                        },
-                        child: Container(
-                          margin: EdgeInsets.all(5),
-                          height: ScreenUtil().setWidth(75),
-                          width: ScreenUtil().setWidth(75),
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(10),
-                              boxShadow: [
-                                BoxShadow(
-                                  color:
-                                      Colors.grey.withAlpha(50).withOpacity(.1),
-                                  spreadRadius: 2,
-                                  blurRadius: 5,
-                                ),
-                              ]),
-                          padding: EdgeInsets.all(5),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Stack(
-                                children: [
-                                  CachedNetworkImage(
-                                    alignment: Alignment.center,
-                                    fit: BoxFit.fill,
-                                    height: ScreenUtil().setWidth(75),
-                                    width: ScreenUtil().setWidth(75),
-                                    imageUrl: offersAtGrocery[index]
-                                        .fullImage
-                                        .toString(),
-                                    imageBuilder: (context, imageProvider) =>
-                                        Container(
-                                      width: MediaQuery.of(context).size.width /
-                                          1.4,
-                                      decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(20.0),
-                                        image: DecorationImage(
-                                          image: imageProvider,
-                                          fit: BoxFit.fill,
-                                          alignment: Alignment.center,
-                                        ),
+                    Expanded(
+                      child: Container(
+                        height: 148,
+                        alignment: Alignment.center,
+                        child: GridView.builder(
+                            itemCount: offersAtGrocery.length,
+                            shrinkWrap: true,
+                            primary: false,
+                            scrollDirection: Axis.horizontal,
+                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              mainAxisExtent: ScreenUtil().screenWidth /
+                                  1.1, // <== change the height to fit your needs
+                            ),
+                            itemBuilder: (context, index) {
+                              return InkWell(
+                                onTap: () {
+                                  if (offersAtGrocery[index].availableNow == 1) {
+                                    Navigator.pushNamed(
+                                      context,
+                                      foodShopPageRoute,
+                                      arguments: FoodDeliveryShop(
+                                        singleShopId:
+                                            offersAtGrocery[index].id!.toInt(),
+                                        businessTypeId: businessTypeIdForGrocery,
                                       ),
-                                    ),
-                                    placeholder: (context, url) =>
-                                        SpinKitFadingCircle(color: colorRed),
-                                    errorWidget: (context, url, error) =>
-                                        Image.asset(
-                                            "assets/images/no_image.png"),
-                                  ),
-                                  Positioned(
-                                    bottom: 0,
-                                    child: Container(
-                                      height: ScreenUtil().setHeight(23),
-                                      decoration: BoxDecoration(
-                                          color: Color(0xFFA5D6B6)
-                                              .withOpacity(0.8),
-                                          borderRadius: BorderRadius.vertical(
-                                              bottom: Radius.circular(15.0))),
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.vertical(
-                                            bottom: Radius.circular(15.0)),
-                                        child: BackdropFilter(
-                                          filter: ImageFilter.blur(
-                                              sigmaX: 4.0, sigmaY: 4.0),
-                                          child: Container(
-                                            width: ScreenUtil().setWidth(75),
+                                    );
+                                  } else {
+                                    CommonFunction.toastMessage(
+                                        getTranslated(context, shopClose).toString());
+                                  }
+                                },
+                                child: Container(
+                                  margin: EdgeInsets.all(5),
+                                  height: ScreenUtil().setWidth(75),
+                                  width: ScreenUtil().setWidth(75),
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(10),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color:
+                                              Colors.grey.withAlpha(50).withOpacity(.1),
+                                          spreadRadius: 2,
+                                          blurRadius: 5,
+                                        ),
+                                      ]),
+                                  padding: EdgeInsets.all(5),
+                                  child: Row(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Stack(
+                                        children: [
+                                          CachedNetworkImage(
                                             alignment: Alignment.center,
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.vertical(
-                                                        bottom: Radius.circular(
-                                                            15.0))),
-                                            child: Text(
-                                              () {
-                                                if (offersAtGrocery[index]
-                                                    .discount!
-                                                    .isNotEmpty) {
-                                                  return offersAtGrocery[index]
-                                                      .discount!
-                                                      .first
-                                                      .name!;
-                                                } else {
-                                                  return '';
-                                                }
-                                              }(),
-                                              overflow: TextOverflow.ellipsis,
-                                              maxLines: 1,
-                                              textAlign: TextAlign.center,
-                                              style: TextStyle(
-                                                color: colorWhite,
-                                                fontSize: 13,
-                                                fontFamily: groldBold,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              ),
-                              SizedBox(width: 10),
-                              SizedBox(
-                                width: SizeConfig.screenWidth! / 1.7,
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    SizedBox(
-                                      height: ScreenUtil().setHeight(15),
-                                      child: Text(
-                                        offersAtGrocery[index].name.toString(),
-                                        overflow: TextOverflow.ellipsis,
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          fontFamily: groldXBold,
-                                          color: colorBlack,
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    SizedBox(
-                                      height: ScreenUtil().setHeight(25),
-                                      child: Text(
-                                        () {
-                                          if (offersAtGrocery[index]
-                                              .menu!
-                                              .isNotEmpty) {
-                                            String allMenus = "";
-                                            String _temp = "";
-                                            for (int i = 0;
-                                                i <
-                                                    offersAtGrocery[index]
-                                                        .menu!
-                                                        .length;
-                                                i++) {
-                                              _temp = offersAtGrocery[index]
-                                                  .menu![i];
-                                              allMenus =
-                                                  allMenus + _temp + ', ';
-                                            }
-                                            String showMenus =
-                                                allMenus.substring(
-                                                    0, allMenus.length - 2);
-                                            return showMenus + ".";
-                                          } else {
-                                            return "";
-                                          }
-                                        }(),
-                                        overflow: TextOverflow.ellipsis,
-                                        maxLines: 2,
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          fontFamily: groldBold,
-                                          color: colorDivider,
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    SizedBox(
-                                      height: ScreenUtil().setHeight(16),
-                                      child: Row(
-                                        children: [
-                                          Icon(
-                                            Icons.star_rate,
-                                            size: 15,
-                                            color: Colors.grey,
-                                          ),
-                                          SizedBox(
-                                            width: 5,
-                                          ),
-                                          Text(
-                                            offersAtGrocery[index]
-                                                .rate
+                                            fit: BoxFit.fill,
+                                            height: ScreenUtil().setWidth(75),
+                                            width: ScreenUtil().setWidth(75),
+                                            imageUrl: offersAtGrocery[index]
+                                                .fullImage
                                                 .toString(),
-                                            style: TextStyle(
-                                                fontSize: 12,
-                                                color: Colors.grey,
-                                                fontFamily: groldBold),
-                                          ),
-                                          SizedBox(width: 10),
-                                          CircleAvatar(
-                                            backgroundColor: Colors.grey,
-                                            radius: 3.0,
-                                          ),
-                                          SizedBox(width: 10),
-                                          Text(
-                                            offersAtGrocery[index]
-                                                    .distance
-                                                    .toString() +
-                                                "Km",
-                                            style: TextStyle(
-                                                fontSize: 12,
-                                                color: Colors.grey,
-                                                fontFamily: groldBold),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    SizedBox(height: 5),
-                                    SizedBox(
-                                      height: ScreenUtil().setHeight(21),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Container(
-                                            padding: EdgeInsets.all(5),
-                                            decoration: BoxDecoration(
-                                                color:
-                                                    Colors.green.withAlpha(40),
+                                            imageBuilder: (context, imageProvider) =>
+                                                Container(
+                                              width: MediaQuery.of(context).size.width /
+                                                  1.4,
+                                              decoration: BoxDecoration(
                                                 borderRadius:
-                                                    BorderRadius.circular(10)),
-                                            child: Text(
-                                              '${getTranslated(context, useCodeText).toString()} ${offersAtGrocery[index].discount![0].code}',
-                                              overflow: TextOverflow.ellipsis,
-                                              maxLines: 1,
-                                              style: TextStyle(
-                                                  color: Colors.green,
-                                                  fontSize: 11,
-                                                  fontFamily: groldReg),
-                                            ),
-                                          ),
-                                          Visibility(
-                                            visible: offersAtGrocery.length > 1,
-                                            child: TextButton(
-                                              onPressed: () {
-                                                Navigator.pushNamed(
-                                                  context,
-                                                  foodShopPageRoute,
-                                                  arguments: FoodDeliveryShop(
-                                                    singleShopId:
-                                                        offersAtGrocery[index]
-                                                            .id!
-                                                            .toInt(),
-                                                    businessTypeId:
-                                                        businessTypeIdForRestaurant,
-                                                  ),
-                                                );
-                                              },
-                                              child: Text(
-                                                getTranslated(context, viewAll)
-                                                    .toString(),
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontFamily: groldBold,
-                                                    fontSize: 16,
-                                                    color: colorBlue),
+                                                    BorderRadius.circular(20.0),
+                                                image: DecorationImage(
+                                                  image: imageProvider,
+                                                  fit: BoxFit.fill,
+                                                  alignment: Alignment.center,
+                                                ),
                                               ),
-                                              style: TextButton.styleFrom(
-                                                  padding: EdgeInsets.zero),
+                                            ),
+                                            errorWidget: (context, url, error) =>
+                                                Image.asset(
+                                                    "assets/images/no_image.png"),
+                                          ),
+                                          Positioned(
+                                            bottom: 0,
+                                            child: Container(
+                                              height: ScreenUtil().setHeight(23),
+                                              decoration: BoxDecoration(
+                                                  color: Color(0xFFA5D6B6)
+                                                      .withOpacity(0.8),
+                                                  borderRadius: BorderRadius.vertical(
+                                                      bottom: Radius.circular(15.0))),
+                                              child: ClipRRect(
+                                                borderRadius: BorderRadius.vertical(
+                                                    bottom: Radius.circular(15.0)),
+                                                child: BackdropFilter(
+                                                  filter: ImageFilter.blur(
+                                                      sigmaX: 4.0, sigmaY: 4.0),
+                                                  child: Container(
+                                                    width: ScreenUtil().setWidth(75),
+                                                    alignment: Alignment.center,
+                                                    decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius.vertical(
+                                                                bottom: Radius.circular(
+                                                                    15.0))),
+                                                    child: Text(
+                                                      () {
+                                                        if (offersAtGrocery[index]
+                                                            .discount!
+                                                            .isNotEmpty) {
+                                                          return offersAtGrocery[index]
+                                                              .discount!
+                                                              .first
+                                                              .name!;
+                                                        } else {
+                                                          return '';
+                                                        }
+                                                      }(),
+                                                      overflow: TextOverflow.ellipsis,
+                                                      maxLines: 1,
+                                                      textAlign: TextAlign.center,
+                                                      style: TextStyle(
+                                                        color: colorWhite,
+                                                        fontSize: 13,
+                                                        fontFamily: groldBold,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
                                             ),
                                           )
                                         ],
                                       ),
-                                    ),
-                                  ],
+                                      SizedBox(width: 10),
+                                      SizedBox(
+                                        width: SizeConfig.screenWidth! / 1.7,
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            SizedBox(
+                                              height: ScreenUtil().setHeight(15),
+                                              child: Text(
+                                                offersAtGrocery[index].name.toString(),
+                                                overflow: TextOverflow.ellipsis,
+                                                style: TextStyle(
+                                                  fontSize: 16,
+                                                  fontFamily: groldXBold,
+                                                  color: colorBlack,
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 5,
+                                            ),
+                                            SizedBox(
+                                              height: ScreenUtil().setHeight(25),
+                                              child: Text(
+                                                () {
+                                                  if (offersAtGrocery[index]
+                                                      .menu!
+                                                      .isNotEmpty) {
+                                                    String allMenus = "";
+                                                    String _temp = "";
+                                                    for (int i = 0;
+                                                        i <
+                                                            offersAtGrocery[index]
+                                                                .menu!
+                                                                .length;
+                                                        i++) {
+                                                      _temp = offersAtGrocery[index]
+                                                          .menu![i];
+                                                      allMenus =
+                                                          allMenus + _temp + ', ';
+                                                    }
+                                                    String showMenus =
+                                                        allMenus.substring(
+                                                            0, allMenus.length - 2);
+                                                    return showMenus + ".";
+                                                  } else {
+                                                    return "";
+                                                  }
+                                                }(),
+                                                overflow: TextOverflow.ellipsis,
+                                                maxLines: 2,
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                  fontFamily: groldBold,
+                                                  color: colorDivider,
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 5,
+                                            ),
+                                            SizedBox(
+                                              height: ScreenUtil().setHeight(16),
+                                              child: Row(
+                                                children: [
+                                                  Icon(
+                                                    Icons.star_rate,
+                                                    size: 15,
+                                                    color: Colors.grey,
+                                                  ),
+                                                  SizedBox(
+                                                    width: 5,
+                                                  ),
+                                                  Text(
+                                                    offersAtGrocery[index]
+                                                        .rate
+                                                        .toString(),
+                                                    style: TextStyle(
+                                                        fontSize: 12,
+                                                        color: Colors.grey,
+                                                        fontFamily: groldBold),
+                                                  ),
+                                                  SizedBox(width: 10),
+                                                  CircleAvatar(
+                                                    backgroundColor: Colors.grey,
+                                                    radius: 3.0,
+                                                  ),
+                                                  SizedBox(width: 10),
+                                                  Text(
+                                                    offersAtGrocery[index]
+                                                            .distance
+                                                            .toString() +
+                                                        "Km",
+                                                    style: TextStyle(
+                                                        fontSize: 12,
+                                                        color: Colors.grey,
+                                                        fontFamily: groldBold),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            SizedBox(height: 5),
+                                            SizedBox(
+                                              height: ScreenUtil().setHeight(21),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.spaceBetween,
+                                                children: [
+                                                  Container(
+                                                    padding: EdgeInsets.all(5),
+                                                    decoration: BoxDecoration(
+                                                        color:
+                                                            Colors.green.withAlpha(40),
+                                                        borderRadius:
+                                                            BorderRadius.circular(10)),
+                                                    child: Text(
+                                                      '${getTranslated(context, useCodeText).toString()} ${offersAtGrocery[index].discount![0].code}',
+                                                      overflow: TextOverflow.ellipsis,
+                                                      maxLines: 1,
+                                                      style: TextStyle(
+                                                          color: Colors.green,
+                                                          fontSize: 11,
+                                                          fontFamily: groldReg),
+                                                    ),
+                                                  ),
+                                                  Visibility(
+                                                    visible: offersAtGrocery.length > 1,
+                                                    child: TextButton(
+                                                      onPressed: () {
+                                                        Navigator.pushNamed(
+                                                          context,
+                                                          foodShopPageRoute,
+                                                          arguments: FoodDeliveryShop(
+                                                            singleShopId:
+                                                                offersAtGrocery[index]
+                                                                    .id!
+                                                                    .toInt(),
+                                                            businessTypeId:
+                                                                businessTypeIdForRestaurant,
+                                                          ),
+                                                        );
+                                                      },
+                                                      child: Text(
+                                                        getTranslated(context, viewAll)
+                                                            .toString(),
+                                                        style: TextStyle(
+                                                            fontWeight: FontWeight.bold,
+                                                            fontFamily: groldBold,
+                                                            fontSize: 16,
+                                                            color: colorBlue),
+                                                      ),
+                                                      style: TextButton.styleFrom(
+                                                          padding: EdgeInsets.zero),
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      )
+                                    ],
+                                  ),
                                 ),
-                              )
-                            ],
+                              );
+                            },
                           ),
-                        ),
-                      );
-                    },
-                  )
-                : SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.15,
-                    width: MediaQuery.of(context).size.width,
-                    child: Center(
-                      child: Text(
-                        getTranslated(context, noOffer).toString(),
-                        textAlign: TextAlign.center,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontFamily: groldReg,
-                        ),
                       ),
                     ),
-                  );
+                  ],
+                )
+                : SizedBox();
           }
         },
       );
 
   _buildOffersFruits() => FutureBuilder(
-    future: offersAtFruitsFuture,
-    builder: (context, snapshot) {
-      if (snapshot.connectionState != ConnectionState.done) {
-        return SpinKitFadingCircle(color: colorRed);
-      } else {
-        return offersAtFruit.isNotEmpty
-            ? GridView.builder(
-          itemCount: offersAtFruit.length,
-          shrinkWrap: true,
-          primary: false,
-          scrollDirection: Axis.horizontal,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            mainAxisExtent: ScreenUtil().screenWidth /
-                1.1, // <== change the height to fit your needs
-          ),
-          itemBuilder: (context, index) {
-            return InkWell(
-              onTap: () {
-                if (offersAtFruit[index].availableNow == 1) {
-                  Navigator.pushNamed(
-                    context,
-                    foodShopPageRoute,
-                    arguments: FoodDeliveryShop(
-                      singleShopId: offersAtFruit[index].id!.toInt(),
-                      businessTypeId:
-                      businessTypeIdForFruitVegetables,
-                    ),
-                  );
-                } else {
-                  CommonFunction.toastMessage(
-                      getTranslated(context, shopClose).toString());
-                }
-              },
-              child: Container(
-                margin: EdgeInsets.all(5),
-                height: ScreenUtil().setWidth(75),
-                width: ScreenUtil().setWidth(75),
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                    boxShadow: [
-                      BoxShadow(
-                        color:
-                        Colors.grey.withAlpha(50).withOpacity(.1),
-                        spreadRadius: 2,
-                        blurRadius: 5,
+        future: offersAtFruitsFuture,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState != ConnectionState.done) {
+            return SizedBox();
+          } else {
+            return offersAtFruit.isNotEmpty
+                ? Column(
+                    children: [
+                      Container(
+                        alignment: Alignment.bottomLeft,
+                        margin: EdgeInsets.only(
+                          left: 24.0,
+                          right: 16.0,
+                          top: 20.0,
+                        ),
+                        child: SizedBox(
+                          height:
+                              (MediaQuery.of(context).size.height / 100) * 5,
+                          child: Text(
+                            getTranslated(context, offersAtFruitsName)
+                                .toString(),
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                                fontWeight: FontWeight.w400,
+                                fontFamily: groldReg,
+                                fontSize: 20,
+                                color: colorBlack),
+                          ),
+                        ),
                       ),
-                    ]),
-                padding: EdgeInsets.all(5),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Stack(
-                      children: [
-                        CachedNetworkImage(
+                      Expanded(
+                        child: Container(
+                          height: 148,
                           alignment: Alignment.center,
-                          fit: BoxFit.fill,
-                          height: ScreenUtil().setWidth(75),
-                          width: ScreenUtil().setWidth(75),
-                          imageUrl: offersAtFruit[index]
-                              .fullImage
-                              .toString(),
-                          imageBuilder: (context, imageProvider) =>
-                              Container(
-                                width: MediaQuery.of(context).size.width /
-                                    1.4,
-                                decoration: BoxDecoration(
-                                  borderRadius:
-                                  BorderRadius.circular(20.0),
-                                  image: DecorationImage(
-                                    image: imageProvider,
-                                    fit: BoxFit.fill,
-                                    alignment: Alignment.center,
+                          child: GridView.builder(
+                            itemCount: offersAtFruit.length,
+                            shrinkWrap: true,
+                            primary: false,
+                            scrollDirection: Axis.horizontal,
+                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              mainAxisExtent: ScreenUtil().screenWidth /
+                                  1.1, // <== change the height to fit your needs
+                            ),
+                            itemBuilder: (context, index) {
+                              return InkWell(
+                                onTap: () {
+                                  if (offersAtFruit[index].availableNow == 1) {
+                                    Navigator.pushNamed(
+                                      context,
+                                      foodShopPageRoute,
+                                      arguments: FoodDeliveryShop(
+                                        singleShopId:
+                                            offersAtFruit[index].id!.toInt(),
+                                        businessTypeId:
+                                            businessTypeIdForFruitVegetables,
+                                      ),
+                                    );
+                                  } else {
+                                    CommonFunction.toastMessage(
+                                        getTranslated(context, shopClose)
+                                            .toString());
+                                  }
+                                },
+                                child: Container(
+                                  margin: EdgeInsets.all(5),
+                                  height: ScreenUtil().setWidth(75),
+                                  width: ScreenUtil().setWidth(75),
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(10),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.grey
+                                              .withAlpha(50)
+                                              .withOpacity(.1),
+                                          spreadRadius: 2,
+                                          blurRadius: 5,
+                                        ),
+                                      ]),
+                                  padding: EdgeInsets.all(5),
+                                  child: Row(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Stack(
+                                        children: [
+                                          CachedNetworkImage(
+                                            alignment: Alignment.center,
+                                            fit: BoxFit.fill,
+                                            height: ScreenUtil().setWidth(75),
+                                            width: ScreenUtil().setWidth(75),
+                                            imageUrl: offersAtFruit[index]
+                                                .fullImage
+                                                .toString(),
+                                            imageBuilder:
+                                                (context, imageProvider) =>
+                                                    Container(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  1.4,
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(20.0),
+                                                image: DecorationImage(
+                                                  image: imageProvider,
+                                                  fit: BoxFit.fill,
+                                                  alignment: Alignment.center,
+                                                ),
+                                              ),
+                                            ),
+                                            errorWidget: (context, url, error) =>
+                                                Image.asset(
+                                                    "assets/images/no_image.png"),
+                                          ),
+                                          Positioned(
+                                            bottom: 0,
+                                            child: Container(
+                                              height: ScreenUtil().setHeight(23),
+                                              decoration: BoxDecoration(
+                                                  color: Color(0xFF6F85C1)
+                                                      .withOpacity(0.8),
+                                                  borderRadius:
+                                                      BorderRadius.vertical(
+                                                          bottom: Radius.circular(
+                                                              15.0))),
+                                              child: ClipRRect(
+                                                borderRadius: BorderRadius.vertical(
+                                                    bottom: Radius.circular(15.0)),
+                                                child: BackdropFilter(
+                                                  filter: ImageFilter.blur(
+                                                      sigmaX: 4.0, sigmaY: 4.0),
+                                                  child: Container(
+                                                    width:
+                                                        ScreenUtil().setWidth(75),
+                                                    alignment: Alignment.center,
+                                                    decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius.vertical(
+                                                                bottom:
+                                                                    Radius.circular(
+                                                                        15.0))),
+                                                    child: Text(
+                                                      () {
+                                                        if (offersAtFruit[index]
+                                                            .discount!
+                                                            .isNotEmpty) {
+                                                          return offersAtFruit[
+                                                                  index]
+                                                              .discount!
+                                                              .first
+                                                              .name!;
+                                                        } else {
+                                                          return '';
+                                                        }
+                                                      }(),
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                      maxLines: 1,
+                                                      textAlign: TextAlign.center,
+                                                      style: TextStyle(
+                                                        color: colorWhite,
+                                                        fontSize: 13,
+                                                        fontFamily: groldBold,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                      SizedBox(width: 10),
+                                      SizedBox(
+                                        width: SizeConfig.screenWidth! / 1.7,
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            SizedBox(
+                                              height: ScreenUtil().setHeight(15),
+                                              child: Text(
+                                                offersAtFruit[index]
+                                                    .name
+                                                    .toString(),
+                                                overflow: TextOverflow.ellipsis,
+                                                style: TextStyle(
+                                                  fontSize: 16,
+                                                  fontFamily: groldXBold,
+                                                  color: colorBlack,
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(height: 5),
+                                            SizedBox(
+                                              height: ScreenUtil().setHeight(25),
+                                              child: Text(
+                                                () {
+                                                  if (offersAtFruit[index]
+                                                      .menu!
+                                                      .isNotEmpty) {
+                                                    String allMenus = "";
+                                                    String _temp = "";
+                                                    for (int i = 0;
+                                                        i <
+                                                            offersAtFruit[index]
+                                                                .menu!
+                                                                .length;
+                                                        i++) {
+                                                      _temp = offersAtFruit[index]
+                                                          .menu![i];
+                                                      allMenus =
+                                                          allMenus + _temp + ', ';
+                                                    }
+                                                    String showMenus =
+                                                        allMenus.substring(
+                                                            0, allMenus.length - 2);
+                                                    return showMenus + ".";
+                                                  } else {
+                                                    return "";
+                                                  }
+                                                }(),
+                                                overflow: TextOverflow.ellipsis,
+                                                maxLines: 2,
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                  fontFamily: groldBold,
+                                                  color: colorDivider,
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(height: 5),
+                                            SizedBox(
+                                              height: ScreenUtil().setHeight(16),
+                                              child: Row(
+                                                children: [
+                                                  Icon(
+                                                    Icons.star_rate,
+                                                    size: 15,
+                                                    color: Colors.grey,
+                                                  ),
+                                                  SizedBox(width: 5),
+                                                  Text(
+                                                    offersAtFruit[index]
+                                                        .rate
+                                                        .toString(),
+                                                    style: TextStyle(
+                                                        fontSize: 12,
+                                                        color: Colors.grey,
+                                                        fontFamily: groldBold),
+                                                  ),
+                                                  SizedBox(width: 10),
+                                                  CircleAvatar(
+                                                    backgroundColor: Colors.grey,
+                                                    radius: 3.0,
+                                                  ),
+                                                  SizedBox(width: 10),
+                                                  Text(
+                                                    offersAtFruit[index]
+                                                            .distance
+                                                            .toString() +
+                                                        "Km",
+                                                    style: TextStyle(
+                                                        fontSize: 12,
+                                                        color: Colors.grey,
+                                                        fontFamily: groldBold),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            SizedBox(height: 5),
+                                            SizedBox(
+                                              height: ScreenUtil().setHeight(21),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.spaceBetween,
+                                                children: [
+                                                  Container(
+                                                    padding: EdgeInsets.all(5),
+                                                    decoration: BoxDecoration(
+                                                        color: Colors.blue
+                                                            .withAlpha(40),
+                                                        borderRadius:
+                                                            BorderRadius.circular(
+                                                                10)),
+                                                    child: Text(
+                                                      '${getTranslated(context, useCodeText).toString()} ${offersAtFruit[index].discount![0].code}',
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                      maxLines: 1,
+                                                      style: TextStyle(
+                                                          color: Colors.blue,
+                                                          fontSize: 11,
+                                                          fontFamily: groldReg),
+                                                    ),
+                                                  ),
+                                                  Visibility(
+                                                    visible:
+                                                        offersAtFruit.length > 1,
+                                                    child: TextButton(
+                                                      onPressed: () {
+                                                        Navigator.pushNamed(
+                                                          context,
+                                                          foodShopPageRoute,
+                                                          arguments:
+                                                              FoodDeliveryShop(
+                                                            singleShopId:
+                                                                offersAtFruit[index]
+                                                                    .id!
+                                                                    .toInt(),
+                                                            businessTypeId:
+                                                                businessTypeIdForRestaurant,
+                                                          ),
+                                                        );
+                                                      },
+                                                      child: Text(
+                                                        getTranslated(
+                                                                context, viewAll)
+                                                            .toString(),
+                                                        style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            fontFamily: groldBold,
+                                                            fontSize: 16,
+                                                            color: colorBlue),
+                                                      ),
+                                                      style: TextButton.styleFrom(
+                                                          padding: EdgeInsets.zero),
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      )
+                                    ],
                                   ),
                                 ),
-                              ),
-                          placeholder: (context, url) =>
-                              SpinKitFadingCircle(color: colorRed),
-                          errorWidget: (context, url, error) =>
-                              Image.asset(
-                                  "assets/images/no_image.png"),
+                              );
+                            },
+                          ),
                         ),
-                        Positioned(
-                          bottom: 0,
-                          child: Container(
-                            height: ScreenUtil().setHeight(23),
-                            decoration: BoxDecoration(
-                                color: Color(0xFF6F85C1)
-                                    .withOpacity(0.8),
-                                borderRadius: BorderRadius.vertical(
-                                    bottom: Radius.circular(15.0))),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.vertical(
-                                  bottom: Radius.circular(15.0)),
-                              child: BackdropFilter(
-                                filter: ImageFilter.blur(
-                                    sigmaX: 4.0, sigmaY: 4.0),
-                                child: Container(
-                                  width: ScreenUtil().setWidth(75),
+                      ),
+                    ],
+                  )
+                : SizedBox();
+          }
+        },
+      );
+
+  _buildOffersRestaurant() => FutureBuilder<BaseModel<OffersAtRestaurantModel>>(
+    future: offersAtRestaurantFuture,
+    builder: (context, snapshot) {
+      if (snapshot.connectionState != ConnectionState.done) {
+        return SizedBox();
+      } else {
+        if (snapshot.data!.data == null) {
+          if (snapshot.data!.error
+              .getErrorMessage()
+              .toString()
+              .contains('Unauthenticated.')) {
+            //clear session and logout
+            PreferenceUtils.clear();
+            Future.delayed(
+                Duration.zero, () => dialogUnauthenticated(context));
+          }
+          return Center(
+              child: Text(snapshot.data!.error.getErrorMessage()));
+        } else {
+          return offersAtRestaurant.isNotEmpty
+              ? Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                alignment: Alignment.bottomLeft,
+                margin: EdgeInsets.only(
+                  left: 16.0,
+                  right: 16.0,
+                  top: 20.0,
+                ),
+                child: SizedBox(
+                  height:
+                  (MediaQuery.of(context).size.height / 100) * 5,
+                  child: Text(
+                    getTranslated(context, offersAtRestaurantName)
+                        .toString(),
+                    textAlign: TextAlign.start,
+                    style: TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontFamily: groldReg,
+                        fontSize: 20,
+                        color: colorBlack),
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  height: 152,
+                  alignment: Alignment.center,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    shrinkWrap: true,
+                    itemCount: offersAtRestaurant.length,
+                    itemBuilder: (context, index1) {
+                      return GridView.builder(
+                        itemCount: offersAtRestaurant[index1]
+                            .discount!
+                            .length,
+                        scrollDirection: Axis.horizontal,
+                        shrinkWrap: true,
+                        primary: false,
+                        gridDelegate:
+                        SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 1,
+                            mainAxisExtent: MediaQuery.of(context)
+                                .size
+                                .width /
+                                1.4),
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.only(left: 16),
+                            child: Stack(
+                              children: [
+                                CachedNetworkImage(
                                   alignment: Alignment.center,
-                                  decoration: BoxDecoration(
-                                      borderRadius:
-                                      BorderRadius.vertical(
-                                          bottom: Radius.circular(
-                                              15.0))),
-                                  child: Text(
-                                        () {
-                                      if (offersAtFruit[index]
-                                          .discount!
-                                          .isNotEmpty) {
-                                        return offersAtFruit[index]
-                                            .discount!
-                                            .first
-                                            .name!;
-                                      } else {
-                                        return '';
-                                      }
-                                    }(),
-                                    overflow: TextOverflow.ellipsis,
-                                    maxLines: 1,
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color: colorWhite,
-                                      fontSize: 13,
-                                      fontFamily: groldBold,
+                                  fit: BoxFit.fill,
+                                  imageUrl: offersAtRestaurant[index1]
+                                      .fullImage
+                                      .toString(),
+                                  imageBuilder:
+                                      (context, imageProvider) =>
+                                      Container(
+                                        width: MediaQuery.of(context)
+                                            .size
+                                            .width /
+                                            1,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                          BorderRadius.circular(20.0),
+                                          image: DecorationImage(
+                                            image: imageProvider,
+                                            fit: BoxFit.fill,
+                                            alignment: Alignment.center,
+                                          ),
+                                        ),
+                                      ),
+                                  errorWidget: (context, url,
+                                      error) =>
+                                      Image.asset(
+                                          "assets/images/no_image.png"),
+                                ),
+                                Positioned(
+                                  top: 0,
+                                  left: 40,
+                                  width: ScreenUtil().setWidth(120),
+                                  height: ScreenUtil().setHeight(150),
+                                  // Note: without ClipRect, the blur region will be expanded to full
+                                  // size of the Image instead of custom size
+                                  child: ClipRect(
+                                    child: BackdropFilter(
+                                      filter: ImageFilter.blur(
+                                          sigmaX: 0.1, sigmaY: 0.1),
+                                      child: Container(
+                                        color: Colors.black
+                                            .withOpacity(0.7),
+                                        alignment: Alignment.center,
+                                        child: Column(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                          children: [
+                                            Padding(
+                                              padding:
+                                              EdgeInsets.symmetric(
+                                                  horizontal: 8),
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                MainAxisAlignment
+                                                    .center,
+                                                crossAxisAlignment:
+                                                CrossAxisAlignment
+                                                    .start,
+                                                children: [
+                                                  Text(
+                                                    offersAtRestaurant[
+                                                    index1]
+                                                        .discount![
+                                                    index]
+                                                        .discount
+                                                        .toString() +
+                                                        "%",
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                        FontWeight
+                                                            .w900,
+                                                        fontFamily:
+                                                        groldItalic,
+                                                        fontSize: 48,
+                                                        color:
+                                                        colorWhite),
+                                                  ),
+                                                  Transform.translate(
+                                                    offset: Offset(
+                                                        -1.0, -9.0),
+                                                    child: Text(
+                                                      "OFF",
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                          FontWeight
+                                                              .w500,
+                                                          fontFamily:
+                                                          groldItalic,
+                                                          fontSize: 24,
+                                                          color:
+                                                          colorWhite),
+                                                    ),
+                                                  ),
+                                                  Transform.translate(
+                                                    offset: Offset(
+                                                        -1.0, -2.0),
+                                                    child: Text(
+                                                      "ON ORDERS ABOVE Rs " +
+                                                          offersAtRestaurant[
+                                                          index1]
+                                                              .discount![
+                                                          index]
+                                                              .minAmount
+                                                              .toString(),
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                          FontWeight
+                                                              .w400,
+                                                          fontFamily:
+                                                          groldXBold,
+                                                          fontSize: 8,
+                                                          color:
+                                                          colorWhite),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 4,
+                                            ),
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                  color: colorOrange),
+                                              alignment:
+                                              Alignment.center,
+                                              child: Padding(
+                                                padding: EdgeInsets
+                                                    .symmetric(
+                                                    vertical: 6,
+                                                    horizontal: 2),
+                                                child: Text(
+                                                  offersAtRestaurant[
+                                                  index]
+                                                      .name!
+                                                      .toString()
+                                                      .toUpperCase(),
+                                                  maxLines: 1,
+                                                  textAlign:
+                                                  TextAlign.center,
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                      FontWeight
+                                                          .w400,
+                                                      fontFamily:
+                                                      groldReg,
+                                                      fontSize: 16,
+                                                      color:
+                                                      colorWhite),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                    SizedBox(width: 10),
-                    SizedBox(
-                      width: SizeConfig.screenWidth! / 1.7,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            height: ScreenUtil().setHeight(15),
-                            child: Text(
-                              offersAtFruit[index].name.toString(),
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontFamily: groldXBold,
-                                color: colorBlack,
-                              ),
-                            ),
-                          ),
-                          SizedBox(height: 5),
-                          SizedBox(
-                            height: ScreenUtil().setHeight(25),
-                            child: Text(
-                                  () {
-                                if (offersAtFruit[index]
-                                    .menu!
-                                    .isNotEmpty) {
-                                  String allMenus = "";
-                                  String _temp = "";
-                                  for (int i = 0;
-                                  i <
-                                      offersAtFruit[index]
-                                          .menu!
-                                          .length;
-                                  i++) {
-                                    _temp =
-                                    offersAtFruit[index].menu![i];
-                                    allMenus =
-                                        allMenus + _temp + ', ';
-                                  }
-                                  String showMenus =
-                                  allMenus.substring(
-                                      0, allMenus.length - 2);
-                                  return showMenus + ".";
-                                } else {
-                                  return "";
-                                }
-                              }(),
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 2,
-                              style: TextStyle(
-                                fontSize: 12,
-                                fontFamily: groldBold,
-                                color: colorDivider,
-                              ),
-                            ),
-                          ),
-                          SizedBox(height: 5),
-                          SizedBox(
-                            height: ScreenUtil().setHeight(16),
-                            child: Row(
-                              children: [
-                                Icon(
-                                  Icons.star_rate,
-                                  size: 15,
-                                  color: Colors.grey,
-                                ),
-                                SizedBox(width: 5),
-                                Text(
-                                  offersAtFruit[index]
-                                      .rate
-                                      .toString(),
-                                  style: TextStyle(
-                                      fontSize: 12,
-                                      color: Colors.grey,
-                                      fontFamily: groldBold),
-                                ),
-                                SizedBox(width: 10),
-                                CircleAvatar(
-                                  backgroundColor: Colors.grey,
-                                  radius: 3.0,
-                                ),
-                                SizedBox(width: 10),
-                                Text(
-                                  offersAtFruit[index]
-                                      .distance
-                                      .toString() +
-                                      "Km",
-                                  style: TextStyle(
-                                      fontSize: 12,
-                                      color: Colors.grey,
-                                      fontFamily: groldBold),
-                                ),
                               ],
                             ),
+                          );
+                        },
+                      );
+                    },
+                  ),
+                ),
+              )
+            ],
+          )
+              : SizedBox();
+        }
+      }
+    },
+  );
+
+  _buildOffersWidget() => FutureBuilder(
+    future: offersData,
+    builder: (context, snapshot) {
+      if (snapshot.connectionState != ConnectionState.done) {
+        return SizedBox();
+      } else {
+        return offers.isNotEmpty
+            ? RefreshIndicator(
+          onRefresh: _onRefresh,
+          child: ListView.separated(
+            itemCount: offers.length,
+            shrinkWrap: true,
+            primary: false,
+            scrollDirection: Axis.vertical,
+            separatorBuilder: (context, index) =>
+                SizedBox(height: 20),
+            itemBuilder: (context, index) {
+              return Container(
+                height: ScreenUtil().setHeight(100),
+                decoration: BoxDecoration(
+                    color: Colors.grey.withAlpha(20),
+                    borderRadius: BorderRadius.circular(15)),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: SizeConfig.screenWidth! / 1.7,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: PreferenceUtils.getString(
+                              PreferenceNames
+                                  .currentLanguageCode) ==
+                              'ar'
+                              ? AssetImage(
+                              'assets/images/offer_flipped.png')
+                              : AssetImage('assets/images/offer.png'),
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            offers[index].description.toString(),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 2,
+                            style: TextStyle(
+                                fontSize: 14,
+                                fontFamily: groldReg,
+                                color: colorBlack),
                           ),
-                          SizedBox(height: 5),
+                          SizedBox(height: 10),
                           SizedBox(
-                            height: ScreenUtil().setHeight(21),
+                            width: MediaQuery.of(context).size.width /
+                                1.7,
                             child: Row(
                               mainAxisAlignment:
                               MainAxisAlignment.spaceBetween,
                               children: [
                                 Container(
+                                  width: MediaQuery.of(context)
+                                      .size
+                                      .width /
+                                      3,
                                   padding: EdgeInsets.all(5),
                                   decoration: BoxDecoration(
                                       color:
-                                      Colors.blue.withAlpha(40),
+                                      Colors.grey.withAlpha(40),
                                       borderRadius:
                                       BorderRadius.circular(10)),
-                                  child: Text(
-                                    '${getTranslated(context, useCodeText).toString()} ${offersAtFruit[index].discount![0].code}',
+                                  child: RichText(
                                     overflow: TextOverflow.ellipsis,
                                     maxLines: 1,
-                                    style: TextStyle(
-                                        color: Colors.blue,
-                                        fontSize: 11,
-                                        fontFamily: groldReg),
+                                    text: TextSpan(
+                                      text:
+                                      '${getTranslated(context, useCodeText).toString()} ',
+                                      style: TextStyle(
+                                        color: colorBlack,
+                                        fontSize: 12,
+                                        fontFamily: groldReg,
+                                      ),
+                                      children: <TextSpan>[
+                                        TextSpan(
+                                          text:
+                                          '${offers[index].code}',
+                                          style: TextStyle(
+                                              color: colorBlack,
+                                              fontSize: 14,
+                                              fontWeight:
+                                              FontWeight.bold,
+                                              fontFamily: groldReg),
+                                          //Use Code GRAB50
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
-                                Visibility(
-                                  visible: offersAtFruit.length > 1,
-                                  child: TextButton(
-                                    onPressed: () {
-                                      Navigator.pushNamed(
-                                        context,
-                                        foodShopPageRoute,
-                                        arguments: FoodDeliveryShop(
-                                          singleShopId:
-                                          offersAtFruit[index]
-                                              .id!
-                                              .toInt(),
-                                          businessTypeId:
-                                          businessTypeIdForRestaurant,
+                                TextButton(
+                                  onPressed: () {
+                                    Clipboard.setData(ClipboardData(
+                                        text:
+                                        "${offers[index].code}"))
+                                        .then((_) {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(SnackBar(
+                                        content: Text(
+                                          getTranslated(context,
+                                              couponCopied)
+                                              .toString(),
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              fontFamily: groldBold),
                                         ),
-                                      );
-                                    },
-                                    child: Text(
-                                      getTranslated(context, viewAll)
-                                          .toString(),
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontFamily: groldBold,
-                                          fontSize: 16,
-                                          color: colorBlue),
-                                    ),
-                                    style: TextButton.styleFrom(
-                                        padding: EdgeInsets.zero),
+                                        backgroundColor: colorBlue,
+                                      ));
+                                    });
+                                  },
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        getTranslated(
+                                            context, copyText)
+                                            .toString(),
+                                        style: TextStyle(
+                                          color: colorBlue,
+                                          fontSize: 14,
+                                          fontFamily: groldReg,
+                                        ),
+                                      ),
+                                      Icon(
+                                        Icons.copy,
+                                        size: 20,
+                                        color: colorBlue,
+                                      )
+                                    ],
                                   ),
-                                )
+                                ),
                               ],
                             ),
+                          )
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width / 3.34,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            getTranslated(context, getText)
+                                .toString(),
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontFamily: groldReg,
+                              color: colorBlack,
+                            ),
+                          ),
+                          SizedBox(height: 10),
+                          Text(
+                                () {
+                              if (offers[index].type == "amount") {
+                                return '${PreferenceUtils.getString(PreferenceNames.currencyCodeSetting)} ${offers[index].discount}';
+                              } else {
+                                return '${offers[index].discount}%';
+                              }
+                            }(),
+                            style: TextStyle(
+                              fontSize: 25,
+                              fontFamily: groldReg,
+                              color: colorBlack,
+                            ),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          SizedBox(height: 10),
+                          Text(
+                            'off',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontFamily: groldReg,
+                              color: colorBlack,
+                            ),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ],
                       ),
-                    )
+                    ),
                   ],
                 ),
-              ),
-            );
-          },
+              );
+            },
+          ),
         )
-            : SizedBox(
-          height: MediaQuery.of(context).size.height * 0.15,
-          width: MediaQuery.of(context).size.width,
-          child: Center(
-            child: Text(
-              getTranslated(context, noOffer).toString(),
-              textAlign: TextAlign.center,
-              overflow: TextOverflow.ellipsis,
-              maxLines: 1,
-              style: TextStyle(
-                fontSize: 16,
-                fontFamily: groldReg,
+            : RefreshIndicator(
+          onRefresh: _onRefresh,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset("assets/images/no_image.png"),
+              Text(
+                getTranslated(context, noDataDesc).toString(),
+                textAlign: TextAlign.center,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
+                style: TextStyle(
+                  fontSize: 20,
+                  fontFamily: groldReg,
+                  color: colorBlack,
+                ),
               ),
-            ),
+            ],
           ),
         );
       }
     },
   );
+
   Future<BaseModel<OffersAtRestaurantModel>> offersAtRestaurantApi(
       String lat, String long) async {
     OffersAtRestaurantModel response;
@@ -1074,13 +1538,13 @@ class _OffersPageState extends State<OffersPage> {
         'lang': long,
       };
       response =
-      await ApiServices(ApiHeader().dioData()).offersAtRestaurant(body);
+          await ApiServices(ApiHeader().dioData()).offersAtRestaurant(body);
 
       offersAtRestaurant.clear();
       if (response.success == true) {
         if (response.data!.isNotEmpty) {
           offersAtRestaurant.addAll(response.data!);
-          print("home_widget Line 1745"+response.data!.toString());
+          print("home_widget Line 1745" + response.data!.toString());
         }
       }
       setState(() {});
@@ -1146,7 +1610,6 @@ class _OffersPageState extends State<OffersPage> {
     return BaseModel()..data = response;
   }
 
-
   Future<BaseModel<SettingModel>> settingData() async {
     SettingModel response;
     try {
@@ -1183,9 +1646,11 @@ class _OffersPageState extends State<OffersPage> {
           PreferenceUtils.setString(PreferenceNames.paypalAvailable, "0");
         }
         if (response.data!.razor == "1") {
-          PreferenceUtils.setString(PreferenceNames.razorPayAvailable.toString(), "1");
+          PreferenceUtils.setString(
+              PreferenceNames.razorPayAvailable.toString(), "1");
         } else {
-          PreferenceUtils.setString(PreferenceNames.razorPayAvailable.toString(), "0");
+          PreferenceUtils.setString(
+              PreferenceNames.razorPayAvailable.toString(), "0");
         }
         if (response.data!.stripe == "1") {
           PreferenceUtils.setString(PreferenceNames.stripeAvailable, "1");
@@ -1246,7 +1711,7 @@ class _OffersPageState extends State<OffersPage> {
           PreferenceUtils.setString(PreferenceNames.onesignalUserAppID, "");
         }
         if (PreferenceUtils.getString(PreferenceNames.onesignalPushToken)
-            .isNotEmpty ||
+                .isNotEmpty ||
             PreferenceUtils.getString(PreferenceNames.onesignalPushToken) !=
                 'N/A') {
           getOneSingleToken(
@@ -1263,415 +1728,6 @@ class _OffersPageState extends State<OffersPage> {
     }
     return BaseModel()..data = response;
   }
-
-  _buildOffersRestaurant() => FutureBuilder<BaseModel<OffersAtRestaurantModel>>(
-    future: offersAtRestaurantFuture,
-    builder: (context, snapshot) {
-      if (snapshot.connectionState != ConnectionState.done) {
-        return SpinKitFadingCircle(color: colorRed);
-      } else {
-        if (snapshot.data!.data == null) {
-          if (snapshot.data!.error
-              .getErrorMessage()
-              .toString()
-              .contains('Unauthenticated.')) {
-            //clear session and logout
-            PreferenceUtils.clear();
-            Future.delayed(
-                Duration.zero, () => dialogUnauthenticated(context));
-          }
-          return Center(
-              child: Text(snapshot.data!.error.getErrorMessage()));
-        } else {
-          return offersAtRestaurant.isNotEmpty
-              ? Padding(
-            padding: EdgeInsets.only(left: 8),
-            child: GridView.builder(
-              itemCount: offersAtRestaurant.length,
-              scrollDirection: Axis.horizontal,
-              shrinkWrap: true,
-              primary: false,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 1,
-                  mainAxisExtent: MediaQuery.of(context).size.width/1.25
-              ),
-              itemBuilder: (context, index) {
-                return Stack(
-                  children: [
-                    Container(
-                      margin: EdgeInsets.symmetric(horizontal: 8),
-                      child: CachedNetworkImage(
-                        alignment: Alignment.center,
-                        fit: BoxFit.fill,
-                        imageUrl: offersAtRestaurant[index]
-                            .fullImage
-                            .toString(),
-                        imageBuilder: (context, imageProvider) =>
-                            Container(
-                              width:
-                              MediaQuery.of(context).size.width / 1,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20.0),
-
-                                image: DecorationImage(
-                                  image: imageProvider,
-                                  fit: BoxFit.fill,
-                                  alignment: Alignment.center,
-                                ),
-                              ),
-                            ),
-                        placeholder: (context, url) =>
-                            SpinKitFadingCircle(color: colorRed),
-                        errorWidget: (context, url, error) =>
-                            Image.asset("assets/images/no_image.png"),
-                      ),
-                    ),
-                    Positioned(
-                      top: 0,
-                      left: 40,
-                      width: ScreenUtil().setWidth(120),
-                      height: ScreenUtil().setHeight(150),
-                      // Note: without ClipRect, the blur region will be expanded to full
-                      // size of the Image instead of custom size
-                      child: ClipRect(
-                        child: BackdropFilter(
-                          filter: ImageFilter.blur(
-                              sigmaX: 0.1, sigmaY: 0.1),
-                          child: Container(
-                            color: Colors.black.withOpacity(0.7),
-                            alignment: Alignment.center,
-                            child: Column(
-                              mainAxisAlignment:
-                              MainAxisAlignment.center,
-                              crossAxisAlignment:
-                              CrossAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 8),
-                                  child: Column(
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                    CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        offersAtRestaurant[index].discount![index].discount.toString()+"%",
-                                        style: TextStyle(
-                                            fontWeight:
-                                            FontWeight.w900,
-                                            fontFamily: groldItalic,
-                                            fontSize: 48,
-                                            color: colorWhite),
-                                      ),
-                                      Transform.translate(
-                                        offset: Offset(-1.0, -9.0),
-                                        child : Text(
-                                          "OFF",
-                                          style: TextStyle(
-                                              fontWeight:
-                                              FontWeight.w500,
-                                              fontFamily: groldItalic,
-                                              fontSize: 24,
-                                              color: colorWhite),
-                                        ),
-                                      ),
-                                      Transform.translate(
-                                        offset: Offset(-1.0,-2.0),
-                                        child: Text(
-                                          "ON ORDERS ABOVE Rs 100",
-                                          style: TextStyle(
-                                              fontWeight:
-                                              FontWeight.w400,
-                                              fontFamily: groldXBold,
-                                              fontSize: 8,
-                                              color: colorWhite),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 4,
-                                ),
-                                Container(
-                                  decoration: BoxDecoration(
-                                      color: colorOrange),
-                                  alignment: Alignment.center,
-                                  child: Padding(
-                                    padding: EdgeInsets.symmetric(vertical: 6,horizontal: 2),
-                                    child: Text(
-                                      offersAtRestaurant[index]
-                                          .name!
-                                          .toString()
-                                          .toUpperCase(),
-                                      maxLines: 1,
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w400,
-                                          fontFamily: groldReg,
-                                          fontSize: 16,
-                                          color: colorWhite),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                );
-              },
-            ),
-          )
-              : SizedBox(
-            height: MediaQuery.of(context).size.height * 0.15,
-            width: MediaQuery.of(context).size.width,
-            child: Center(
-              child: Text(
-                getTranslated(context, noOffer).toString(),
-                textAlign: TextAlign.center,
-                overflow: TextOverflow.ellipsis,
-                maxLines: 1,
-                style: TextStyle(
-                  fontSize: 16,
-                  fontFamily: groldReg,
-                ),
-              ),
-            ),
-          );
-        }
-      }
-    },
-  );
-
-  _buildOffersWidget() => FutureBuilder(
-        future: offersData,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState != ConnectionState.done) {
-            return SpinKitFadingCircle(color: colorRed);
-          } else {
-            return offers.isNotEmpty
-                ? RefreshIndicator(
-                    onRefresh: _onRefresh,
-                    child: ListView.separated(
-                      itemCount: offers.length,
-                      shrinkWrap: true,
-                      primary: false,
-                      scrollDirection: Axis.vertical,
-                      separatorBuilder: (context, index) =>
-                          SizedBox(height: 20),
-                      itemBuilder: (context, index) {
-                        return Container(
-                          height: ScreenUtil().setHeight(100),
-                          decoration: BoxDecoration(
-                              color: Colors.grey.withAlpha(20),
-                              borderRadius: BorderRadius.circular(15)),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Container(
-                                width: SizeConfig.screenWidth! / 1.7,
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: PreferenceUtils.getString(
-                                                PreferenceNames
-                                                    .currentLanguageCode) ==
-                                            'ar'
-                                        ? AssetImage(
-                                            'assets/images/offer_flipped.png')
-                                        : AssetImage('assets/images/offer.png'),
-                                    fit: BoxFit.fill,
-                                  ),
-                                ),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      offers[index].description.toString(),
-                                      overflow: TextOverflow.ellipsis,
-                                      maxLines: 2,
-                                      style: TextStyle(
-                                          fontSize: 14,
-                                          fontFamily: groldReg,
-                                          color: colorBlack),
-                                    ),
-                                    SizedBox(height: 10),
-                                    SizedBox(
-                                      width: MediaQuery.of(context).size.width /
-                                          1.7,
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Container(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                3,
-                                            padding: EdgeInsets.all(5),
-                                            decoration: BoxDecoration(
-                                                color:
-                                                    Colors.grey.withAlpha(40),
-                                                borderRadius:
-                                                    BorderRadius.circular(10)),
-                                            child: RichText(
-                                              overflow: TextOverflow.ellipsis,
-                                              maxLines: 1,
-                                              text: TextSpan(
-                                                text:
-                                                    '${getTranslated(context, useCodeText).toString()} ',
-                                                style: TextStyle(
-                                                  color: colorBlack,
-                                                  fontSize: 12,
-                                                  fontFamily: groldReg,
-                                                ),
-                                                children: <TextSpan>[
-                                                  TextSpan(
-                                                    text:
-                                                        '${offers[index].code}',
-                                                    style: TextStyle(
-                                                        color: colorBlack,
-                                                        fontSize: 14,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontFamily:
-                                                            groldReg),
-                                                    //Use Code GRAB50
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          TextButton(
-                                            onPressed: () {
-                                              Clipboard.setData(ClipboardData(
-                                                      text:
-                                                          "${offers[index].code}"))
-                                                  .then((_) {
-                                                ScaffoldMessenger.of(context)
-                                                    .showSnackBar(SnackBar(
-                                                  content: Text(
-                                                    getTranslated(context,
-                                                            couponCopied)
-                                                        .toString(),
-                                                    style: TextStyle(
-                                                        fontSize: 16,
-                                                        fontFamily:
-                                                            groldBold),
-                                                  ),
-                                                  backgroundColor: colorBlue,
-                                                ));
-                                              });
-                                            },
-                                            child: Row(
-                                              children: [
-                                                Text(
-                                                  getTranslated(
-                                                          context, copyText)
-                                                      .toString(),
-                                                  style: TextStyle(
-                                                    color: colorBlue,
-                                                    fontSize: 14,
-                                                    fontFamily: groldReg,
-                                                  ),
-                                                ),
-                                                Icon(
-                                                  Icons.copy,
-                                                  size: 20,
-                                                  color: colorBlue,
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                width: MediaQuery.of(context).size.width / 3.34,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      getTranslated(context, getText)
-                                          .toString(),
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        fontFamily: groldReg,
-                                        color: colorBlack,
-                                      ),
-                                    ),
-                                    SizedBox(height: 10),
-                                    Text(
-                                      () {
-                                        if (offers[index].type == "amount") {
-                                          return '${PreferenceUtils.getString(PreferenceNames.currencyCodeSetting)} ${offers[index].discount}';
-                                        } else {
-                                          return '${offers[index].discount}%';
-                                        }
-                                      }(),
-                                      style: TextStyle(
-                                        fontSize: 25,
-                                        fontFamily: groldReg,
-                                        color: colorBlack,
-                                      ),
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                    SizedBox(height: 10),
-                                    Text(
-                                      'off',
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        fontFamily: groldReg,
-                                        color: colorBlack,
-                                      ),
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        );
-                      },
-                    ),
-                  )
-                : RefreshIndicator(
-                    onRefresh: _onRefresh,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset("assets/images/no_image.png"),
-                        Text(
-                          getTranslated(context, noDataDesc).toString(),
-                          textAlign: TextAlign.center,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 1,
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontFamily: groldReg,
-                            color: colorBlack,
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-          }
-        },
-      );
-
-
 
   getOneSingleToken(String appId) async {
     // String push_token = '';
@@ -1738,27 +1794,27 @@ class _OffersPageState extends State<OffersPage> {
           ),
           content: StatefulBuilder(
               builder: (BuildContext context, StateSetter setState) {
-                //height: MediaQuery.of(context).size.height / 2.5,
-                return Wrap(
+            //height: MediaQuery.of(context).size.height / 2.5,
+            return Wrap(
+              children: [
+                Column(
                   children: [
-                    Column(
-                      children: [
-                        Align(
-                          alignment: Alignment.center,
-                          child: Text(
-                            getTranslated(context, yourSessionExpired)!,
-                            style: TextStyle(
-                                color: colorPink,
-                                fontSize: 16,
-                                fontFamily: groldBold),
-                          ),
-                        ),
-                        SizedBox(height: 10),
-                      ],
+                    Align(
+                      alignment: Alignment.center,
+                      child: Text(
+                        getTranslated(context, yourSessionExpired)!,
+                        style: TextStyle(
+                            color: colorPink,
+                            fontSize: 16,
+                            fontFamily: groldBold),
+                      ),
                     ),
+                    SizedBox(height: 10),
                   ],
-                );
-              }),
+                ),
+              ],
+            );
+          }),
           actions: <Widget>[
             ElevatedButton(
               style: ElevatedButton.styleFrom(primary: colorRed),
@@ -1770,7 +1826,7 @@ class _OffersPageState extends State<OffersPage> {
               onPressed: () {
                 Navigator.of(context).pushAndRemoveUntil(
                     MaterialPageRoute(builder: (context) => LoginScreen()),
-                        (Route<dynamic> route) => false);
+                    (Route<dynamic> route) => false);
               },
             ),
           ],
