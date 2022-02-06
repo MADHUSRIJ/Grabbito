@@ -42,8 +42,10 @@ class _SelectAddressScreenState extends State<SelectAddressScreen> {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Scaffold(
+      backgroundColor: colorWhite,
       appBar: AppBar(
         backgroundColor: colorWhite,
+        elevation: 0,
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () => Navigator.of(context).pop(),
@@ -51,13 +53,13 @@ class _SelectAddressScreenState extends State<SelectAddressScreen> {
         title: Text(
           getTranslated(context, selectAddress).toString(),
           style: TextStyle(
-              fontFamily: groldBlack, color: colorBlack, fontSize: 18),
+              fontFamily: groldReg, color: colorBlack, fontSize: 18),
         ),
       ),
       body: ModalProgressHUD(
         inAsyncCall: _loading,
         opacity: 1.0,
-        color: Colors.transparent.withOpacity(0.2),
+        color: Colors.transparent,
         progressIndicator: SpinKitFadingCircle(color: colorRed),
         child: SingleChildScrollView(
           child: Container(
@@ -309,7 +311,7 @@ class _SelectAddressScreenState extends State<SelectAddressScreen> {
         child: Container(
           height: 60,
           width: SizeConfig.screenWidth,
-          color: colorGreen,
+          color: colorOrange,
           child: Center(
             child: Container(
               padding: EdgeInsets.only(right: 20),

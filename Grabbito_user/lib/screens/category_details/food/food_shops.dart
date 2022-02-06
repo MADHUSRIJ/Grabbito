@@ -404,8 +404,8 @@ class _FoodDeliveryShopState extends State<FoodDeliveryShop>
       ),
       bottomNavigationBar: Visibility(
         visible: ScopedModel.of<CartModel>(context, rebuildOnChange: true)
-                .cart
-                .isNotEmpty
+            .cart
+            .isNotEmpty
             ? true
             : false,
         child: GestureDetector(
@@ -415,10 +415,10 @@ class _FoodDeliveryShopState extends State<FoodDeliveryShop>
             child: Container(
               height: 48,
               width: SizeConfig.screenWidth,
-             decoration: BoxDecoration(
-               color: colorOrange,
-               borderRadius: BorderRadius.circular(50)
-             ),
+              decoration: BoxDecoration(
+                  color: colorOrange,
+                  borderRadius: BorderRadius.circular(50)
+              ),
               padding: EdgeInsets.only(
                 left: 30,
                 right: 30,
@@ -426,18 +426,20 @@ class _FoodDeliveryShopState extends State<FoodDeliveryShop>
               child: SizedBox(
                 width: MediaQuery.of(context).size.width,
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Container(
-                          child: Text(
-                            '$totalQty ${getTranslated(context, totalItems).toString()}',
-                            style: TextStyle(
-                                fontSize: 18,
-                                color: Colors.white,
-                                fontFamily: groldReg),
-                          ),
+                        Text(
+                          '$totalQty ${getTranslated(context, totalItems).toString()}',
+                          style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.white,
+                              fontFamily: groldReg),
+                        ),
+                        SizedBox(
+                          width: 10,
                         ),
                         VerticalDivider(
                           thickness: 1,
@@ -447,32 +449,28 @@ class _FoodDeliveryShopState extends State<FoodDeliveryShop>
                           color: colorWhite,
                         ),
                         SizedBox(
-                          width: 4,
+                          width: 10,
                         ),
-                        Container(
-                          child: Text(
-                            '${PreferenceUtils.getString(PreferenceNames.currencySymbolSetting)} $totalCartAmount',
-                            style: TextStyle(
-                                fontSize: 18,
-                                color: Colors.white,
-                                fontFamily: groldBold),
-                          ),
+                        Text(
+                          '${PreferenceUtils.getString(PreferenceNames.currencySymbolSetting)} $totalCartAmount',
+                          style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.white,
+                              fontFamily: groldBold),
                         ),
                       ],
                     ),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Container(
-                          child: Text(
-                            getTranslated(context, addToBag).toString(),
-                            softWrap: true,
-                            style: TextStyle(
-                                fontSize: 18,
-                                color: Colors.white,
-                                fontFamily: groldReg),
-                          ),
+                        Text(
+                          getTranslated(context, addToBag).toString(),
+                          style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.white,
+                              fontFamily: groldReg),
                         ),
+                        SizedBox(width: 10),
                         Icon(IconlyBold.bag_2,color: Colors.white,size: 20,),
                       ],
                     ),

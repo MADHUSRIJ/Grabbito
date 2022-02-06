@@ -27,16 +27,17 @@ class _OnBoardPageState extends State<OnBoardPage> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              SizedBox(
-                height: 343,
-                width: 323,
-                child: Image.asset(
-                  widget.pageItem.image,
-                  fit: BoxFit.fill,
+              Container(
+                height: MediaQuery.of(context).size.height/2,
+                alignment: Alignment.center,
+                child: SizedBox(
+                  height: 343,
+                  width: 323,
+                  child: Image.asset(
+                    widget.pageItem.image,
+                    fit: BoxFit.fill,
+                  ),
                 ),
-              ),
-              SizedBox(
-                height: 30,
               ),
               Container(
                 alignment: Alignment.center,

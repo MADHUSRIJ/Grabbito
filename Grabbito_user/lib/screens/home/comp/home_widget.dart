@@ -367,7 +367,7 @@ class _MainPageState extends State<MainPage> {
                               ),
                               Container(
                                 margin: EdgeInsets.symmetric(horizontal: 16),
-                                //height: 260),
+                                //height: 260,
                                 child: FutureBuilder(
                                   future: businessTypeFuture,
                                   builder: (context, snapshot) {
@@ -376,7 +376,7 @@ class _MainPageState extends State<MainPage> {
                                       return SizedBox();
                                     } else {
                                       return Container(
-                                        height: 300,
+                                        height: 310,
                                         alignment: Alignment.center,
                                         width: MediaQuery.of(context).size.width,
                                         child: Column(
@@ -388,11 +388,10 @@ class _MainPageState extends State<MainPage> {
                                                 left: 0.0,
                                                 right: 16.0,
                                                 top: 20.0,
+                                                bottom: 16.0
                                               ),
                                               child: SizedBox(
-                                                height: (MediaQuery.of(context).size.height /
-                                                    100) *
-                                                    5,
+                                                height: 20,
                                                 child: Text(
                                                   getTranslated(context, serviceList)
                                                       .toString(),
@@ -400,7 +399,7 @@ class _MainPageState extends State<MainPage> {
                                                   style: TextStyle(
                                                       fontWeight: FontWeight.w400,
                                                       fontFamily: groldReg,
-                                                      fontSize: 16,
+                                                      fontSize: 18,
                                                       color: colorBlack),
                                                 ),
                                               ),
@@ -427,8 +426,12 @@ class _MainPageState extends State<MainPage> {
                                                           businessTypes[index]) : ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                                         content: Text(businessTypes[index]
                                                             .name
-                                                            .toString()+"is currently not available in your place"),
-                                                        backgroundColor: colorOrange,
+                                                            .toString()+"is currently not available in your place",style: TextStyle(
+                                                          color: colorWhite,
+                                                          fontFamily: 'Grold Regular',
+                                                          fontSize: 16
+                                                        ),),
+                                                        backgroundColor: colorBlack.withOpacity(0.3),
                                                       ));
                                                     },
                                                     child: Container(
@@ -561,7 +564,7 @@ class _MainPageState extends State<MainPage> {
                                                 content: Text(businessTypes[index+4]
                                                     .name
                                                     .toString()+" is currently not available in your place"),
-                                                backgroundColor: colorOrange,
+                                                backgroundColor: colorWhite,
                                               ));
                                             },
                                             child: Container(
@@ -924,9 +927,9 @@ class _MainPageState extends State<MainPage> {
                         children: [
                           Container(
                             padding: index == 0
-                                ? EdgeInsets.only(left: 20.0)
+                                ? EdgeInsets.only(left: 16.0)
                                 : index == banners.length - 1
-                                    ? EdgeInsets.only(right: 20.0)
+                                    ? EdgeInsets.only(right: 16.0)
                                     : EdgeInsets.zero,
                             child: CachedNetworkImage(
                               alignment: Alignment.center,
@@ -934,9 +937,8 @@ class _MainPageState extends State<MainPage> {
                               imageBuilder: (context, imageProvider) =>
                                   Container(
                                 height: 145,
-                                width: MediaQuery.of(context).size.width -
-                                    (MediaQuery.of(context).size.width / 100) *
-                                        10,
+                                alignment: Alignment.center,
+                                width: MediaQuery.of(context).size.width - 32,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(20.0),
                                   color: Colors.grey,

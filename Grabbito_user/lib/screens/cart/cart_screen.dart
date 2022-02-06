@@ -166,8 +166,10 @@ class _CartScreenState extends State<CartScreen> {
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(
+        backgroundColor: colorWhite,
         appBar: AppBar(
           backgroundColor: colorWhite,
+          elevation: 0,
           leading: IconButton(
             icon: Icon(IconlyLight.arrow_left, color: Colors.black),
             onPressed: () => Navigator.pushReplacement(
@@ -199,17 +201,22 @@ class _CartScreenState extends State<CartScreen> {
                 visible: !isCartEmpty,
                 child: Container(
                   width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                    border: Border(bottom: BorderSide(width: 1,color: Colors.grey.shade200)),
+                  ),
                   margin: EdgeInsets.only(left: 10, right: 10, top: 10),
                   child: Card(
+                    elevation: 0,
                     child: Container(
-                      padding: EdgeInsets.all(10),
+                      alignment: Alignment.center,
+                      padding: EdgeInsets.symmetric(vertical: 10,horizontal: 16),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Icon(
                                 Icons.location_pin,
@@ -271,13 +278,10 @@ class _CartScreenState extends State<CartScreen> {
                                     );
                                   }
                                 },
-                                child: Text(
-                                  getTranslated(context, locationChange)
-                                      .toString(),
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      color: Colors.white,
-                                      fontFamily: groldReg),
+                                child: Icon(
+                                 IconlyLight.filter,
+                                 color: colorBlack,
+                                 size: 18,
                                 ),
                               )
                             ],
@@ -295,10 +299,15 @@ class _CartScreenState extends State<CartScreen> {
                   margin: EdgeInsets.only(left: 10, right: 10, top: 10),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Card(
+                        elevation:0,
                         child: Container(
-                          padding: EdgeInsets.all(10),
+                          padding: EdgeInsets.symmetric(vertical: 16,horizontal: 8),
+                          decoration: BoxDecoration(
+                            border: Border(bottom: BorderSide(width: 1,color: Colors.grey.shade200)),
+                          ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -383,8 +392,13 @@ class _CartScreenState extends State<CartScreen> {
                       ),
                       //all cart show
                       Card(
+                        elevation: 0,
                         child: Container(
-                          padding: EdgeInsets.all(10),
+                          padding: EdgeInsets.symmetric(vertical: 16,horizontal: 8),
+                          decoration: BoxDecoration(
+                            border: Border(bottom: BorderSide(width: 1,color: Colors.grey.shade200)),
+                          ),
+                          alignment: Alignment.center,
                           child: ListView.separated(
                             itemCount: cartMenuItem.length,
                             separatorBuilder: (context, index) => DottedLine(),
@@ -782,14 +796,15 @@ class _CartScreenState extends State<CartScreen> {
                       ),
                       //note for delivery guid
                       Card(
+                        elevation: 0,
                         child: Container(
-                          padding: EdgeInsets.all(10),
-                          margin: EdgeInsets.only(right: 0, left: 0, top: 20),
+                          padding: EdgeInsets.symmetric(vertical: 16,horizontal: 8),
                           decoration: BoxDecoration(
-                            border: Border(
-                                bottom:
-                                    BorderSide(width: 0.5, color: colorButton)),
+                            border: Border(bottom: BorderSide(width: 1,color: Colors.grey.shade200)),
                           ),
+                          alignment: Alignment.center,
+                          margin: EdgeInsets.only(right: 0, left: 0, top: 20),
+
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -817,6 +832,7 @@ class _CartScreenState extends State<CartScreen> {
                       ),
                       //promocode
                       Card(
+                        elevation: 0,
                         child: Container(
                           padding: EdgeInsets.all(10),
                           child: Column(
@@ -826,10 +842,9 @@ class _CartScreenState extends State<CartScreen> {
                                 margin:
                                     EdgeInsets.only(right: 0, left: 0, top: 20),
                                 decoration: BoxDecoration(
-                                  border: Border(
-                                      bottom: BorderSide(
-                                          width: 0.5, color: colorButton)),
+                                  border: Border(bottom: BorderSide(width: 1,color: Colors.grey.shade200)),
                                 ),
+                                alignment: Alignment.center,
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -919,13 +934,16 @@ class _CartScreenState extends State<CartScreen> {
                                   ],
                                 ),
                               ),
+                              SizedBox(
+                                height: 8,
+                              ),
                               Visibility(
                                 visible: promoCodeTextSuccess,
                                 child: Text(
                                   getTranslated(
                                           context, couponApplySuccessfully)
                                       .toString(),
-                                  style: TextStyle(color: colorGreen),
+                                  style: TextStyle(color: colorGreen,fontFamily: 'Grold Regular'),
                                 ),
                               ),
                               SizedBox(
@@ -936,7 +954,7 @@ class _CartScreenState extends State<CartScreen> {
                                 child: Text(
                                   getTranslated(context, orSelectAnyoneFromIt)
                                       .toString(),
-                                  style: TextStyle(color: colorBlack),
+                                  style: TextStyle(color: colorBlack,fontFamily: 'Grold Regular'),
                                 ),
                               ),
                               Visibility(
@@ -1235,6 +1253,7 @@ class _CartScreenState extends State<CartScreen> {
                     Container(
                       width: SizeConfig.screenWidth! / 2,
                       color: Colors.white30,
+                      alignment: Alignment.centerLeft,
                       padding: EdgeInsets.only(left: 20),
                       child: Padding(
                         padding: EdgeInsets.symmetric(horizontal: 8),
@@ -1264,11 +1283,13 @@ class _CartScreenState extends State<CartScreen> {
                       ),
                     ),
                     Container(
-                      padding: EdgeInsets.only(right: 20),
+
+                      alignment: Alignment.centerLeft,
+                      padding: EdgeInsets.only(right: 16),
                       child: Text(
                         getTranslated(context, proceedToPay).toString(),
                         style: TextStyle(
-                            fontSize: 18,
+                            fontSize: 16,
                             color: Colors.white,
                             fontFamily: groldReg),
                       ),
