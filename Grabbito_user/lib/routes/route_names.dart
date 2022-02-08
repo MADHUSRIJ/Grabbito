@@ -28,3 +28,4 @@ const String petsProductRoute = 'petsProduct';
 const String cartScreenRoute = 'CartScreen';
 const String selectAddressRoute = 'selectAddress';
 const String selectLocationScreenRoute = 'selectLocationScreen';
+const String selectFoodItem = 'selectFoodItem';

@@ -426,7 +426,7 @@ class _MainPageState extends State<MainPage> {
                                                           businessTypes[index]) : ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                                         content: Text(businessTypes[index]
                                                             .name
-                                                            .toString()+"is currently not available in your place",style: TextStyle(
+                                                            .toString()+" is currently not available in your place",style: TextStyle(
                                                           color: colorWhite,
                                                           fontFamily: 'Grold Regular',
                                                           fontSize: 16

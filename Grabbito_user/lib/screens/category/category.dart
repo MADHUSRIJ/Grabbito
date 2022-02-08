@@ -896,7 +896,9 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
                                                 child: Row(
                                               children: [
                                                 Expanded(
-                                                  flex:2,
+                                                  flex: shopData[index]
+                                                      .bannerImage
+                                                      .toString() != "prod_default.png" ? 3 : 5 ,
                                                   child: Container(
                                                     alignment: Alignment.centerLeft,
                                                     child: Text(shopData[index]
@@ -971,10 +973,12 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
                                     //     color: Colors.black,
                                     //   ),
                                     // ),
-                                    Align(
+                                    shopData[index]
+                                        .bannerImage
+                                        .toString() != "prod_default.png" ? Align(
                                       alignment: Alignment.center,
                                       child: Transform.translate(
-                                        offset: Offset(36.0, 36.0),
+                                        offset: Offset(46, 36.0),
                                         child: Container(
                                             width: 52,
                                             height: 52,
@@ -1028,7 +1032,7 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
                                               ),
                                             )),
                                       ),
-                                    ),
+                                    ) : SizedBox(),
                                   ],
                                 ),
                               );

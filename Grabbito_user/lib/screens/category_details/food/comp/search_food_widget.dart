@@ -283,7 +283,7 @@ class _SearchFoodState extends State<SearchFood> {
               right: 20,
             ),
             child: SizedBox(
-              width: ScreenUtil().screenWidth,
+              width: MediaQuery.of(context).size.width,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -295,7 +295,7 @@ class _SearchFoodState extends State<SearchFood> {
                         style: TextStyle(
                             fontSize: 18,
                             color: Colors.white,
-                            fontFamily: groldBold),
+                            fontFamily: groldReg),
                       ),
                       SizedBox(
                         width: 10,
@@ -315,7 +315,7 @@ class _SearchFoodState extends State<SearchFood> {
                         style: TextStyle(
                             fontSize: 18,
                             color: Colors.white,
-                            fontFamily: groldBold),
+                            fontFamily: groldReg),
                       ),
                     ],
                   ),
@@ -407,7 +407,7 @@ class _SearchFoodState extends State<SearchFood> {
                                               maxLines: 1,
                                               overflow: TextOverflow.ellipsis,
                                               style: TextStyle(
-                                                fontFamily: groldBold,
+                                                fontFamily: groldReg,
                                                 color: colorBlack,
                                                 fontSize: 16,
                                               ),
@@ -1629,7 +1629,7 @@ class _SearchFoodState extends State<SearchFood> {
                                                               '${PreferenceUtils.getString(PreferenceNames.currencySymbolSetting)} ${_listFinalCustomization[outerIndex].list[innerIndex].price.toString()}',
                                                               style: TextStyle(
                                                                 fontFamily:
-                                                                    groldBold,
+                                                                    groldReg,
                                                                 color:
                                                                     colorBlack,
                                                                 fontSize: 16,
@@ -1725,7 +1725,7 @@ class _SearchFoodState extends State<SearchFood> {
                                       style: TextStyle(
                                           fontSize: 18,
                                           color: Colors.white,
-                                          fontFamily: groldBold),
+                                          fontFamily: groldReg),
                                     ),
                                     SizedBox(
                                       width: 10,
@@ -1743,7 +1743,7 @@ class _SearchFoodState extends State<SearchFood> {
                                       style: TextStyle(
                                           fontSize: 18,
                                           color: Colors.white,
-                                          fontFamily: groldBold),
+                                          fontFamily: groldReg),
                                     ),
                                   ],
                                 ),
