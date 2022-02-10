@@ -1391,6 +1391,7 @@ class _SearchFoodState extends State<SearchFood> {
     double tempPrice = 0;
     List<CustomizationItemModel> _listCustomizationItem = [];
     List<CustomModel> _listFinalCustomization = [];
+    List<bool> listFinalCustomizationCheck = [];
     List<int> _radioButtonFlagList = [];
     List<String> _listForAPI = [];
     listFinalCustomizationCheck.clear();

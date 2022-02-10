@@ -616,7 +616,7 @@ class _FoodDeliveryShopState extends State<FoodDeliveryShop>
                     ),
                 itemBuilder: (BuildContext context, int subMenuIndex) {
                   return GestureDetector(
-                    onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context)=> FoodItems(item: menus[index].submenu![subMenuIndex],))),
+                    onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context)=> FoodItems(item: menus[index].submenu![subMenuIndex]))),
                     child: Container(
                       width: SizeConfig.screenWidth,
                       height: menus[index].submenu![subMenuIndex].description ==
