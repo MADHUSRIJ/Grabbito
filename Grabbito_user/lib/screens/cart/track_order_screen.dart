@@ -197,13 +197,6 @@ class _TrackOrderScreenState extends State<TrackOrderScreen> {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    ScreenUtil.init(
-        BoxConstraints(
-            maxWidth: MediaQuery.of(context).size.width,
-            maxHeight: MediaQuery.of(context).size.height),
-        designSize: Size(MediaQuery.of(context).size.width,
-            MediaQuery.of(context).size.height),
-        orientation: Orientation.portrait);
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(

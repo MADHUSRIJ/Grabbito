@@ -59,13 +59,6 @@ class _ProfilePageState extends State<ProfilePage>
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    ScreenUtil.init(
-        BoxConstraints(
-            maxWidth: MediaQuery.of(context).size.width,
-            maxHeight: MediaQuery.of(context).size.height),
-        designSize: Size(MediaQuery.of(context).size.width,
-            MediaQuery.of(context).size.height),
-        orientation: Orientation.portrait);
     return DefaultTabController(
       initialIndex: 0,
       length: 3,

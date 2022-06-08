@@ -193,13 +193,6 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
       if (aspect1 > 0.33) break;
     }
     SizeConfig().init(context);
-    ScreenUtil.init(
-        BoxConstraints(
-            maxWidth: MediaQuery.of(context).size.width,
-            maxHeight: MediaQuery.of(context).size.height),
-        designSize: Size(MediaQuery.of(context).size.width,
-            MediaQuery.of(context).size.height),
-        orientation: Orientation.portrait);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(

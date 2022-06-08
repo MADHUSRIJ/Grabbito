@@ -103,12 +103,6 @@ class _FoodDeliveryShopState extends State<FoodDeliveryShop>
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    ScreenUtil.init(
-        BoxConstraints(
-            maxWidth: MediaQuery.of(context).size.width,
-            maxHeight: MediaQuery.of(context).size.height),
-        designSize: Size(360, 690),
-        orientation: Orientation.portrait);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
