@@ -1,5 +1,4 @@
 import 'package:dotted_border/dotted_border.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:grabbito/constant/app_strings.dart';
@@ -12,7 +11,7 @@ import 'package:grabbito/utilities/preference_utility.dart';
 
 class CouponWidget extends StatefulWidget {
   final Discount couponData;
-  CouponWidget({Key? key, required this.couponData}) : super(key: key);
+  const CouponWidget({Key? key, required this.couponData}) : super(key: key);
   @override
   _CouponWidgetState createState() => _CouponWidgetState();
 }

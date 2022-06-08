@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:grabbito/constant/app_strings.dart';
 import 'package:grabbito/constant/color_constant.dart';
@@ -8,7 +7,7 @@ import 'package:grabbito/routes/route_names.dart';
 class OnBoardPage extends StatefulWidget {
   final OnBoardResponse pageItem;
 
-  OnBoardPage({required this.pageItem});
+  const OnBoardPage({required this.pageItem});
 
   @override
   _OnBoardPageState createState() => _OnBoardPageState();

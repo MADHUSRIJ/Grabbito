@@ -21,16 +21,14 @@ import 'package:grabbito/utilities/preference_utility.dart';
 import 'package:grabbito/utilities/transition.dart';
 
 //new
-import 'package:stripe_platform_interface/stripe_platform_interface.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'dart:developer';
-import 'package:flutter/foundation.dart';
 
 class StripePaymentScreen extends StatefulWidget {
   final String fromWhere;
   final Map<String, dynamic> paymentData;
 
-  StripePaymentScreen({required this.fromWhere, required this.paymentData});
+  const StripePaymentScreen({required this.fromWhere, required this.paymentData});
 
   @override
   _StripePaymentScreenState createState() => _StripePaymentScreenState();

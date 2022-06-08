@@ -11,7 +11,6 @@ import 'package:grabbito/screens/category/category.dart';
 import 'package:grabbito/screens/cart/select_location_screen.dart';
 import 'package:grabbito/screens/category_details/food/comp/search_food_widget.dart';
 import 'package:grabbito/screens/category_details/food/food_shops.dart';
-import 'package:grabbito/screens/food_items/food_item.dart';
 import 'package:grabbito/screens/home/home_screen.dart';
 import 'package:grabbito/screens/on_board/on_board_screen.dart';
 import 'package:grabbito/screens/set_location/set_location_screen.dart';

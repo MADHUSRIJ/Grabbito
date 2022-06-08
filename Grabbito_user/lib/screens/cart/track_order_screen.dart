@@ -6,7 +6,6 @@ import 'dart:ui' as ui;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -32,7 +31,7 @@ class TrackOrderScreen extends StatefulWidget {
   final BookOrderData? bookOrderPassingData;
   final Package? bookOrderPassingDataPickup;
   final String whichOrder;
-  TrackOrderScreen(
+  const TrackOrderScreen(
       {this.bookOrderPassingData,
       required this.whichOrder,
       this.bookOrderPassingDataPickup});

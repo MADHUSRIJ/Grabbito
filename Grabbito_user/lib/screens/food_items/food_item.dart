@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:grabbito/constant/app_strings.dart';
 import 'package:grabbito/constant/color_constant.dart';
 import 'package:grabbito/localization/localization_constant.dart';
@@ -30,14 +29,14 @@ class _FoodItemsState extends State<FoodItems> {
   TabController? controllerTab;
   bool isVegOnly = false;
   bool isFirst = true;
-  bool _loading = false;
+  final bool _loading = false;
   String bannerImage = '';
   bool veg = false;
   bool nonVeg = false;
   bool both = false;
 
   ScrollController? _scrollViewController;
-  bool _showAppbar = true;
+  final bool _showAppbar = true;
   bool isScrollingDown = false;
 
   List<Discount> discountList = [];
@@ -387,7 +386,7 @@ class _FoodItemsState extends State<FoodItems> {
                     borderRadius: BorderRadius.circular(50),
                   ),
                   child: Text(
-                    "Add Rs " + "200",
+                    "Add Rs " "200",
                     style: TextStyle(
                         fontFamily: groldReg,
                         fontWeight: FontWeight.w400,

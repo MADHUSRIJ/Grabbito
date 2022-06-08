@@ -5,9 +5,7 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:iconly/iconly.dart';
 import 'package:intl/intl.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
@@ -1309,7 +1307,7 @@ class _CartScreenState extends State<CartScreen> {
                     for (int i = 0; i < allRows.length; i++) {
                       if (allRows[i]['pro_customization'] == '') {
                         print('procustom calling');
-                        var addToItem;
+                        double addToItem;
                         addToItem = double.parse(allRows[i]['pro_price']) *
                             allRows[i]['pro_qty'];
                         item.add({
@@ -2682,6 +2680,7 @@ class PreviousCustomizationItemModel {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['main_menu'] = name;
     data['data'] = datamodel;
+    return null;
   }
 }
 

@@ -1,7 +1,5 @@
 import 'dart:convert';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:iconly/iconly.dart';

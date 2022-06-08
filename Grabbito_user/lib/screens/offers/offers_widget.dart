@@ -1,8 +1,8 @@
-import 'package:flutter/cupertino.dart';
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:grabbito/constant/app_strings.dart';
@@ -32,7 +32,6 @@ import 'package:grabbito/utilities/preference_utility.dart';
 import 'package:iconly/iconly.dart';
 import 'dart:convert';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter_html/shims/dart_ui_real.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 class OffersPage extends StatefulWidget {

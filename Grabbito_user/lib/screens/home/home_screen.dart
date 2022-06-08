@@ -1,8 +1,5 @@
-import 'dart:ui';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:grabbito/screens/settings/settings_screen.dart';
 import 'package:iconly/iconly.dart';
@@ -25,7 +22,7 @@ import 'package:grabbito/utilities/preference_utility.dart';
 
 class HomeScreen extends StatefulWidget {
   final int passToCurrentIndex;
-  HomeScreen(this.passToCurrentIndex);
+  const HomeScreen(this.passToCurrentIndex);
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }

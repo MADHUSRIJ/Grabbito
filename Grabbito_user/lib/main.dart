@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:grabbito/constant/color_constant.dart';
@@ -9,7 +8,6 @@ import 'package:grabbito/routes/custome_router.dart';
 import 'package:grabbito/routes/route_names.dart';
 import 'package:grabbito/utilities/database_helper.dart';
 import 'package:grabbito/utilities/preference_consts.dart';
-
 import 'constant/common_function.dart';
 import 'localization/language_localization.dart';
 import 'localization/localization_constant.dart';
@@ -153,9 +151,7 @@ class _MyAppState extends State<MyApp> {
           theme: ThemeData(
               colorScheme: ColorScheme(
                   primary: colorPrimary,
-                  primaryVariant: primaryVariant,
                   secondary: secondary,
-                  secondaryVariant: secondaryVariant,
                   surface: surface,
                   background: background,
                   error: error,

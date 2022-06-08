@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:grabbito/constant/color_constant.dart';
 import 'package:grabbito/repository/models/on_boarding_response.dart';
 import 'package:grabbito/screens/on_board/comp/on_board_page.dart';

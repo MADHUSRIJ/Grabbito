@@ -121,6 +121,7 @@ class DatabaseHelper {
       return await db
           .update(table, row, where: '$columnProId = ?', whereArgs: [id]);
     }
+    return null;
   }
 
   // Deletes the row specified by the id. The number of affected rows is

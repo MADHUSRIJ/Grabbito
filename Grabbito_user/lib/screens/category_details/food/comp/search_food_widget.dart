@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -26,7 +25,7 @@ class SearchFood extends StatefulWidget {
   final int singleShopId;
   final String shopName;
   final int businessTypeId;
-  SearchFood(
+  const SearchFood(
       {required this.singleShopId,
       required this.shopName,
       required this.businessTypeId});

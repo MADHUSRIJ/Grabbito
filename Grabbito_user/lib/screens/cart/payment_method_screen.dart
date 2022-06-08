@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:iconly/iconly.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
@@ -27,7 +26,7 @@ import 'package:grabbito/utilities/transition.dart';
 class PaymentMethodScreen extends StatefulWidget {
   final String fromWhere;
   final Map<String, dynamic> paymentData;
-  PaymentMethodScreen({
+  const PaymentMethodScreen({
     required this.fromWhere,
     required this.paymentData,
   });

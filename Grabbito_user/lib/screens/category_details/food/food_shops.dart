@@ -3,7 +3,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:grabbito/screens/food_items/food_item.dart';
 import 'package:iconly/iconly.dart';
@@ -29,7 +28,7 @@ import 'custom_tab_bar.dart';
 class FoodDeliveryShop extends StatefulWidget {
   final int singleShopId;
   final int businessTypeId;
-  FoodDeliveryShop({required this.singleShopId, required this.businessTypeId});
+  const FoodDeliveryShop({required this.singleShopId, required this.businessTypeId});
 
   @override
   _FoodDeliveryShopState createState() => _FoodDeliveryShopState();
@@ -76,7 +75,7 @@ class _FoodDeliveryShopState extends State<FoodDeliveryShop>
   @override
   void initState() {
     super.initState();
-    _scrollViewController = new ScrollController();
+    _scrollViewController = ScrollController();
     _scrollViewController!.addListener(() {
       if (_scrollViewController!.position.userScrollDirection ==
           ScrollDirection.reverse) {
@@ -211,7 +210,7 @@ class _FoodDeliveryShopState extends State<FoodDeliveryShop>
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Container(
+                          SizedBox(
                             height: 28,
                             child: Text(
                               restaurantName.toString(),
@@ -363,7 +362,7 @@ class _FoodDeliveryShopState extends State<FoodDeliveryShop>
             //     ],
             //   ),
             // ),
-            Container(
+            SizedBox(
               height: MediaQuery.of(context).size.height / 1.5,
               width: MediaQuery.of(context).size.width,
               child: FutureBuilder<BaseModel<SingleShopModel>>(
@@ -712,8 +711,7 @@ class _FoodDeliveryShopState extends State<FoodDeliveryShop>
                                     alignment: Alignment.centerLeft,
                                     margin: EdgeInsets.only(left: 30),
                                     child: Text(
-                                      "RS" +
-                                          ' ${menus[index].submenu![subMenuIndex].price}',
+                                      "RS" ' ${menus[index].submenu![subMenuIndex].price}',
                                       maxLines: 1,
                                       style: TextStyle(
                                           color: colorBlack,
@@ -875,10 +873,10 @@ class _FoodDeliveryShopState extends State<FoodDeliveryShop>
                                       left: 16, right: 10, bottom: 10),
                                   child: Text(
                                     "USE " +
-                                        '${discountList[index].code.toString()}'
+                                        discountList[index].code.toString()
                                             .toUpperCase() +
                                         " | ABOVE RS" +
-                                        '${discountList[index].minOrderAmount.toString()}',
+                                        discountList[index].minOrderAmount.toString(),
                                     style: TextStyle(
                                         color: colorBlack,
                                         fontSize: 12,

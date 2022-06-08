@@ -1,5 +1,4 @@
 import 'package:dotted_line/dotted_line.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:iconly/iconly.dart';
@@ -23,7 +22,7 @@ class OrderDetailScreen extends StatefulWidget {
   final int singleOrderId;
   final String whichOrder;
 
-  OrderDetailScreen({required this.singleOrderId, required this.whichOrder});
+  const OrderDetailScreen({required this.singleOrderId, required this.whichOrder});
 
   @override
   _OrderDetailScreenState createState() => _OrderDetailScreenState();

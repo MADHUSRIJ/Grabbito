@@ -1,8 +1,7 @@
+import 'dart:ui';
+
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_html/shims/dart_ui_real.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -14,7 +13,6 @@ import 'package:grabbito/model/cart_model.dart';
 import 'package:grabbito/model/homepage/business_types_model.dart';
 import 'package:grabbito/model/homepage/offers_at_restaurant_model.dart';
 import 'package:grabbito/model/shops_model.dart';
-import 'package:grabbito/model/single_shop_model.dart';
 import 'package:grabbito/network/api_header.dart';
 import 'package:grabbito/network/api_service.dart';
 import 'package:grabbito/network/base_model.dart';
@@ -34,7 +32,7 @@ import 'package:scoped_model/scoped_model.dart';
 
 class CategoryDetailPage extends StatefulWidget {
   final BusinessTypesData category;
-  CategoryDetailPage({Key? key, required this.category}) : super(key: key);
+  const CategoryDetailPage({Key? key, required this.category}) : super(key: key);
 
   @override
   _CategoryDetailPageState createState() => _CategoryDetailPageState();

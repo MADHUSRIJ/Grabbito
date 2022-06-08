@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 import 'package:grabbito/constant/app_strings.dart';
 import 'package:grabbito/constant/color_constant.dart';
 import 'package:grabbito/localization/localization_constant.dart';
